@@ -30,15 +30,32 @@ class FactorTree(MixInIO):
         The factor list.
     factor_dict: :py:class:`dict` of :py:class:`str` -> :py:class:`int`
         Reverse index of the factors (`factor_dict[factor_list[i]] == i`).
+    self_factors: :py:class:`list` of :py:class:`int`
+        Number of unique factors for each text.
+    n: :py:class:`int`
+        Number of texts.
+    m: :py:class:`int`
+        Number of factors.
+
 
 
     Examples
     --------
 
+    Build a tree from a corpus of texts,limiting factor size to 3:
+
     >>> corpus = ["riri", "fifi", "rififi"]
-    >>> tree = FactorTree(corpus=corpus)
+    >>> tree = FactorTree(corpus=corpus, n_range=3)
+
+    List the number of unique factors for each text:
+
     >>> tree.self_factors
-    [8, 8, 15]
+    [7, 7, 10]
+
+    List the factors in the corpus:
+
+    >>> tree.factor_list
+    ['', 'r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif']
     """
     def __init__(self, corpus=None, auto_update=False, preprocessor=None, n_range=5, filename=None, path='.'):
         if filename is not None:
@@ -62,10 +79,62 @@ class FactorTree(MixInIO):
                 self.add_txt_list_to_tree(corpus)
 
     def add_txt_list_to_tree(self, txt_list):
+        """
+        Add a list of texts to the factor tree.
+
+        Parameters
+        ----------
+        txt_list: :py:class:`list` of :py:class:`srt`
+            Texts to add.
+
+        Returns
+        -------
+        None
+
+        Examples
+        ---------
+
+        >>> tree = FactorTree(n_range=3)
+        >>> tree.add_txt_list_to_tree(["riri", "fifi"])
+        >>> tree.factor_list
+        ['', 'r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi']
+
+        >>> tree.add_txt_list_to_tree(["rififi"])
+        >>> tree.factor_list
+        ['', 'r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif']
+        """
         for txt in txt_list:
             self.add_txt_to_tree(txt)
 
     def add_txt_to_tree(self, txt):
+        """
+        Add a text to the factor tree.
+
+        Parameters
+        ----------
+        txt: :py:class:`srt`
+            Text to add.
+
+        Returns
+        -------
+        None
+
+        Examples
+        ---------
+
+        >>> tree = FactorTree()
+        >>> tree.factor_list
+        ['']
+
+        >>> tree.add_txt_to_tree("riri")
+        >>> tree.factor_list
+        ['', 'r', 'ri', 'rir', 'riri', 'i', 'ir', 'iri']
+
+        >>> tree.add_txt_to_tree("rififi")
+        >>> tree.factor_list
+        ['', 'r', 'ri', 'rir', 'riri', 'i', 'ir', 'iri', 'rif', 'rifi', 'rifif', 'if', 'ifi', 'ifif', 'ififi', 'f', 'fi', 'fif', 'fifi']
+        """
+
         txt = self.preprocessor(txt)
         length = len(txt)
 
@@ -93,45 +162,3 @@ class FactorTree(MixInIO):
         self.corpus_list.append(txt)
         self.corpus_dict[txt] = self.n
         self.n += 1
-
-    def common_factors(self, txt):
-        txt = self.preprocessor(txt)
-        index = self.corpus_dict.get(txt)
-        if not index:
-            if not self.auto_update:
-                return self.common_factors_external(txt)
-            index = self.n
-            self.add_txt_to_tree(txt)
-        return self.common_factors_internal(index)
-
-    def common_factors_internal(self, i):
-        buffer = {0}
-        res = [0] * self.n
-        while buffer:
-            node = buffer.pop()
-            if i in self.count[node]:
-                for j in self.count[node]:
-                    res[j] += 1
-                buffer.update(self.edges[node].values())
-        return res, self.self_factors[i]
-
-    def common_factors_external(self, txt):
-        buffer = {0}
-        res = [0] * self.n
-        new_tree = FactorTree([txt], preprocessor=self.preprocessor, n_range=self.n_range)
-        while buffer:
-            node = buffer.pop()
-            target = self.factor_dict.get(new_tree.factor_list[node])
-            if target is not None:
-                for j in self.count[target]:
-                    res[j] += 1
-                buffer.update(new_tree.edges[node].values())
-        return res, new_tree.self_factors[0]
-
-    def joint_complexity(self, txt, bias=.5):
-        common_factors, autofactors = self.common_factors(txt)
-        biased_factors = [2 * bias * autofactors + 2 * (1 - bias) * f for f in self.self_factors]
-        return [0 if f - common_factor_number == 0 else
-                (f - 2 * common_factor_number) /
-                (f - common_factor_number)
-                for f, common_factor_number in zip(biased_factors, common_factors)]
