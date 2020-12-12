@@ -1,20 +1,4 @@
-from .common import MixInIO
-
-def default_preprocessor(txt):
-    """
-    Default string preprocessor: trim extra spaces and lower case from string `txt`.
-
-    Parameters
-    ----------
-    txt: :py:class:`str`
-        Text to process.
-
-    Returns
-    -------
-    :py:class:`str`
-        Processed text.
-    """
-    return txt.strip().lower()
+from .common import MixInIO, default_preprocessor
 
 
 class FactorTree(MixInIO):
