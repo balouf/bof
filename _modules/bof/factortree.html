@@ -159,15 +159,17 @@
   <h1>Source code for bof.factortree</h1><div class="highlight"><pre>
 <div class="viewcode-block" id="default_preprocessor"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.default_preprocessor">[docs]</a><span></span><span class="k">def</span> <span class="nf">default_preprocessor</span><span class="p">(</span><span class="n">txt</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Txt</span>
+<span class="sd">    Default string preprocessor: trim extra spaces and lower case from string `txt`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    txt</span>
+<span class="sd">    txt: :py:class:`str`</span>
+<span class="sd">        Text to process.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-
+<span class="sd">    :py:class:`str`</span>
+<span class="sd">        Processed text.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">txt</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></div>
 
