@@ -105,3 +105,25 @@ class MixInIO:
             else:
                 raise FileNotFoundError(
                     errno.ENOENT, os.strerror(errno.ENOENT), dest)
+
+
+def default_preprocessor(txt):
+    """
+    Default string preprocessor: trim extra spaces and lower case from string `txt`.
+
+    Parameters
+    ----------
+    txt: :py:class:`str`
+        Text to process.
+
+    Returns
+    -------
+    :py:class:`str`
+        Processed text.
+
+    Examples
+    ---------
+    >>> default_preprocessor(" LaTeX RuleZ    ")
+    'latex rulez'
+    """
+    return txt.strip().lower()
