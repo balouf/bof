@@ -36,7 +36,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="MyClass1" href="my_class_1.html" />
+    <link rel="next" title="Contributing" href="../contributing.html" />
     <link rel="prev" title="Usage" href="../usage.html" /> 
 </head>
 
@@ -92,9 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="my_class_1.html">MyClass1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="my_class_2.html">MyClass2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="my_class_3.html">MyClass3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-bof.factortree">Factor Tree</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
@@ -167,12 +165,52 @@
             
   <div class="section" id="reference">
 <h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="my_class_1.html">MyClass1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="my_class_2.html">MyClass2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="my_class_3.html">MyClass3</a></li>
+<div class="section" id="module-bof.factortree">
+<span id="factor-tree"></span><h2>Factor Tree<a class="headerlink" href="#module-bof.factortree" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="bof.factortree.FactorTree">
+<em class="property">class </em><code class="sig-prename descclassname">bof.factortree.</code><code class="sig-name descname">FactorTree</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">corpus</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">auto_update</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">preprocessor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_range</span><span class="o">=</span><span class="default_value">5</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/factortree.html#FactorTree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.factortree.FactorTree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maintain a Tree of factor of a given corpus.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>corpus</strong> – </p></li>
+<li><p><strong>auto_update</strong> – </p></li>
+<li><p><strong>preprocessor</strong> – </p></li>
+<li><p><strong>n_range</strong> – </p></li>
 </ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="bof.factortree.FactorTree.count">
+<code class="sig-name descname">count</code><a class="headerlink" href="#bof.factortree.FactorTree.count" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="bof.factortree.FactorTree.edges">
+<code class="sig-name descname">edges</code><a class="headerlink" href="#bof.factortree.FactorTree.edges" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">factors</span>
+<span class="go">[8, 8, 15]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="bof.factortree.default_preprocessor">
+<code class="sig-prename descclassname">bof.factortree.</code><code class="sig-name descname">default_preprocessor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">txt</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/factortree.html#default_preprocessor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.factortree.default_preprocessor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Txt</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>txt</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 </div>
 
@@ -184,7 +222,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="my_class_1.html" class="btn btn-neutral float-right" title="MyClass1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

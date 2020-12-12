@@ -5,7 +5,7 @@
 import pytest
 
 
-from bof import bof
+from bof import factortree
 
 
 @pytest.fixture
