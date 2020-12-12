@@ -1,3 +1,5 @@
+from .common import MixInIO
+
 def default_preprocessor(txt):
     """
     Default string preprocessor: trim extra spaces and lower case from string `txt`.
@@ -15,7 +17,7 @@ def default_preprocessor(txt):
     return txt.strip().lower()
 
 
-class FactorTree:
+class FactorTree(MixInIO):
     """
     Maintain a tree of factor of a given corpus.
 
@@ -54,23 +56,26 @@ class FactorTree:
     >>> tree.self_factors
     [8, 8, 15]
     """
-    def __init__(self, corpus=None, auto_update=False, preprocessor=None, n_range=5):
-        self.count = [dict()]
-        self.edges = [dict()]
-        self.corpus_list = []
-        self.corpus_dict = dict()
-        self.factor_list = [""]
-        self.factor_dict = {"": 0}
-        self.self_factors = []
-        self.m = 1
-        self.n = 0
-        self.auto_update = auto_update
-        if preprocessor is None:
-            preprocessor = default_preprocessor
-        self.preprocessor = preprocessor
-        self.n_range = n_range
-        if corpus is not None:
-            self.add_txt_list_to_tree(corpus)
+    def __init__(self, corpus=None, auto_update=False, preprocessor=None, n_range=5, filename=None, path='.'):
+        if filename is not None:
+            self.load(filename=filename, path=path)
+        else:
+            self.count = [dict()]
+            self.edges = [dict()]
+            self.corpus_list = []
+            self.corpus_dict = dict()
+            self.factor_list = [""]
+            self.factor_dict = {"": 0}
+            self.self_factors = []
+            self.m = 1
+            self.n = 0
+            self.auto_update = auto_update
+            if preprocessor is None:
+                preprocessor = default_preprocessor
+            self.preprocessor = preprocessor
+            self.n_range = n_range
+            if corpus is not None:
+                self.add_txt_list_to_tree(corpus)
 
     def add_txt_list_to_tree(self, txt_list):
         for txt in txt_list:
