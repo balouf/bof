@@ -170,31 +170,87 @@
 <dl class="py class">
 <dt id="bof.factortree.FactorTree">
 <em class="property">class </em><code class="sig-prename descclassname">bof.factortree.</code><code class="sig-name descname">FactorTree</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">corpus</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">auto_update</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">preprocessor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_range</span><span class="o">=</span><span class="default_value">5</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/factortree.html#FactorTree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.factortree.FactorTree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Maintain a Tree of factor of a given corpus.</p>
+<dd><p>Maintain a tree of factor of a given corpus.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>corpus</strong> – </p></li>
-<li><p><strong>auto_update</strong> – </p></li>
-<li><p><strong>preprocessor</strong> – </p></li>
-<li><p><strong>n_range</strong> – </p></li>
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Corpus of documents to decompose into factors.</p></li>
+<li><p><strong>auto_update</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – When processing external texts, should the tree be updated (TO BE MOVED WITH THE FACTORS MODULE WHEN CREATED).</p></li>
+<li><p><strong>preprocessor</strong> (<em>callable</em>) – Preprocessing function to apply to texts before adding them to the factor tree.</p></li>
+<li><p><strong>n_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or None, optional) – Maximum factor size. If <cite>None</cite>, all factors will be extracted.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
 <dt id="bof.factortree.FactorTree.count">
 <code class="sig-name descname">count</code><a class="headerlink" href="#bof.factortree.FactorTree.count" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Keep for each factor a dict that tells for each document (represented by its index) the number of occurences of the factor in the document.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="bof.factortree.FactorTree.edges">
 <code class="sig-name descname">edges</code><a class="headerlink" href="#bof.factortree.FactorTree.edges" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Keep for each factor a dict that associates to each letter the corresponding factor index in the tree (if any).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="bof.factortree.FactorTree.corpus_list">
+<code class="sig-name descname">corpus_list</code><a class="headerlink" href="#bof.factortree.FactorTree.corpus_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>The corpus list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">srt</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="bof.factortree.FactorTree.corpus_dict">
+<code class="sig-name descname">corpus_dict</code><a class="headerlink" href="#bof.factortree.FactorTree.corpus_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reverse index of the corpus (<cite>corpus_dict[corpus_list[i]] == i</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> -&gt; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="bof.factortree.FactorTree.factor_list">
+<code class="sig-name descname">factor_list</code><a class="headerlink" href="#bof.factortree.FactorTree.factor_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>The factor list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <code class="xref py py-class docutils literal notranslate"><span class="pre">srt</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="bof.factortree.FactorTree.factor_dict">
+<code class="sig-name descname">factor_dict</code><a class="headerlink" href="#bof.factortree.FactorTree.factor_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reverse index of the factors (<cite>factor_dict[factor_list[i]] == i</cite>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> -&gt; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">factors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">self_factors</span>
 <span class="go">[8, 8, 15]</span>
 </pre></div>
 </div>
@@ -206,13 +262,13 @@
 <dd><p>Default string preprocessor: trim extra spaces and lower case from string <cite>txt</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>txt</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Text to process.</p>
+<dd class="field-odd"><p><strong>txt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Text to process.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Processed text.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
