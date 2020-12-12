@@ -17,19 +17,29 @@ def default_preprocessor(txt):
 
 class FactorTree:
     """
-    Maintain a Tree of factor of a given corpus.
+    Maintain a tree of factor of a given corpus.
 
     Parameters
     ----------
-    corpus
-    auto_update
-    preprocessor
-    n_range
+    corpus: :py:class:`list` of :py:class:`str`, optional
+        Corpus of documents to decompose into factors.
+    auto_update: :py:class:`bool`, optional
+        When processing external texts, should the tree be updated (TO BE MOVED WITH THE FACTORS MODULE WHEN CREATED).
+    preprocessor: callable
+        Preprocessing function to apply to texts before adding them to the factor tree.
+    n_range: :py:class:`int` or None, optional
+        Maximum factor size. If `None`, all factors will be extracted.
 
     Attributes
     ----------
-    count
-    edges
+    count: :py:class:`list` of :py:class:`dict`
+        Keep for each factor a dict that tells for each document (represented by its index) the number of occurences of the factor in the document.
+    edges: :py:class:`list` of :py:class:`dict`
+        Keep for each factor a dict that associates to each letter the corresponding factor index in the tree (if any).
+    corpus_list: :py:class:`list` of :py:class:`srt`
+        The corpus list.
+    corpus_dict: :py:class:`dict` of :py:class:`int`
+        Reverse index of the corpus (`corpus_dict[corpus_list[i]] == i`).
 
     Examples
     --------
