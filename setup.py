@@ -30,7 +30,7 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
     ],
-    description="Bag of Factors allow you to analyze a corpus from its factors.",
+    description="Bag of Factors allow you to analyze a corpus from its self_factors.",
     install_requires=requirements,
     license="GNU General Public License v3",
     long_description=readme + '\n\n' + history,

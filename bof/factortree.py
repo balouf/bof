@@ -38,15 +38,20 @@ class FactorTree:
         Keep for each factor a dict that associates to each letter the corresponding factor index in the tree (if any).
     corpus_list: :py:class:`list` of :py:class:`srt`
         The corpus list.
-    corpus_dict: :py:class:`dict` of :py:class:`int`
+    corpus_dict: :py:class:`dict` of :py:class:`str` -> :py:class:`int`
         Reverse index of the corpus (`corpus_dict[corpus_list[i]] == i`).
+    factor_list: :py:class:`list` of :py:class:`srt`
+        The factor list.
+    factor_dict: :py:class:`dict` of :py:class:`str` -> :py:class:`int`
+        Reverse index of the factors (`factor_dict[factor_list[i]] == i`).
+
 
     Examples
     --------
 
     >>> corpus = ["riri", "fifi", "rififi"]
     >>> tree = FactorTree(corpus=corpus)
-    >>> tree.factors
+    >>> tree.self_factors
     [8, 8, 15]
     """
     def __init__(self, corpus=None, auto_update=False, preprocessor=None, n_range=5):
@@ -56,7 +61,7 @@ class FactorTree:
         self.corpus_dict = dict()
         self.factor_list = [""]
         self.factor_dict = {"": 0}
-        self.factors = []
+        self.self_factors = []
         self.m = 1
         self.n = 0
         self.auto_update = auto_update
@@ -77,7 +82,7 @@ class FactorTree:
 
         # Empty factor my friend!
         self.count[0][self.n] = len(txt) + 1
-        self.factors.append(1)
+        self.self_factors.append(1)
 
         for start in range(length):
             node = 0
@@ -94,7 +99,7 @@ class FactorTree:
                 node = n_node
                 d = self.count[node]
                 if d.setdefault(self.n, 0) == 0:
-                    self.factors[self.n] += 1
+                    self.self_factors[self.n] += 1
                 d[self.n] += 1
         self.corpus_list.append(txt)
         self.corpus_dict[txt] = self.n
@@ -119,7 +124,7 @@ class FactorTree:
                 for j in self.count[node]:
                     res[j] += 1
                 buffer.update(self.edges[node].values())
-        return res, self.factors[i]
+        return res, self.self_factors[i]
 
     def common_factors_external(self, txt):
         buffer = {0}
@@ -132,11 +137,11 @@ class FactorTree:
                 for j in self.count[target]:
                     res[j] += 1
                 buffer.update(new_tree.edges[node].values())
-        return res, new_tree.factors[0]
+        return res, new_tree.self_factors[0]
 
     def joint_complexity(self, txt, bias=.5):
         common_factors, autofactors = self.common_factors(txt)
-        biased_factors = [2 * bias * autofactors + 2 * (1 - bias) * f for f in self.factors]
+        biased_factors = [2 * bias * autofactors + 2 * (1 - bias) * f for f in self.self_factors]
         return [0 if f - common_factor_number == 0 else
                 (f - 2 * common_factor_number) /
                 (f - common_factor_number)
