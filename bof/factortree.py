@@ -1,14 +1,16 @@
 def default_preprocessor(txt):
     """
-    Txt
+    Default string preprocessor: trim extra spaces and lower case from string `txt`.
 
     Parameters
     ----------
-    txt
+    txt: :py:class:`str`
+        Text to process.
 
     Returns
     -------
-
+    :py:class:`str`
+        Processed text.
     """
     return txt.strip().lower()
 
