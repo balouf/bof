@@ -1,32 +1,43 @@
 def default_preprocessor(txt):
+    """
+    Txt
+
+    Parameters
+    ----------
+    txt
+
+    Returns
+    -------
+
+    """
     return txt.strip().lower()
 
 
 class FactorTree:
+    """
+    Maintain a Tree of factor of a given corpus.
+
+    Parameters
+    ----------
+    corpus
+    auto_update
+    preprocessor
+    n_range
+
+    Attributes
+    ----------
+    count
+    edges
+
+    Examples
+    --------
+
+    >>> corpus = ["riri", "fifi", "rififi"]
+    >>> tree = FactorTree(corpus=corpus)
+    >>> tree.factors
+    [8, 8, 15]
+    """
     def __init__(self, corpus=None, auto_update=False, preprocessor=None, n_range=5):
-        """
-        Maintain a Tree of factor of a given corpus.
-
-        Parameters
-        ----------
-        corpus
-        auto_update
-        preprocessor
-        n_range
-
-        Attributes
-        ----------
-        count
-        edges
-
-        Examples
-        --------
-
-        >>> corpus = ["riri", "fifi", "rififi"]
-        >>> tree = FactorTree(corpus=corpus)
-        >>> tree.factors
-        [8, 8, 15]
-        """
         self.count = [dict()]
         self.edges = [dict()]
         self.corpus_list = []
