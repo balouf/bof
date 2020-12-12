@@ -13,6 +13,9 @@ class FactorTree:
         auto_update
         preprocessor
         n_range
+
+        Attributes
+        ----------
         """
         self.nodes = [dict()]
         self.edges = [dict()]
