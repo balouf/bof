@@ -146,11 +146,11 @@ def joint_complexity(txt, tree, balance=.5, update_tree=False):
     Parameters
     ----------
     txt: :py:class:`str`
-        Text to analyze
+        Text to analyze.
     tree: :class:`~bof.factortree.FactorTree`
         Factor tree of the corpus.
-    balance: :py:class:`float`in range [0.0, 1.0]
-        Large values will disregard the size of corpus elements..
+    balance: :py:class:`float` in range [0.0, 1.0]
+        Large values will disregard the size of corpus elements.
     update_tree: :py:class:`bool`
         Update tree if `txt` is not in it?
 

@@ -92,6 +92,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#countvectorizer">CountVectorizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fuzz">Fuzz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Fuzz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#process">Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#factor-tree">Factor Tree</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#joint-complexity">Joint Complexity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#common">Common</a></li>
@@ -167,6 +171,41 @@
             
   <div class="section" id="reference">
 <h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="countvectorizer">
+<h2>CountVectorizer<a class="headerlink" href="#countvectorizer" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>CountVectorizer</cite> class mimicks the module <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html">https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html</a>. It is in fact very similar to using <cite>char</cite> or <cite>char_wb</cite> analyzer option from that module.</p>
+<p>TO BE WRITTEN?</p>
+</div>
+<div class="section" id="fuzz">
+<h2>Fuzz<a class="headerlink" href="#fuzz" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>fuzz</cite> modules mimicks the fuzz module from</p>
+<ul class="simple">
+<li><p>fuzzywuzzy (<a class="reference external" href="https://github.com/seatgeek/fuzzywuzzy">https://github.com/seatgeek/fuzzywuzzy</a>)</p></li>
+<li><p>rapidfuzz (<a class="reference external" href="https://github.com/maxbachmann/rapidfuzz">https://github.com/maxbachmann/rapidfuzz</a>)</p></li>
+</ul>
+<p>The main difference is that the sets of available scorers differ, as the Levenshtein distance is replaced by the Joint Complexity distance.</p>
+<p>MODULE TO BE WRITTEN</p>
+</div>
+<div class="section" id="id1">
+<h2>Fuzz<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>fuzz</cite> modules mimicks the fuzz module from</p>
+<ul class="simple">
+<li><p>fuzzywuzzy (<a class="reference external" href="https://github.com/seatgeek/fuzzywuzzy">https://github.com/seatgeek/fuzzywuzzy</a>)</p></li>
+<li><p>rapidfuzz (<a class="reference external" href="https://github.com/maxbachmann/rapidfuzz">https://github.com/maxbachmann/rapidfuzz</a>)</p></li>
+</ul>
+<p>The main difference is that the sets of available scorers differ, as the Levenshtein distance is replaced by the Joint Complexity distance.</p>
+<p>MODULE TO BE WRITTEN</p>
+</div>
+<div class="section" id="process">
+<h2>Process<a class="headerlink" href="#process" title="Permalink to this headline">¶</a></h2>
+<p>The <cite>process</cite> modules mimicks the process module from</p>
+<ul class="simple">
+<li><p>fuzzywuzzy (<a class="reference external" href="https://github.com/seatgeek/fuzzywuzzy">https://github.com/seatgeek/fuzzywuzzy</a>)</p></li>
+<li><p>rapidfuzz (<a class="reference external" href="https://github.com/maxbachmann/rapidfuzz">https://github.com/maxbachmann/rapidfuzz</a>)</p></li>
+</ul>
+<p>The main difference is that the sets of available scorers differ, as the Levenshtein distance is replaced by the Joint Complexity distance.</p>
+<p>MODULE TO BE WRITTEN</p>
+</div>
 <div class="section" id="factor-tree">
 <h2>Factor Tree<a class="headerlink" href="#factor-tree" title="Permalink to this headline">¶</a></h2>
 <p>The <cite>factortree</cite> module contains the core engine of the <em>Bag of Factors</em> package.</p>
@@ -484,9 +523,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>txt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Text to analyze</p></li>
+<li><p><strong>txt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Text to analyze.</p></li>
 <li><p><strong>tree</strong> (<a class="reference internal" href="#bof.factortree.FactorTree" title="bof.factortree.FactorTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">FactorTree</span></code></a>) – Factor tree of the corpus.</p></li>
-<li><p><strong>balance</strong> (:py:class:<a href="#id1"><span class="problematic" id="id2">`</span></a>float`in range [0.0, 1.0]) – Large values will disregard the size of corpus elements..</p></li>
+<li><p><strong>balance</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> in range [0.0, 1.0]) – Large values will disregard the size of corpus elements.</p></li>
 <li><p><strong>update_tree</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Update tree if <cite>txt</cite> is not in it?</p></li>
 </ul>
 </dd>
