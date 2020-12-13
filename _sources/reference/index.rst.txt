@@ -9,18 +9,6 @@ The `CountVectorizer` class mimicks the module https://scikit-learn.org/stable/m
 
 TO BE WRITTEN?
 
-Fuzz
-------
-
-The `fuzz` modules mimicks the fuzz module from
-
-- fuzzywuzzy (https://github.com/seatgeek/fuzzywuzzy)
-- rapidfuzz (https://github.com/maxbachmann/rapidfuzz)
-
-The main difference is that the sets of available scorers differ, as the Levenshtein distance is replaced by the Joint Complexity distance.
-
-MODULE TO BE WRITTEN
-
 
 Fuzz
 ------
