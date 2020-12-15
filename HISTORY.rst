@@ -7,6 +7,7 @@ History
 ---------------------------------
 
 * Full refactoring to make the package fit/transform compliant.
+* Add a fit_sampling method that allows to fit only a (random) subset of factors
 
 
 ---------------------------------

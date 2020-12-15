@@ -2,6 +2,8 @@ import gzip
 import errno
 import os
 import dill as pickle
+import numpy as np
+from numba import njit
 
 from pathlib import Path
 
@@ -127,3 +129,48 @@ def default_preprocessor(txt):
     'latex rulez'
     """
     return txt.strip().lower()
+
+
+@njit
+def set_seed(seed=42):
+    """
+    Set the seed of the numba random generator (which is distinct from the numpy random generator).
+
+    Parameters
+    ----------
+    seed: :py:class:`int`
+        The seed number.
+
+    Returns
+    -------
+    None
+    """
+    np.random.seed(seed)
+
+
+def make_random_bool_generator(probability_true=.5):
+    """
+    Provides a (possibly biased) random generator of booleans.
+
+    Parameters
+    ----------
+    probability_true: :py:class:`float`, optional.
+        Probability to return `True`.
+
+    Returns
+    -------
+    random_boolean: callable
+        A function that returns a random boolean when called.
+
+    Examples
+    --------
+    >>> rb = make_random_bool_generator()
+    >>> set_seed(seed=42)
+    >>> [rb() for _ in range(10)]
+    [True, False, False, False, True, True, True, False, False, False]
+    """
+    @njit
+    def rb():
+        return np.random.rand() < probability_true
+
+    return rb
