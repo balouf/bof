@@ -56,6 +56,7 @@ class FactorTree(MixInIO):
     ['', 'r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif']
 
     Display the factors per document:
+
     >>> print(count_display(tree))
     riri: ''x5, 'r'x2, 'ri'x2, 'rir'x1, 'i'x2, 'ir'x1, 'iri'x1
     fifi: ''x5, 'i'x2, 'f'x2, 'fi'x2, 'fif'x1, 'if'x1, 'ifi'x1
@@ -328,6 +329,7 @@ class FactorTree(MixInIO):
         ['', 'r', 'ri', 'rir', 'riri', 'i', 'ir', 'iri', 'f', 'fi', 'if', 'ifi', 'ifif', 'ififi']
 
         We random fit another corpus. We reset the seed to reproduce the example above.
+
         >>> set_seed(2012)
         >>> tree.sampling_fit(["riri", "fifi"])
 
@@ -649,6 +651,7 @@ class FactorTree(MixInIO):
 def count_display(tree):
     """
     Simple side function to check the factor decomposition on a small corpus. DO NOT USE ON LARGE CORPI!
+
     Parameters
     ----------
     tree: :class:`~bof.factortree.FactorTree`

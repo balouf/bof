@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reference &mdash; Bag of Factors 0.1.1 documentation</title>
+  <title>Reference &mdash; Bag of Factors 0.2.0 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.1.1
+                0.2.0
               </div>
             
           
@@ -326,11 +326,13 @@
 <span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
 </pre></div>
 </div>
-<p>Display the factors per document:
-&gt;&gt;&gt; print(count_display(tree))
-riri: ‘’x5, ‘r’x2, ‘ri’x2, ‘rir’x1, ‘i’x2, ‘ir’x1, ‘iri’x1
-fifi: ‘’x5, ‘i’x2, ‘f’x2, ‘fi’x2, ‘fif’x1, ‘if’x1, ‘ifi’x1
-rififi: ‘’x7, ‘r’x1, ‘ri’x1, ‘i’x3, ‘f’x2, ‘fi’x2, ‘fif’x1, ‘if’x2, ‘ifi’x2, ‘rif’x1</p>
+<p>Display the factors per document:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">count_display</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+<span class="go">riri: &#39;&#39;x5, &#39;r&#39;x2, &#39;ri&#39;x2, &#39;rir&#39;x1, &#39;i&#39;x2, &#39;ir&#39;x1, &#39;iri&#39;x1</span>
+<span class="go">fifi: &#39;&#39;x5, &#39;i&#39;x2, &#39;f&#39;x2, &#39;fi&#39;x2, &#39;fif&#39;x1, &#39;if&#39;x1, &#39;ifi&#39;x1</span>
+<span class="go">rififi: &#39;&#39;x7, &#39;r&#39;x1, &#39;ri&#39;x1, &#39;i&#39;x3, &#39;f&#39;x2, &#39;fi&#39;x2, &#39;fif&#39;x1, &#39;if&#39;x2, &#39;ifi&#39;x2, &#39;rif&#39;x1</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt id="bof.factortree.FactorTree.clear">
 <code class="sig-name descname">clear</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keep_graph</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/factortree.html#FactorTree.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.factortree.FactorTree.clear" title="Permalink to this definition">¶</a></dt>
@@ -557,9 +559,11 @@ rififi: ‘’x7, ‘r’x1, ‘ri’x1, ‘i’x3, ‘f’x2, ‘fi’x2, ‘fi
 <span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
 </pre></div>
 </div>
-<p>We random fit another corpus. We reset the seed to reproduce the example above.
-&gt;&gt;&gt; set_seed(2012)
-&gt;&gt;&gt; tree.sampling_fit([“riri”, “fifi”])</p>
+<p>We random fit another corpus. We reset the seed to reproduce the example above.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">set_seed</span><span class="p">(</span><span class="mi">2012</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">sampling_fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
 <p>The factors have been implicitly reset.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
 <span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;]</span>
@@ -789,15 +793,16 @@ Do not update count.</p>
 <dl class="py function">
 <dt id="bof.factortree.count_display">
 <code class="sig-prename descclassname">bof.factortree.</code><code class="sig-name descname">count_display</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tree</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/factortree.html#count_display"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.factortree.count_display" title="Permalink to this definition">¶</a></dt>
-<dd><p>Simple side function to check the factor decomposition on a small corpus. DO NOT USE ON LARGE CORPI!
-:param tree:
-:type tree: <a class="reference internal" href="#bof.factortree.FactorTree" title="bof.factortree.FactorTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">FactorTree</span></code></a></p>
+<dd><p>Simple side function to check the factor decomposition on a small corpus. DO NOT USE ON LARGE CORPI!</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tree</strong> (<a class="reference internal" href="#bof.factortree.FactorTree" title="bof.factortree.FactorTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">FactorTree</span></code></a>) – </p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>

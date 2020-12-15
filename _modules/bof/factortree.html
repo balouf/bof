@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bof.factortree &mdash; Bag of Factors 0.1.1 documentation</title>
+  <title>bof.factortree &mdash; Bag of Factors 0.2.0 documentation</title>
   
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.1.1
+                0.2.0
               </div>
             
           
@@ -215,6 +215,7 @@
 <span class="sd">    [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
 
 <span class="sd">    Display the factors per document:</span>
+
 <span class="sd">    &gt;&gt;&gt; print(count_display(tree))</span>
 <span class="sd">    riri: &#39;&#39;x5, &#39;r&#39;x2, &#39;ri&#39;x2, &#39;rir&#39;x1, &#39;i&#39;x2, &#39;ir&#39;x1, &#39;iri&#39;x1</span>
 <span class="sd">    fifi: &#39;&#39;x5, &#39;i&#39;x2, &#39;f&#39;x2, &#39;fi&#39;x2, &#39;fif&#39;x1, &#39;if&#39;x1, &#39;ifi&#39;x1</span>
@@ -487,6 +488,7 @@
 <span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
 
 <span class="sd">        We random fit another corpus. We reset the seed to reproduce the example above.</span>
+
 <span class="sd">        &gt;&gt;&gt; set_seed(2012)</span>
 <span class="sd">        &gt;&gt;&gt; tree.sampling_fit([&quot;riri&quot;, &quot;fifi&quot;])</span>
 
@@ -808,6 +810,7 @@
 <div class="viewcode-block" id="count_display"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.count_display">[docs]</a><span class="k">def</span> <span class="nf">count_display</span><span class="p">(</span><span class="n">tree</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Simple side function to check the factor decomposition on a small corpus. DO NOT USE ON LARGE CORPI!</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    tree: :class:`~bof.factortree.FactorTree`</span>
