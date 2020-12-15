@@ -161,6 +161,8 @@
 <span class="kn">import</span> <span class="nn">errno</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">dill</span> <span class="k">as</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">njit</span>
 
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
@@ -286,6 +288,51 @@
 <span class="sd">    &#39;latex rulez&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">txt</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="set_seed"><a class="viewcode-back" href="../../reference/index.html#bof.common.set_seed">[docs]</a><span class="nd">@njit</span>
+<span class="k">def</span> <span class="nf">set_seed</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the seed of the numba random generator (which is distinct from the numpy random generator).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    seed: :py:class:`int`</span>
+<span class="sd">        The seed number.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="make_random_bool_generator"><a class="viewcode-back" href="../../reference/index.html#bof.common.make_random_bool_generator">[docs]</a><span class="k">def</span> <span class="nf">make_random_bool_generator</span><span class="p">(</span><span class="n">probability_true</span><span class="o">=.</span><span class="mi">5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Provides a (possibly biased) random generator of booleans.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    probability_true: :py:class:`float`, optional.</span>
+<span class="sd">        Probability to return `True`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    random_boolean: callable</span>
+<span class="sd">        A function that returns a random boolean when called.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; rb = make_random_bool_generator()</span>
+<span class="sd">    &gt;&gt;&gt; set_seed(seed=42)</span>
+<span class="sd">    &gt;&gt;&gt; [rb() for _ in range(10)]</span>
+<span class="sd">    [True, False, False, False, True, True, True, False, False, False]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@njit</span>
+    <span class="k">def</span> <span class="nf">rb</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">probability_true</span>
+
+    <span class="k">return</span> <span class="n">rb</span></div>
 </pre></div>
 
            </div>

@@ -326,6 +326,11 @@
 <span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
 </pre></div>
 </div>
+<p>Display the factors per document:
+&gt;&gt;&gt; print(count_display(tree))
+riri: ‘’x5, ‘r’x2, ‘ri’x2, ‘rir’x1, ‘i’x2, ‘ir’x1, ‘iri’x1
+fifi: ‘’x5, ‘i’x2, ‘f’x2, ‘fi’x2, ‘fif’x1, ‘if’x1, ‘ifi’x1
+rififi: ‘’x7, ‘r’x1, ‘ri’x1, ‘i’x3, ‘f’x2, ‘fi’x2, ‘fif’x1, ‘if’x2, ‘ifi’x2, ‘rif’x1</p>
 <dl class="py method">
 <dt id="bof.factortree.FactorTree.clear">
 <code class="sig-name descname">clear</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keep_graph</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/factortree.html#FactorTree.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.factortree.FactorTree.clear" title="Permalink to this definition">¶</a></dt>
@@ -342,22 +347,50 @@
 </dd>
 </dl>
 <p class="rubric">Examples</p>
+<p>Build a factor tree of three documents, with max factor size 3.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span> <span class="n">n_range</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">n</span>
+</pre></div>
+</div>
+<p>Number of documents:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">n</span>
 <span class="go">3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">m</span>
+</pre></div>
+</div>
+<p>Number of factors:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">m</span>
 <span class="go">13</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">n</span>
+</pre></div>
+</div>
+<p>Clear the object.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Number of documents:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">n</span>
 <span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">m</span>
+</pre></div>
+</div>
+<p>Number of factors (remind that the empty factor “” is always present).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">m</span>
 <span class="go">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span> <span class="n">n_range</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">clear</span><span class="p">(</span><span class="n">keep_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">n</span>
+</pre></div>
+</div>
+<p>Rebuild the FactorTree.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span> <span class="n">n_range</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Clear the corpus part, leaving the factor graph untouched..</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">clear</span><span class="p">(</span><span class="n">keep_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Number of documents:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">n</span>
 <span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">m</span>
+</pre></div>
+</div>
+<p>Number of factors:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">m</span>
 <span class="go">13</span>
 </pre></div>
 </div>
@@ -370,7 +403,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>.) – Texts to analyze.</p></li>
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.) – Texts to analyze.</p></li>
 <li><p><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Clears FactorTree. If False, FactorTree will be updated instead.</p></li>
 </ul>
 </dd>
@@ -382,21 +415,46 @@
 </dd>
 </dl>
 <p class="rubric">Examples</p>
+<p>We fit a corpus to a tree.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">(</span><span class="n">n_range</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
+</pre></div>
+</div>
+<p>The inner corpus remains empty:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
 <span class="go">[]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
+</pre></div>
+</div>
+<p>The factors have been populated:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
 <span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
+</pre></div>
+</div>
+<p>We fit another corpus.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The inner corpus remains empty:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
 <span class="go">[]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
+</pre></div>
+</div>
+<p>The factors have been implicitly reset and updated from the new corpus (<cite>rif</cite> is gone in this toy example):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
 <span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;rififi&quot;</span><span class="p">],</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
+</pre></div>
+</div>
+<p>We add another corpus to the fit by setting <cite>reset</cite> to <cite>False</cite>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;rififi&quot;</span><span class="p">],</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The inner corpus remains empty:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
 <span class="go">[]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
+</pre></div>
+</div>
+<p>The list of features has been updated (with <cite>rif`</cite>):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
 <span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
 </pre></div>
 </div>
@@ -409,7 +467,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>.) – Texts to analyze.</p></li>
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.) – Texts to analyze.</p></li>
 <li><p><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Clears FactorTree. If False, FactorTree will be updated instead.</p></li>
 </ul>
 </dd>
@@ -421,22 +479,99 @@
 </dd>
 </dl>
 <p class="rubric">Examples</p>
+<p>Build a FactorTree from a corpus of three documents:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">(</span><span class="n">n_range</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
+</pre></div>
+</div>
+<p>List of documents:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
 <span class="go">[&#39;riri&#39;, &#39;fifi&#39;, &#39;rififi&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
+</pre></div>
+</div>
+<p>List of factors (of size at most 3):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
 <span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
+</pre></div>
+</div>
+<p>Build a FactorTree from a corpus of two documents.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Notice the implicit reset, as there are now two documents:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
 <span class="go">[&#39;riri&#39;, &#39;fifi&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
+</pre></div>
+</div>
+<p>Similarly, the factors are these from <code class="docutils literal notranslate"><span class="pre">riri</span></code> and <code class="docutils literal notranslate"><span class="pre">fifi</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
 <span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;rififi&quot;</span><span class="p">],</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
+</pre></div>
+</div>
+<p>With <cite>reset</cite> set to <cite>False</cite>, we can add another list while keeping the previous state.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;rififi&quot;</span><span class="p">],</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We have now 2+1=3 documents.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
 <span class="go">[&#39;riri&#39;, &#39;fifi&#39;, &#39;rififi&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
+</pre></div>
+</div>
+<p>The list of features has been updated as well:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
 <span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bof.factortree.FactorTree.sampling_fit">
+<code class="sig-name descname">sampling_fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">corpus</span></em>, <em class="sig-param"><span class="n">reset</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">sampling_rate</span><span class="o">=</span><span class="default_value">0.5</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/factortree.html#FactorTree.sampling_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.factortree.FactorTree.sampling_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a partial factor tree where only a random subset of factors are selected. Does not update inner corpus.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.) – Texts to analyze.</p></li>
+<li><p><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Clears FactorTree. If False, FactorTree will be updated instead.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>We fit a corpus to a tree a normal way to see the complete list of factors of size at most 3..</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
+</pre></div>
+</div>
+<p>Now we use a sampling fit instead. Only a subset of the factors are selected.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">set_seed</span><span class="p">(</span><span class="mi">2012</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">sampling_fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
+</pre></div>
+</div>
+<p>We random fit another corpus. We reset the seed to reproduce the example above.
+&gt;&gt;&gt; set_seed(2012)
+&gt;&gt;&gt; tree.sampling_fit([“riri”, “fifi”])</p>
+<p>The factors have been implicitly reset.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;]</span>
+</pre></div>
+</div>
+<p>We add another corpus to the fit by setting <cite>reset</cite> to <cite>False</cite>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">sampling_fit</span><span class="p">([</span><span class="s2">&quot;rififi&quot;</span><span class="p">],</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The list of features has been updated:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -460,28 +595,34 @@
 </dd>
 </dl>
 <p class="rubric">Examples</p>
+<p>To start, we fit_transform a corpus:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">(</span><span class="n">n_range</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
-<span class="go">[&#39;riri&#39;, &#39;fifi&#39;, &#39;rififi&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
-<span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">count</span>
-<span class="go">[{0: 5, 1: 5, 2: 7}, {0: 2, 2: 1}, {0: 2, 2: 1}, {0: 1}, {0: 2, 1: 2, 2: 3}, {0: 1}, {0: 1}, {1: 2, 2: 2}, {1: 2, 2: 2}, {1: 1, 2: 1}, {1: 1, 2: 2}, {1: 1, 2: 2}, {2: 1}]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">&quot;fir&quot;</span><span class="p">,</span> <span class="s2">&quot;rfi&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
-<span class="go">[&#39;fir&#39;, &#39;rfi&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
-<span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">count</span>
-<span class="go">[{0: 4, 1: 4}, {0: 1, 1: 1}, {}, {}, {0: 1, 1: 1}, {0: 1}, {}, {0: 1, 1: 1}, {0: 1, 1: 1}, {}, {}, {}, {}]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">&quot;rififi&quot;</span><span class="p">],</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
-<span class="go">[&#39;fir&#39;, &#39;rfi&#39;, &#39;rififi&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
-<span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">count</span>
-<span class="go">[{0: 4, 1: 4, 2: 7}, {0: 1, 1: 1, 2: 1}, {2: 1}, {}, {0: 1, 1: 1, 2: 3}, {0: 1}, {}, {0: 1, 1: 1, 2: 2}, {0: 1, 1: 1, 2: 2}, {2: 1}, {2: 2}, {2: 2}, {2: 1}]</span>
+</pre></div>
+</div>
+<p>The corpus decomposition in factors:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">count_display</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+<span class="go">riri: &#39;&#39;x5, &#39;r&#39;x2, &#39;ri&#39;x2, &#39;rir&#39;x1, &#39;i&#39;x2, &#39;ir&#39;x1, &#39;iri&#39;x1</span>
+<span class="go">fifi: &#39;&#39;x5, &#39;i&#39;x2, &#39;f&#39;x2, &#39;fi&#39;x2, &#39;fif&#39;x1, &#39;if&#39;x1, &#39;ifi&#39;x1</span>
+<span class="go">rififi: &#39;&#39;x7, &#39;r&#39;x1, &#39;ri&#39;x1, &#39;i&#39;x3, &#39;f&#39;x2, &#39;fi&#39;x2, &#39;fif&#39;x1, &#39;if&#39;x2, &#39;ifi&#39;x2, &#39;rif&#39;x1</span>
+</pre></div>
+</div>
+<p>We now apply a transform.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">&quot;fir&quot;</span><span class="p">,</span> <span class="s2">&quot;rfi&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Observe the corpus decomposition: the old corpus has been erased, and new factors (e.g. <cite>rf</cite>) are discarded.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">count_display</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+<span class="go">fir: &#39;&#39;x4, &#39;r&#39;x1, &#39;i&#39;x1, &#39;ir&#39;x1, &#39;f&#39;x1, &#39;fi&#39;x1</span>
+<span class="go">rfi: &#39;&#39;x4, &#39;r&#39;x1, &#39;i&#39;x1, &#39;f&#39;x1, &#39;fi&#39;x1</span>
+</pre></div>
+</div>
+<p>We update (without discarding previous entries) the corpus with a new one.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">&quot;rififi&quot;</span><span class="p">],</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">count_display</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+<span class="go">fir: &#39;&#39;x4, &#39;r&#39;x1, &#39;i&#39;x1, &#39;ir&#39;x1, &#39;f&#39;x1, &#39;fi&#39;x1</span>
+<span class="go">rfi: &#39;&#39;x4, &#39;r&#39;x1, &#39;i&#39;x1, &#39;f&#39;x1, &#39;fi&#39;x1</span>
+<span class="go">rififi: &#39;&#39;x7, &#39;r&#39;x1, &#39;ri&#39;x1, &#39;i&#39;x3, &#39;f&#39;x2, &#39;fi&#39;x2, &#39;fif&#39;x1, &#39;if&#39;x2, &#39;ifi&#39;x2, &#39;rif&#39;x1</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -502,19 +643,27 @@
 </dd>
 </dl>
 <p class="rubric">Examples</p>
+<p>Initiate a factor tree.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
 <span class="go">[&#39;&#39;]</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">txt_fit_transform</span><span class="p">(</span><span class="s2">&quot;riri&quot;</span><span class="p">)</span>
+<p>Fit one document. Check features.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">txt_fit</span><span class="p">(</span><span class="s2">&quot;riri&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
 <span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;]</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">txt_fit_transform</span><span class="p">(</span><span class="s2">&quot;rififi&quot;</span><span class="p">)</span>
+<p>Fit another document. Check features.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">txt_fit</span><span class="p">(</span><span class="s2">&quot;rififi&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
 <span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;]</span>
+</pre></div>
+</div>
+<p>The corpus stays empty.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">corpus</span>
+<span class="go">[]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -535,19 +684,65 @@
 </dd>
 </dl>
 <p class="rubric">Examples</p>
+<p>Starts with empty corpus.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
 <span class="go">[&#39;&#39;]</span>
 </pre></div>
 </div>
+<p>Add one document. Check factors.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">txt_fit_transform</span><span class="p">(</span><span class="s2">&quot;riri&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
-<span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">count_display</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+<span class="go">riri: &#39;&#39;x5, &#39;r&#39;x2, &#39;ri&#39;x2, &#39;rir&#39;x1, &#39;riri&#39;x1, &#39;i&#39;x2, &#39;ir&#39;x1, &#39;iri&#39;x1</span>
 </pre></div>
 </div>
+<p>Add another document. Check factors.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">txt_fit_transform</span><span class="p">(</span><span class="s2">&quot;rififi&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
-<span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">count_display</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+<span class="go">riri: &#39;&#39;x5, &#39;r&#39;x2, &#39;ri&#39;x2, &#39;rir&#39;x1, &#39;riri&#39;x1, &#39;i&#39;x2, &#39;ir&#39;x1, &#39;iri&#39;x1</span>
+<span class="go">rififi: &#39;&#39;x7, &#39;r&#39;x1, &#39;ri&#39;x1, &#39;i&#39;x3, &#39;rif&#39;x1, &#39;rifi&#39;x1, &#39;rifif&#39;x1, &#39;if&#39;x2, &#39;ifi&#39;x2, &#39;ifif&#39;x1, &#39;ififi&#39;x1, &#39;f&#39;x2, &#39;fi&#39;x2, &#39;fif&#39;x1, &#39;fifi&#39;x1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bof.factortree.FactorTree.txt_sampling_fit">
+<code class="sig-name descname">txt_sampling_fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">txt</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/factortree.html#FactorTree.txt_sampling_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.factortree.FactorTree.txt_sampling_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a text’s factor to the factor tree.
+When a new factor is met, it is added with some probability, otherwise it is discarded.
+This can be seen as a simple way to reduce the size of the tree by only selecting a subset of frequent factors.
+Do not update count.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>txt</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">srt</span></code>) – Text to update factors from.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Initiate tree</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Prepare random boolean generator.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">set_rb</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Initiate seed
+&gt;&gt;&gt; set_seed(42)</p>
+<p>Random fit a few words.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">txt_sampling_fit</span><span class="p">(</span><span class="s2">&quot;riri&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">txt_sampling_fit</span><span class="p">(</span><span class="s2">&quot;fifi&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">txt_sampling_fit</span><span class="p">(</span><span class="s2">&quot;rififi&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can observe that only a (random) subset of factors have been selected. The list is coherent: it contains the subfactors of each factor.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;i&#39;, &#39;if&#39;, &#39;ifi&#39;]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -568,23 +763,52 @@
 </dd>
 </dl>
 <p class="rubric">Examples</p>
+<p>Initiate a factor tree.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
 <span class="go">[&#39;&#39;]</span>
 </pre></div>
 </div>
+<p>Add a document. Check factors.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">txt_fit_transform</span><span class="p">(</span><span class="s2">&quot;riri&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
-<span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">count_display</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+<span class="go">riri: &#39;&#39;x5, &#39;r&#39;x2, &#39;ri&#39;x2, &#39;rir&#39;x1, &#39;riri&#39;x1, &#39;i&#39;x2, &#39;ir&#39;x1, &#39;iri&#39;x1</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">txt_fit_transform</span><span class="p">(</span><span class="s2">&quot;rififi&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">features</span>
-<span class="go">[&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;]</span>
+<p>transform another document. Check factors. Only pre-existing factors have been used for the second document.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">.</span><span class="n">txt_transform</span><span class="p">(</span><span class="s2">&quot;rififi&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">count_display</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+<span class="go">riri: &#39;&#39;x5, &#39;r&#39;x2, &#39;ri&#39;x2, &#39;rir&#39;x1, &#39;riri&#39;x1, &#39;i&#39;x2, &#39;ir&#39;x1, &#39;iri&#39;x1</span>
+<span class="go">rififi: &#39;&#39;x7, &#39;r&#39;x1, &#39;ri&#39;x1, &#39;i&#39;x3</span>
 </pre></div>
 </div>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt id="bof.factortree.count_display">
+<code class="sig-prename descclassname">bof.factortree.</code><code class="sig-name descname">count_display</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tree</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/factortree.html#count_display"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.factortree.count_display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple side function to check the factor decomposition on a small corpus. DO NOT USE ON LARGE CORPI!
+:param tree:
+:type tree: <a class="reference internal" href="#bof.factortree.FactorTree" title="bof.factortree.FactorTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">FactorTree</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Analyzes the factor of size at most 3 of <cite>[“riri”, “fifi”, “rififi”]</cite>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">],</span> <span class="n">n_range</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">count_display</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
+<span class="go">riri: &#39;&#39;x5, &#39;r&#39;x2, &#39;ri&#39;x2, &#39;rir&#39;x1, &#39;i&#39;x2, &#39;ir&#39;x1, &#39;iri&#39;x1</span>
+<span class="go">fifi: &#39;&#39;x5, &#39;i&#39;x2, &#39;f&#39;x2, &#39;fi&#39;x2, &#39;fif&#39;x1, &#39;if&#39;x1, &#39;ifi&#39;x1</span>
+<span class="go">rififi: &#39;&#39;x7, &#39;r&#39;x1, &#39;ri&#39;x1, &#39;i&#39;x3, &#39;f&#39;x2, &#39;fi&#39;x2, &#39;fif&#39;x1, &#39;if&#39;x2, &#39;ifi&#39;x2, &#39;rif&#39;x1</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -842,6 +1066,47 @@
 <span class="go">&#39;latex rulez&#39;</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="bof.common.make_random_bool_generator">
+<code class="sig-prename descclassname">bof.common.</code><code class="sig-name descname">make_random_bool_generator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">probability_true</span><span class="o">=</span><span class="default_value">0.5</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#make_random_bool_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.common.make_random_bool_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides a (possibly biased) random generator of booleans.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>probability_true</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, optional.) – Probability to return <cite>True</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>random_boolean</strong> – A function that returns a random boolean when called.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>callable</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rb</span> <span class="o">=</span> <span class="n">make_random_bool_generator</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">set_seed</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">rb</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="go">[True, False, False, False, True, True, True, False, False, False]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="bof.common.set_seed">
+<code class="sig-prename descclassname">bof.common.</code><code class="sig-name descname">set_seed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">42</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#set_seed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.common.set_seed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the seed of the numba random generator (which is distinct from the numpy random generator).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – The seed number.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
