@@ -70,7 +70,6 @@ class FactorTree(MixInIO):
             self.self_factors = []
             self.m = 1
             self.n = 0
-            self.auto_update = auto_update
             if preprocessor is None:
                 preprocessor = default_preprocessor
             self.preprocessor = preprocessor
