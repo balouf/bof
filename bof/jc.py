@@ -32,24 +32,24 @@ def common_factors(txt, tree, update_tree=False):
     ([8, 2, 4], 8)
     >>> common_factors("rafi", tree)
     ([3, 4, 5], 11)
-    >>> tree.corpus_list
+    >>> tree.corpus
     ['riri', 'fifi', 'rififi']
     >>> common_factors("fifi", tree, update_tree=True)
     ([2, 8, 8], 8)
-    >>> tree.corpus_list
+    >>> tree.corpus
     ['riri', 'fifi', 'rififi']
     >>> common_factors("fari", tree, update_tree=True)
     ([4, 3, 5, 11], 11)
-    >>> tree.corpus_list
+    >>> tree.corpus
     ['riri', 'fifi', 'rififi', 'fari']
     """
     txt = tree.preprocessor(txt)
-    index = tree.corpus_dict.get(txt)
+    index = tree.corpus_.get(txt)
     if not index:
         if not update_tree:
             return common_factors_external(txt, tree)
         index = tree.n
-        tree.add_txt_to_tree(txt)
+        tree.txt_fit_transform(txt)
     return common_factors_internal(index, tree)
 
 
@@ -89,7 +89,7 @@ def common_factors_internal(i, tree):
         if i in tree.count[node]:
             for j in tree.count[node]:
                 factors[j] += 1
-            buffer.update(tree.edges[node].values())
+            buffer.update(tree.graph[node].values())
     return factors, tree.self_factors[i]
 
 
@@ -122,7 +122,7 @@ def common_factors_external(txt, tree):
     ([8, 2, 4], 8)
     >>> common_factors_external("rafi", tree)
     ([3, 4, 5], 11)
-    >>> tree.corpus_list
+    >>> tree.corpus
     ['riri', 'fifi', 'rififi']
     """
 
@@ -131,11 +131,11 @@ def common_factors_external(txt, tree):
     new_tree = FactorTree([txt], preprocessor=tree.preprocessor, n_range=tree.n_range)
     while buffer:
         node = buffer.pop()
-        target = tree.factor_dict.get(new_tree.factor_list[node])
+        target = tree.features_.get(new_tree.features[node])
         if target is not None:
             for j in tree.count[target]:
                 factors[j] += 1
-            buffer.update(new_tree.edges[node].values())
+            buffer.update(new_tree.graph[node].values())
     return factors, new_tree.self_factors[0]
 
 
