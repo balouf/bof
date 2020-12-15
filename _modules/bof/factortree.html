@@ -168,8 +168,6 @@
 <span class="sd">    ----------</span>
 <span class="sd">    corpus: :py:class:`list` of :py:class:`str`, optional</span>
 <span class="sd">        Corpus of documents to decompose into factors.</span>
-<span class="sd">    auto_update: :py:class:`bool`, optional</span>
-<span class="sd">        When processing external texts, should the tree be updated (TO BE MOVED WITH THE FACTORS MODULE WHEN CREATED).</span>
 <span class="sd">    preprocessor: callable</span>
 <span class="sd">        Preprocessing function to apply to texts before adding them to the factor tree.</span>
 <span class="sd">    n_range: :py:class:`int` or None, optional</span>
@@ -179,16 +177,16 @@
 <span class="sd">    ----------</span>
 <span class="sd">    count: :py:class:`list` of :py:class:`dict`</span>
 <span class="sd">        Keep for each factor a dict that tells for each document (represented by its index) the number of occurences of the factor in the document.</span>
-<span class="sd">    edges: :py:class:`list` of :py:class:`dict`</span>
+<span class="sd">    graph: :py:class:`list` of :py:class:`dict`</span>
 <span class="sd">        Keep for each factor a dict that associates to each letter the corresponding factor index in the tree (if any).</span>
-<span class="sd">    corpus_list: :py:class:`list` of :py:class:`srt`</span>
+<span class="sd">    corpus: :py:class:`list` of :py:class:`srt`</span>
 <span class="sd">        The corpus list.</span>
-<span class="sd">    corpus_dict: :py:class:`dict` of :py:class:`str` -&gt; :py:class:`int`</span>
-<span class="sd">        Reverse index of the corpus (`corpus_dict[corpus_list[i]] == i`).</span>
-<span class="sd">    factor_list: :py:class:`list` of :py:class:`srt`</span>
+<span class="sd">    corpus_: :py:class:`dict` of :py:class:`str` -&gt; :py:class:`int`</span>
+<span class="sd">        Reverse index of the corpus (`corpus_[corpus_list[i]] == i`).</span>
+<span class="sd">    features: :py:class:`list` of :py:class:`srt`</span>
 <span class="sd">        The factor list.</span>
-<span class="sd">    factor_dict: :py:class:`dict` of :py:class:`str` -&gt; :py:class:`int`</span>
-<span class="sd">        Reverse index of the factors (`factor_dict[factor_list[i]] == i`).</span>
+<span class="sd">    features_: :py:class:`dict` of :py:class:`str` -&gt; :py:class:`int`</span>
+<span class="sd">        Reverse index of the factors (`features_[factor_list[i]] == i`).</span>
 <span class="sd">    self_factors: :py:class:`list` of :py:class:`int`</span>
 <span class="sd">        Number of unique factors for each text.</span>
 <span class="sd">    n: :py:class:`int`</span>
@@ -213,61 +211,204 @@
 
 <span class="sd">    List the factors in the corpus:</span>
 
-<span class="sd">    &gt;&gt;&gt; tree.factor_list</span>
+<span class="sd">    &gt;&gt;&gt; tree.features</span>
 <span class="sd">    [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auto_update</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">preprocessor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_range</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">preprocessor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_range</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">()]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">()]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">corpus_list</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">corpus_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">factor_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">factor_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">()]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corpus_</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">features_</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">self_factors</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">auto_update</span> <span class="o">=</span> <span class="n">auto_update</span>
             <span class="k">if</span> <span class="n">preprocessor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">preprocessor</span> <span class="o">=</span> <span class="n">default_preprocessor</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">preprocessor</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span> <span class="o">=</span> <span class="n">n_range</span>
             <span class="k">if</span> <span class="n">corpus</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">add_txt_list_to_tree</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
 
-<div class="viewcode-block" id="FactorTree.add_txt_list_to_tree"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.add_txt_list_to_tree">[docs]</a>    <span class="k">def</span> <span class="nf">add_txt_list_to_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">txt_list</span><span class="p">):</span>
+<div class="viewcode-block" id="FactorTree.clear"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.clear">[docs]</a>    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keep_graph</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add a list of texts to the factor tree.</span>
+<span class="sd">        Reset the object.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        txt_list: :py:class:`list` of :py:class:`srt`</span>
-<span class="sd">            Texts to add.</span>
+<span class="sd">        keep_graph: :py:class:`bool`, optional</span>
+<span class="sd">            Preserve the factor tree, only clear the corpus related part.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        None</span>
 
 <span class="sd">        Examples</span>
-<span class="sd">        ---------</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; corpus = [&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; tree = FactorTree(corpus=corpus, n_range=3)</span>
+<span class="sd">        &gt;&gt;&gt; tree.n</span>
+<span class="sd">        3</span>
+<span class="sd">        &gt;&gt;&gt; tree.m</span>
+<span class="sd">        13</span>
+<span class="sd">        &gt;&gt;&gt; tree.clear()</span>
+<span class="sd">        &gt;&gt;&gt; tree.n</span>
+<span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; tree.m</span>
+<span class="sd">        1</span>
+<span class="sd">        &gt;&gt;&gt; tree = FactorTree(corpus=corpus, n_range=3)</span>
+<span class="sd">        &gt;&gt;&gt; tree.clear(keep_graph=True)</span>
+<span class="sd">        &gt;&gt;&gt; tree.n</span>
+<span class="sd">        0</span>
+<span class="sd">        &gt;&gt;&gt; tree.m</span>
+<span class="sd">        13</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corpus_</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">self_factors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">keep_graph</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">()]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">()]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">features_</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="mi">1</span></div>
 
+<div class="viewcode-block" id="FactorTree.fit_transform"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.fit_transform">[docs]</a>    <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build the factor tree and populate the factor counts.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        corpus: :py:class:`list` of :py:class:`list`.</span>
+<span class="sd">            Texts to analyze.</span>
+<span class="sd">        reset: :py:class:`bool`</span>
+<span class="sd">            Clears FactorTree. If False, FactorTree will be updated instead.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; tree = FactorTree(n_range=3)</span>
-<span class="sd">        &gt;&gt;&gt; tree.add_txt_list_to_tree([&quot;riri&quot;, &quot;fifi&quot;])</span>
-<span class="sd">        &gt;&gt;&gt; tree.factor_list</span>
+<span class="sd">        &gt;&gt;&gt; tree.fit_transform([&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; tree.corpus</span>
+<span class="sd">        [&#39;riri&#39;, &#39;fifi&#39;, &#39;rififi&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
+<span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; tree.fit_transform([&quot;riri&quot;, &quot;fifi&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; tree.corpus</span>
+<span class="sd">        [&#39;riri&#39;, &#39;fifi&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
 <span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;]</span>
-
-<span class="sd">        &gt;&gt;&gt; tree.add_txt_list_to_tree([&quot;rififi&quot;])</span>
-<span class="sd">        &gt;&gt;&gt; tree.factor_list</span>
+<span class="sd">        &gt;&gt;&gt; tree.fit_transform([&quot;rififi&quot;], reset=False)</span>
+<span class="sd">        &gt;&gt;&gt; tree.corpus</span>
+<span class="sd">        [&#39;riri&#39;, &#39;fifi&#39;, &#39;rififi&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
 <span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">txt</span> <span class="ow">in</span> <span class="n">txt_list</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">add_txt_to_tree</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">reset</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">txt</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">txt_fit_transform</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FactorTree.add_txt_to_tree"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.add_txt_to_tree">[docs]</a>    <span class="k">def</span> <span class="nf">add_txt_to_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">txt</span><span class="p">):</span>
+
+<div class="viewcode-block" id="FactorTree.fit"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add a text to the factor tree.</span>
+<span class="sd">        Build the factor tree. Does not update inner corpus.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        corpus: :py:class:`list` of :py:class:`list`.</span>
+<span class="sd">            Texts to analyze.</span>
+<span class="sd">        reset: :py:class:`bool`</span>
+<span class="sd">            Clears FactorTree. If False, FactorTree will be updated instead.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; tree = FactorTree(n_range=3)</span>
+<span class="sd">        &gt;&gt;&gt; tree.fit([&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; tree.corpus</span>
+<span class="sd">        []</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
+<span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; tree.fit([&quot;riri&quot;, &quot;fifi&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; tree.corpus</span>
+<span class="sd">        []</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
+<span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; tree.fit([&quot;rififi&quot;], reset=False)</span>
+<span class="sd">        &gt;&gt;&gt; tree.corpus</span>
+<span class="sd">        []</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
+<span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">reset</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">txt</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">txt_fit</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FactorTree.transform"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Counts factors from the factor tree in the corpus. Does not update the factor tree.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        corpus: :py:class:`list` of :py:class:`list`.</span>
+<span class="sd">            Texts to analyze.</span>
+<span class="sd">        reset: :py:class:`bool`</span>
+<span class="sd">            Clears internal corpus. If False, internal corpus will be updated instead.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; tree = FactorTree(n_range=3)</span>
+<span class="sd">        &gt;&gt;&gt; tree.fit_transform([&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; tree.corpus</span>
+<span class="sd">        [&#39;riri&#39;, &#39;fifi&#39;, &#39;rififi&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
+<span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; tree.count</span>
+<span class="sd">        [{0: 5, 1: 5, 2: 7}, {0: 2, 2: 1}, {0: 2, 2: 1}, {0: 1}, {0: 2, 1: 2, 2: 3}, {0: 1}, {0: 1}, {1: 2, 2: 2}, {1: 2, 2: 2}, {1: 1, 2: 1}, {1: 1, 2: 2}, {1: 1, 2: 2}, {2: 1}]</span>
+<span class="sd">        &gt;&gt;&gt; tree.transform([&quot;fir&quot;, &quot;rfi&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; tree.corpus</span>
+<span class="sd">        [&#39;fir&#39;, &#39;rfi&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
+<span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; tree.count</span>
+<span class="sd">        [{0: 4, 1: 4}, {0: 1, 1: 1}, {}, {}, {0: 1, 1: 1}, {0: 1}, {}, {0: 1, 1: 1}, {0: 1, 1: 1}, {}, {}, {}, {}]</span>
+<span class="sd">        &gt;&gt;&gt; tree.transform([&quot;rififi&quot;], reset=False)</span>
+<span class="sd">        &gt;&gt;&gt; tree.corpus</span>
+<span class="sd">        [&#39;fir&#39;, &#39;rfi&#39;, &#39;rififi&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
+<span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; tree.count</span>
+<span class="sd">        [{0: 4, 1: 4, 2: 7}, {0: 1, 1: 1, 2: 1}, {2: 1}, {}, {0: 1, 1: 1, 2: 3}, {0: 1}, {}, {0: 1, 1: 1, 2: 2}, {0: 1, 1: 1, 2: 2}, {2: 1}, {2: 2}, {2: 2}, {2: 1}]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">reset</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">(</span><span class="n">keep_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">txt</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">txt_transform</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FactorTree.txt_fit_transform"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.txt_fit_transform">[docs]</a>    <span class="k">def</span> <span class="nf">txt_fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">txt</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a text to the factor tree and update count.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -282,15 +423,15 @@
 <span class="sd">        ---------</span>
 
 <span class="sd">        &gt;&gt;&gt; tree = FactorTree()</span>
-<span class="sd">        &gt;&gt;&gt; tree.factor_list</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
 <span class="sd">        [&#39;&#39;]</span>
 
-<span class="sd">        &gt;&gt;&gt; tree.add_txt_to_tree(&quot;riri&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; tree.factor_list</span>
+<span class="sd">        &gt;&gt;&gt; tree.txt_fit_transform(&quot;riri&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
 <span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;]</span>
 
-<span class="sd">        &gt;&gt;&gt; tree.add_txt_to_tree(&quot;rififi&quot;)</span>
-<span class="sd">        &gt;&gt;&gt; tree.factor_list</span>
+<span class="sd">        &gt;&gt;&gt; tree.txt_fit_transform(&quot;rififi&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
 <span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -305,22 +446,120 @@
             <span class="n">node</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span> <span class="k">else</span> <span class="n">length</span>
             <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">txt</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]:</span>
-                <span class="n">n_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+                <span class="n">n_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">n_node</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">())</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">())</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">())</span>
-                    <span class="n">fac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factor_list</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">+</span> <span class="n">letter</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">factor_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fac</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">factor_dict</span><span class="p">[</span><span class="n">fac</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span>
+                    <span class="n">fac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">+</span> <span class="n">letter</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fac</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="p">[</span><span class="n">fac</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">node</span> <span class="o">=</span> <span class="n">n_node</span>
                 <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">self_factors</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">d</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">corpus_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">corpus_dict</span><span class="p">[</span><span class="n">txt</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corpus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corpus_</span><span class="p">[</span><span class="n">txt</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="FactorTree.txt_fit"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.txt_fit">[docs]</a>    <span class="k">def</span> <span class="nf">txt_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">txt</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a text&#39;s factor to the factor tree. Do not update count.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        txt: :py:class:`srt`</span>
+<span class="sd">            Text to update factors from.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ---------</span>
+
+<span class="sd">        &gt;&gt;&gt; tree = FactorTree()</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
+<span class="sd">        [&#39;&#39;]</span>
+
+<span class="sd">        &gt;&gt;&gt; tree.txt_fit_transform(&quot;riri&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
+<span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;]</span>
+
+<span class="sd">        &gt;&gt;&gt; tree.txt_fit_transform(&quot;rififi&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
+<span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">txt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span> <span class="k">else</span> <span class="n">length</span>
+            <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">txt</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]:</span>
+                <span class="n">n_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">n_node</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">())</span>
+                    <span class="n">fac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">+</span> <span class="n">letter</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fac</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="p">[</span><span class="n">fac</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">n_node</span></div>
+
+<div class="viewcode-block" id="FactorTree.txt_transform"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.txt_transform">[docs]</a>    <span class="k">def</span> <span class="nf">txt_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">txt</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parse a text through the factor tree without updating it. Update count.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        txt: :py:class:`srt`</span>
+<span class="sd">            Text to add.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ---------</span>
+
+<span class="sd">        &gt;&gt;&gt; tree = FactorTree()</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
+<span class="sd">        [&#39;&#39;]</span>
+
+<span class="sd">        &gt;&gt;&gt; tree.txt_fit_transform(&quot;riri&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
+<span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;]</span>
+
+<span class="sd">        &gt;&gt;&gt; tree.txt_fit_transform(&quot;rififi&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tree.features</span>
+<span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">txt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+
+        <span class="c1"># Empty factor my friend!</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">self_factors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span> <span class="k">else</span> <span class="n">length</span>
+            <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">txt</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]:</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">letter</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">[</span><span class="n">node</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">self_factors</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">d</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corpus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corpus_</span><span class="p">[</span><span class="n">txt</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span></div></div>
+
 </pre></div>
 
            </div>

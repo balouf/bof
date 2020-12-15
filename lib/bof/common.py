@@ -47,7 +47,7 @@ class MixInIO:
         ...     tree1.save(filename='myfile', path=tmpdirname) # doctest.ELLIPSIS
         File ...myfile.pkl already exists! Use erase option to overwrite.
 
-        >>> tree1.add_txt_to_tree("titi")
+        >>> tree1.txt_fit_transform("titi")
         >>> with tempfile.TemporaryDirectory() as tmpdirname:
         ...     tree1.save(filename='myfile', path=tmpdirname)
         ...     tree1.save(filename='myfile', path=tmpdirname, erase=True)
@@ -55,7 +55,7 @@ class MixInIO:
         ...     dir_content = [f.name for f in Path(tmpdirname).glob('*')]
         >>> dir_content
         ['myfile.pkl']
-        >>> tree2.corpus_list
+        >>> tree2.corpus
         ['riri', 'fifi', 'rififi', 'titi']
 
         >>> with tempfile.TemporaryDirectory() as tmpdirname:

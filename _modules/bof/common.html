@@ -206,7 +206,7 @@
 <span class="sd">        ...     tree1.save(filename=&#39;myfile&#39;, path=tmpdirname) # doctest.ELLIPSIS</span>
 <span class="sd">        File ...myfile.pkl already exists! Use erase option to overwrite.</span>
 
-<span class="sd">        &gt;&gt;&gt; tree1.add_txt_to_tree(&quot;titi&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tree1.txt_fit_transform(&quot;titi&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; with tempfile.TemporaryDirectory() as tmpdirname:</span>
 <span class="sd">        ...     tree1.save(filename=&#39;myfile&#39;, path=tmpdirname)</span>
 <span class="sd">        ...     tree1.save(filename=&#39;myfile&#39;, path=tmpdirname, erase=True)</span>
@@ -214,7 +214,7 @@
 <span class="sd">        ...     dir_content = [f.name for f in Path(tmpdirname).glob(&#39;*&#39;)]</span>
 <span class="sd">        &gt;&gt;&gt; dir_content</span>
 <span class="sd">        [&#39;myfile.pkl&#39;]</span>
-<span class="sd">        &gt;&gt;&gt; tree2.corpus_list</span>
+<span class="sd">        &gt;&gt;&gt; tree2.corpus</span>
 <span class="sd">        [&#39;riri&#39;, &#39;fifi&#39;, &#39;rififi&#39;, &#39;titi&#39;]</span>
 
 <span class="sd">        &gt;&gt;&gt; with tempfile.TemporaryDirectory() as tmpdirname:</span>
