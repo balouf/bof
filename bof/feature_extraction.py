@@ -121,8 +121,8 @@ class CountVectorizer:
     """
 
     def __init__(self, corpus=None, n_range=5, preprocessor=None):
-        self.feats_to_docs = csr_matrix((0, 0), dtype=int)
-        self.docs_to_feats = csr_matrix((0, 0), dtype=int)
+        self.feats_to_docs = csr_matrix((0, 0), dtype=np.uint64)
+        self.docs_to_feats = csr_matrix((0, 0), dtype=np.uint64)
         self.m = 0
         self.features_ = dict()
         self.features = list()
@@ -156,7 +156,7 @@ class CountVectorizer:
 
         >>> vectorizer = CountVectorizer(n_range=3)
         >>> vectorizer.fit_transform(["riri", "fifi", "rififi"]) # doctest: +NORMALIZE_WHITESPACE
-        <3x12 sparse matrix of type '<class 'numpy.int32'>'
+        <3x12 sparse matrix of type '<class 'numpy.uint64'>'
             with 21 stored elements in Compressed Sparse Row format>
 
         List of documents:
@@ -172,7 +172,7 @@ class CountVectorizer:
         Build a FactorTree from a corpus of two documents.
 
         >>> vectorizer.fit_transform(["riri", "fifi"]) # doctest: +NORMALIZE_WHITESPACE
-        <2x11 sparse matrix of type '<class 'numpy.int32'>'
+        <2x11 sparse matrix of type '<class 'numpy.uint64'>'
             with 12 stored elements in Compressed Sparse Row format>
 
         Notice the implicit reset, as there are now two documents:
@@ -191,7 +191,7 @@ class CountVectorizer:
         With `reset` set to `False`, we can add another list while keeping the previous state.
 
         >>> vectorizer.fit_transform(["rififi"], reset=False) # doctest: +NORMALIZE_WHITESPACE
-        <3x12 sparse matrix of type '<class 'numpy.int32'>'
+        <3x12 sparse matrix of type '<class 'numpy.uint64'>'
             with 21 stored elements in Compressed Sparse Row format>
 
         We have now 2+1=3 documents.
@@ -208,8 +208,8 @@ class CountVectorizer:
         ['r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif']
         """
         if reset:
-            self.feats_to_docs = csr_matrix((0, 0), dtype=int)
-            self.docs_to_feats = csr_matrix((0, 0), dtype=int)
+            self.feats_to_docs = csr_matrix((0, 0), dtype=np.uint64)
+            self.docs_to_feats = csr_matrix((0, 0), dtype=np.uint64)
             self.m = 0
             self.features_ = dict()
             self.features = list()
@@ -218,8 +218,8 @@ class CountVectorizer:
         new_n = len(corpus)
         self.corpus += corpus
         tot_size = sum(number_of_factors(len(txt.strip().lower()), self.n_range) for txt in corpus)
-        feature_indices = np.zeros(tot_size, dtype=int)
-        document_indices = np.zeros(tot_size, dtype=int)
+        feature_indices = np.zeros(tot_size, dtype=np.uint64)
+        document_indices = np.zeros(tot_size, dtype=np.uint64)
         ptr = 0
         end = build_end(self.n_range)
         for i, txt in enumerate(corpus):
@@ -240,7 +240,7 @@ class CountVectorizer:
                     ptr += 1
             document_indices[start_ptr:ptr] = i
 
-        new_count = coo_matrix((np.ones(tot_size, dtype=int), (feature_indices, document_indices)),
+        new_count = coo_matrix((np.ones(tot_size, dtype=np.uint64), (feature_indices, document_indices)),
                                shape=(self.m, new_n))
         self.feats_to_docs.resize(self.m, old_n)
         self.feats_to_docs = hstack([self.feats_to_docs, new_count.tocsr()])
@@ -310,8 +310,8 @@ class CountVectorizer:
         ['r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif']
         """
         if reset:
-            self.feats_to_docs = csr_matrix((0, 0), dtype=int)
-            self.docs_to_feats = csr_matrix((0, 0), dtype=int)
+            self.feats_to_docs = csr_matrix((0, 0), dtype=np.uint64)
+            self.docs_to_feats = csr_matrix((0, 0), dtype=np.uint64)
             self.m = 0
             self.features_ = dict()
             self.features = list()
@@ -353,7 +353,7 @@ class CountVectorizer:
 
         >>> vectorizer = CountVectorizer(n_range=3)
         >>> vectorizer.fit_transform(["riri", "fifi", "rififi"]) # doctest: +NORMALIZE_WHITESPACE
-        <3x12 sparse matrix of type '<class 'numpy.int32'>'
+        <3x12 sparse matrix of type '<class 'numpy.uint64'>'
             with 21 stored elements in Compressed Sparse Row format>
 
         The corpus decomposition in factors:
@@ -366,7 +366,7 @@ class CountVectorizer:
         We now apply a transform.
 
         >>> vectorizer.transform(["fir", "rfi"]) # doctest: +NORMALIZE_WHITESPACE
-        <2x12 sparse matrix of type '<class 'numpy.intc'>'
+        <2x12 sparse matrix of type '<class 'numpy.uint64'>'
             with 9 stored elements in Compressed Sparse Row format>
 
         Observe the corpus decomposition: the old corpus has been erased, and new factors (e.g. `rf`) are discarded.
@@ -379,7 +379,7 @@ class CountVectorizer:
         update is returned.
 
         >>> vectorizer.transform(["rififi"], reset=False) # doctest: +NORMALIZE_WHITESPACE
-        <1x12 sparse matrix of type '<class 'numpy.intc'>'
+        <1x12 sparse matrix of type '<class 'numpy.uint64'>'
             with 9 stored elements in Compressed Sparse Row format>
 
         >>> print(vectorizer.tostr())
@@ -388,15 +388,15 @@ class CountVectorizer:
         rififi: 'r'x1, 'ri'x1, 'i'x3, 'f'x2, 'fi'x2, 'fif'x1, 'if'x2, 'ifi'x2, 'rif'x1
         """
         if reset:
-            self.feats_to_docs = csr_matrix((0, 0), dtype=int)
-            self.docs_to_feats = csr_matrix((0, 0), dtype=int)
+            self.feats_to_docs = csr_matrix((0, 0), dtype=np.uint64)
+            self.docs_to_feats = csr_matrix((0, 0), dtype=np.uint64)
             self.corpus = list()
         old_n = len(self.corpus)
         new_n = len(corpus)
         self.corpus += corpus
         tot_size = sum(number_of_factors(len(txt.strip().lower()), self.n_range) for txt in corpus)
-        feature_indices = np.zeros(tot_size, dtype=int)
-        document_indices = np.zeros(tot_size, dtype=int)
+        feature_indices = np.zeros(tot_size, dtype=np.uint64)
+        document_indices = np.zeros(tot_size, dtype=np.uint64)
         ptr = 0
         end = build_end(self.n_range)
         for i, txt in enumerate(corpus):
@@ -415,7 +415,7 @@ class CountVectorizer:
         feature_indices = feature_indices[:ptr]
         document_indices = document_indices[:ptr]
 
-        new_count = coo_matrix((np.ones(ptr, dtype=int), (feature_indices, document_indices)),
+        new_count = coo_matrix((np.ones(ptr, dtype=np.uint64), (feature_indices, document_indices)),
                                shape=(self.m, new_n))
         self.feats_to_docs.resize(self.m, old_n)
         self.feats_to_docs = hstack([self.feats_to_docs, new_count.tocsr()])
