@@ -7,7 +7,8 @@ CountVectorizer
 
 The `CountVectorizer` class mimicks the module https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html. It is in fact very similar to using `char` or `char_wb` analyzer option from that module.
 
-TO BE WRITTEN?
+.. automodule:: bof.feature_extraction
+    :members:
 
 
 Fuzz
