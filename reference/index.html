@@ -361,7 +361,7 @@
 <p>Build a FactorTree from a corpus of three documents:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">n_range</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span> 
-<span class="go">&lt;3x12 sparse matrix of type &#39;&lt;class &#39;numpy.int32&#39;&gt;&#39;</span>
+<span class="go">&lt;3x12 sparse matrix of type &#39;&lt;class &#39;numpy.uint64&#39;&gt;&#39;</span>
 <span class="go">    with 21 stored elements in Compressed Sparse Row format&gt;</span>
 </pre></div>
 </div>
@@ -377,7 +377,7 @@
 </div>
 <p>Build a FactorTree from a corpus of two documents.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">])</span> 
-<span class="go">&lt;2x11 sparse matrix of type &#39;&lt;class &#39;numpy.int32&#39;&gt;&#39;</span>
+<span class="go">&lt;2x11 sparse matrix of type &#39;&lt;class &#39;numpy.uint64&#39;&gt;&#39;</span>
 <span class="go">    with 12 stored elements in Compressed Sparse Row format&gt;</span>
 </pre></div>
 </div>
@@ -397,7 +397,7 @@
 </div>
 <p>With <cite>reset</cite> set to <cite>False</cite>, we can add another list while keeping the previous state.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;rififi&quot;</span><span class="p">],</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
-<span class="go">&lt;3x12 sparse matrix of type &#39;&lt;class &#39;numpy.int32&#39;&gt;&#39;</span>
+<span class="go">&lt;3x12 sparse matrix of type &#39;&lt;class &#39;numpy.uint64&#39;&gt;&#39;</span>
 <span class="go">    with 21 stored elements in Compressed Sparse Row format&gt;</span>
 </pre></div>
 </div>
@@ -463,7 +463,7 @@ corpus is not returned but is internally preserved.</p>
 <p>To start, we fit_transform a corpus:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">n_range</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span> 
-<span class="go">&lt;3x12 sparse matrix of type &#39;&lt;class &#39;numpy.int32&#39;&gt;&#39;</span>
+<span class="go">&lt;3x12 sparse matrix of type &#39;&lt;class &#39;numpy.uint64&#39;&gt;&#39;</span>
 <span class="go">    with 21 stored elements in Compressed Sparse Row format&gt;</span>
 </pre></div>
 </div>
@@ -476,7 +476,7 @@ corpus is not returned but is internally preserved.</p>
 </div>
 <p>We now apply a transform.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">&quot;fir&quot;</span><span class="p">,</span> <span class="s2">&quot;rfi&quot;</span><span class="p">])</span> 
-<span class="go">&lt;2x12 sparse matrix of type &#39;&lt;class &#39;numpy.intc&#39;&gt;&#39;</span>
+<span class="go">&lt;2x12 sparse matrix of type &#39;&lt;class &#39;numpy.uint64&#39;&gt;&#39;</span>
 <span class="go">    with 9 stored elements in Compressed Sparse Row format&gt;</span>
 </pre></div>
 </div>
@@ -489,7 +489,7 @@ corpus is not returned but is internally preserved.</p>
 <p>We update (without discarding previous entries) the corpus with a new one. Note that only the matrix of the
 update is returned.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">&quot;rififi&quot;</span><span class="p">],</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
-<span class="go">&lt;1x12 sparse matrix of type &#39;&lt;class &#39;numpy.intc&#39;&gt;&#39;</span>
+<span class="go">&lt;1x12 sparse matrix of type &#39;&lt;class &#39;numpy.uint64&#39;&gt;&#39;</span>
 <span class="go">    with 9 stored elements in Compressed Sparse Row format&gt;</span>
 </pre></div>
 </div>
