@@ -176,7 +176,8 @@
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
 <span class="sd">    count: :py:class:`list` of :py:class:`dict`</span>
-<span class="sd">        Keep for each factor a dict that tells for each document (represented by its index) the number of occurences of the factor in the document.</span>
+<span class="sd">        Keep for each factor a dict that tells for each document (represented by its index) the number of occurences of</span>
+<span class="sd">        the factor in the document.</span>
 <span class="sd">    graph: :py:class:`list` of :py:class:`dict`</span>
 <span class="sd">        Keep for each factor a dict that associates to each letter the corresponding factor index in the tree (if any).</span>
 <span class="sd">    corpus: :py:class:`list` of :py:class:`srt`</span>
@@ -238,7 +239,7 @@
                 <span class="n">preprocessor</span> <span class="o">=</span> <span class="n">default_preprocessor</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">preprocessor</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span> <span class="o">=</span> <span class="n">n_range</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rb</span><span class="o">=</span><span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rb</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">if</span> <span class="n">corpus</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
 
@@ -387,7 +388,6 @@
         <span class="k">for</span> <span class="n">txt</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">txt_fit_transform</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span></div>
 
-
 <div class="viewcode-block" id="FactorTree.fit"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build the factor tree. Does not update inner corpus.</span>
@@ -454,17 +454,18 @@
         <span class="k">for</span> <span class="n">txt</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">txt_fit</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span></div>
 
-
 <div class="viewcode-block" id="FactorTree.sampling_fit"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.sampling_fit">[docs]</a>    <span class="k">def</span> <span class="nf">sampling_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sampling_rate</span><span class="o">=.</span><span class="mi">5</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build a partial factor tree where only a random subset of factors are selected. Does not update inner corpus.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        corpus: :py:class:`list` of :py:class:`str`.</span>
+<span class="sd">        corpus: :py:class:`list` of :py:class:`str`</span>
 <span class="sd">            Texts to analyze.</span>
 <span class="sd">        reset: :py:class:`bool`</span>
 <span class="sd">            Clears FactorTree. If False, FactorTree will be updated instead.</span>
+<span class="sd">        sampling_rate: :py:class:`float`</span>
+<span class="sd">            Probability to explore factors starting from one given position in the text.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -511,7 +512,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">rb</span> <span class="o">=</span> <span class="n">make_random_bool_generator</span><span class="p">(</span><span class="n">probability_true</span><span class="o">=</span><span class="n">sampling_rate</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">txt</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">txt_sampling_fit</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span></div>
-
 
 <div class="viewcode-block" id="FactorTree.transform"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -565,7 +565,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">(</span><span class="n">keep_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">txt</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">txt_transform</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span></div>
-
 
 <div class="viewcode-block" id="FactorTree.txt_fit_transform"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.txt_fit_transform">[docs]</a>    <span class="k">def</span> <span class="nf">txt_fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">txt</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -631,7 +630,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">corpus_</span><span class="p">[</span><span class="n">txt</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span></div>
 
-
 <div class="viewcode-block" id="FactorTree.txt_fit"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.txt_fit">[docs]</a>    <span class="k">def</span> <span class="nf">txt_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">txt</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a text&#39;s factor to the factor tree. Do not update count.</span>
@@ -688,7 +686,6 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">node</span> <span class="o">=</span> <span class="n">n_node</span></div>
 
-
 <div class="viewcode-block" id="FactorTree.txt_sampling_fit"><a class="viewcode-back" href="../../reference/index.html#bof.factortree.FactorTree.txt_sampling_fit">[docs]</a>    <span class="k">def</span> <span class="nf">txt_sampling_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">txt</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a text&#39;s factor to the factor tree.</span>
@@ -725,7 +722,8 @@
 <span class="sd">        &gt;&gt;&gt; tree.txt_sampling_fit(&quot;fifi&quot;)</span>
 <span class="sd">        &gt;&gt;&gt; tree.txt_sampling_fit(&quot;rififi&quot;)</span>
 
-<span class="sd">        We can observe that only a (random) subset of factors have been selected. The list is coherent: it contains the subfactors of each factor.</span>
+<span class="sd">        We can observe that only a (random) subset of factors have been selected. The list is coherent: it contains the</span>
+<span class="sd">        subfactors of each factor.</span>
 
 <span class="sd">        &gt;&gt;&gt; tree.features</span>
 <span class="sd">        [&#39;&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;i&#39;, &#39;if&#39;, &#39;ifi&#39;]</span>

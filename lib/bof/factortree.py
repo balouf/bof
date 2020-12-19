@@ -17,7 +17,8 @@ class FactorTree(MixInIO):
     Attributes
     ----------
     count: :py:class:`list` of :py:class:`dict`
-        Keep for each factor a dict that tells for each document (represented by its index) the number of occurences of the factor in the document.
+        Keep for each factor a dict that tells for each document (represented by its index) the number of occurences of
+        the factor in the document.
     graph: :py:class:`list` of :py:class:`dict`
         Keep for each factor a dict that associates to each letter the corresponding factor index in the tree (if any).
     corpus: :py:class:`list` of :py:class:`srt`
@@ -79,7 +80,7 @@ class FactorTree(MixInIO):
                 preprocessor = default_preprocessor
             self.preprocessor = preprocessor
             self.n_range = n_range
-            self.rb=None
+            self.rb = None
             if corpus is not None:
                 self.fit_transform(corpus)
 
@@ -228,7 +229,6 @@ class FactorTree(MixInIO):
         for txt in corpus:
             self.txt_fit_transform(txt)
 
-
     def fit(self, corpus, reset=True):
         """
         Build the factor tree. Does not update inner corpus.
@@ -295,17 +295,18 @@ class FactorTree(MixInIO):
         for txt in corpus:
             self.txt_fit(txt)
 
-
     def sampling_fit(self, corpus, reset=True, sampling_rate=.5):
         """
         Build a partial factor tree where only a random subset of factors are selected. Does not update inner corpus.
 
         Parameters
         ----------
-        corpus: :py:class:`list` of :py:class:`str`.
+        corpus: :py:class:`list` of :py:class:`str`
             Texts to analyze.
         reset: :py:class:`bool`
             Clears FactorTree. If False, FactorTree will be updated instead.
+        sampling_rate: :py:class:`float`
+            Probability to explore factors starting from one given position in the text.
 
         Returns
         -------
@@ -352,7 +353,6 @@ class FactorTree(MixInIO):
         self.rb = make_random_bool_generator(probability_true=sampling_rate)
         for txt in corpus:
             self.txt_sampling_fit(txt)
-
 
     def transform(self, corpus, reset=True):
         """
@@ -406,7 +406,6 @@ class FactorTree(MixInIO):
             self.clear(keep_graph=True)
         for txt in corpus:
             self.txt_transform(txt)
-
 
     def txt_fit_transform(self, txt):
         """
@@ -472,7 +471,6 @@ class FactorTree(MixInIO):
         self.corpus_[txt] = self.n
         self.n += 1
 
-
     def txt_fit(self, txt):
         """
         Add a text's factor to the factor tree. Do not update count.
@@ -529,7 +527,6 @@ class FactorTree(MixInIO):
                     self.m += 1
                 node = n_node
 
-
     def txt_sampling_fit(self, txt):
         """
         Add a text's factor to the factor tree.
@@ -566,7 +563,8 @@ class FactorTree(MixInIO):
         >>> tree.txt_sampling_fit("fifi")
         >>> tree.txt_sampling_fit("rififi")
 
-        We can observe that only a (random) subset of factors have been selected. The list is coherent: it contains the subfactors of each factor.
+        We can observe that only a (random) subset of factors have been selected. The list is coherent: it contains the
+        subfactors of each factor.
 
         >>> tree.features
         ['', 'r', 'ri', 'rir', 'riri', 'f', 'fi', 'fif', 'fifi', 'i', 'if', 'ifi']
