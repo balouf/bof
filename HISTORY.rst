@@ -2,6 +2,14 @@
 History
 =======
 
+---------------------------------------------------
+0.3.0 (2020-12-15): CountVectorizer simplification
+---------------------------------------------------
+
+* The CountVectorizer class is lighter and faster. Only features are kept inside.
+* Dealing with embeddings is delegated to other modules.
+
+
 ---------------------------------
 0.2.0 (2020-12-15): Fit/Transform
 ---------------------------------

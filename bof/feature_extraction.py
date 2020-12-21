@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.sparse import coo_matrix
 
-from .common import default_preprocessor
+from .common import default_preprocessor, make_random_bool_generator, set_seed
 
 
 def number_of_factors(length, n_range=None):
@@ -96,6 +96,7 @@ class CountVectorizer:
     >>> vectorizer = CountVectorizer(n_range=3)
 
     Build the factor matrix of a corpus of texts.
+
     >>> corpus = ["riri", "fifi", "rififi"]
     >>> vectorizer.fit_transform(corpus=corpus).toarray() # doctest: +NORMALIZE_WHITESPACE
     array([[2, 2, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0],
@@ -206,11 +207,11 @@ class CountVectorizer:
             document_indices[start_ptr:ptr] = i
 
         return coo_matrix((np.ones(tot_size, dtype=np.uintc), (document_indices, feature_indices)),
-                           shape=(len(corpus), self.m)).tocsr()
+                          shape=(len(corpus), self.m)).tocsr()
 
     def fit(self, corpus, reset=True):
         """
-        Build the features. Does not keep build the factor matrix.
+        Build the features. Does not build the factor matrix.
 
         Parameters
         ----------
@@ -231,7 +232,7 @@ class CountVectorizer:
         >>> vectorizer = CountVectorizer(n_range=3)
         >>> vectorizer.fit(["riri", "fifi", "rififi"])
 
-        The `fir` method does not return anything, but the factors have been populated:
+        The `fit` method does not return anything, but the factors have been populated:
 
         >>> vectorizer.features
         ['r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif']
@@ -239,7 +240,6 @@ class CountVectorizer:
         We fit another corpus.
 
         >>> vectorizer.fit(["riri", "fifi"])
-
 
         The factors have been implicitly reset (`rif` is gone in this toy example):
 
@@ -335,4 +335,78 @@ class CountVectorizer:
         document_indices = document_indices[:ptr]
 
         return coo_matrix((np.ones(ptr, dtype=np.uintc), (document_indices, feature_indices)),
-                           shape=(len(corpus), self.m)).tocsr()
+                          shape=(len(corpus), self.m)).tocsr()
+
+    def sampling_fit(self, corpus, reset=True, sampling_rate=.5):
+        """
+        Build a partial factor tree where only a random subset of factors are selected. Note that there is no
+        `sampling_fit_transform` method, as mutualizing the processes would introduce incoherences in the factor
+        description: you have to do a `sampling_fit` followed by a `transform`.
+
+        Parameters
+        ----------
+        corpus: :py:class:`list` of :py:class:`str`
+            Texts to analyze.
+        reset: :py:class:`bool`
+            Clears FactorTree. If False, FactorTree will be updated instead.
+        sampling_rate: :py:class:`float`
+            Probability to explore factors starting from one given position in the text.
+
+        Returns
+        -------
+        None
+
+        Examples
+        --------
+
+        We fit a corpus to a tree a normal way to see the complete list of factors of size at most 3..
+
+        >>> vectorizer = CountVectorizer()
+        >>> vectorizer.fit(["riri", "fifi", "rififi"])
+        >>> vectorizer.features
+        ['r', 'ri', 'rir', 'riri', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'fifi', 'if', 'ifi', 'rif', 'rifi', 'rifif', 'ifif', 'ififi']
+
+        Now we use a sampling fit instead. Only a subset of the factors are selected.
+
+        >>> set_seed(2012)
+        >>> vectorizer.sampling_fit(["riri", "fifi", "rififi"])
+        >>> vectorizer.features
+        ['r', 'ri', 'rir', 'riri', 'i', 'ir', 'iri', 'f', 'fi', 'if', 'ifi', 'ifif', 'ififi']
+
+        We random fit another corpus. We reset the seed to reproduce the example above.
+
+        >>> set_seed(2012)
+        >>> vectorizer.sampling_fit(["riri", "fifi"])
+
+        The factors have been implicitly reset.
+
+        >>> vectorizer.features
+        ['r', 'ri', 'rir', 'riri', 'i', 'ir', 'iri', 'f', 'fi']
+
+        We add another corpus to the fit by setting `reset` to `False`:
+
+        >>> vectorizer.sampling_fit(["rififi"], reset=False)
+
+        The list of features has been updated:
+
+        >>> vectorizer.features
+        ['r', 'ri', 'rir', 'riri', 'i', 'ir', 'iri', 'f', 'fi', 'if', 'ifi', 'ifif', 'ififi']
+        """
+        if reset:
+            self.features_ = dict()
+            self.features = list()
+            self.m = 0
+        rb = make_random_bool_generator(probability_true=sampling_rate)
+        end = build_end(self.n_range)
+        for i, txt in enumerate(corpus):
+            txt = self.preprocessor(txt)
+            length = len(txt)
+            for start in range(length):
+                if rb():
+                    f = ""
+                    for letter in txt[start:end(start, length)]:
+                        f += letter
+                        if f not in self.features_:
+                            self.features_[f] = self.m
+                            self.features.append(f)
+                            self.m += 1
