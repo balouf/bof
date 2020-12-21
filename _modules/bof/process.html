@@ -158,7 +158,7 @@
   <h1>Source code for bof.process</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">heapq</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">njit</span><span class="p">,</span> <span class="n">int32</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">njit</span>
 
 <span class="kn">from</span> <span class="nn">.feature_extraction</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
 
@@ -191,7 +191,7 @@
 <span class="sd">        A `queries_length X choices_length` matrix that contains the number of (unique) factors between choices and</span>
 <span class="sd">        queries.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">queries_length</span><span class="p">,</span> <span class="n">choices_length</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">queries_length</span><span class="p">,</span> <span class="n">choices_length</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">queries_length</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">xind</span><span class="p">[</span><span class="n">xptr</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="n">xptr</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]:</span>
             <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">:</span>  <span class="c1"># NB with sorted_indices, could be a break, but no guarantee enforced</span>
@@ -255,7 +255,7 @@
 <span class="sd">        A `n X n` matrix that contains joint complexity scores of the corpus.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">self_factors</span> <span class="o">=</span> <span class="n">xptr</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">xptr</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="n">common_factors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">common_factors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">xind</span><span class="p">[</span><span class="n">xptr</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="n">xptr</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]:</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">yind</span><span class="p">[</span><span class="n">yptr</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span><span class="n">yptr</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]:</span>

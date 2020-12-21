@@ -1,6 +1,6 @@
 import heapq
 import numpy as np
-from numba import njit, int32
+from numba import njit
 
 from .feature_extraction import CountVectorizer
 
@@ -33,7 +33,7 @@ def jit_common_factors(queries_length, xind, xptr, choices_length, yind, yptr, m
         A `queries_length X choices_length` matrix that contains the number of (unique) factors between choices and
         queries.
     """
-    res = np.zeros((queries_length, choices_length), dtype=int32)
+    res = np.zeros((queries_length, choices_length), dtype=np.int32)
     for i in range(queries_length):
         for k in xind[xptr[i]:xptr[i + 1]]:
             if k < m:  # NB with sorted_indices, could be a break, but no guarantee enforced
@@ -97,7 +97,7 @@ def jit_square_factors(xind, xptr, yind, yptr, n, length_impact):
         A `n X n` matrix that contains joint complexity scores of the corpus.
     """
     self_factors = xptr[1:] - xptr[:-1]
-    common_factors = np.zeros((n, n), dtype=int32)
+    common_factors = np.zeros((n, n), dtype=np.int32)
     for i in range(n):
         for k in xind[xptr[i]:xptr[i + 1]]:
             for j in yind[yptr[k]:yptr[k + 1]]:
