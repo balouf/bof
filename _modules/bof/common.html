@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bof.common &mdash; Bag of Factors 0.2.0 documentation</title>
+  <title>bof.common &mdash; Bag of Factors 0.3.0 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.2.0
+                0.3.0
               </div>
             
           
@@ -189,6 +189,24 @@
 <span class="sd">        Examples</span>
 <span class="sd">        ----------</span>
 <span class="sd">        &gt;&gt;&gt; import tempfile</span>
+<span class="sd">        &gt;&gt;&gt; from bof.feature_extraction import CountVectorizer</span>
+<span class="sd">        &gt;&gt;&gt; vect1 = CountVectorizer(n_range=3)</span>
+<span class="sd">        &gt;&gt;&gt; vect1.fit([&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; with tempfile.TemporaryDirectory() as tmpdirname:</span>
+<span class="sd">        ...     vect1.save(filename=&#39;myfile&#39;, compress=True, path=tmpdirname)</span>
+<span class="sd">        ...     vect2 = CountVectorizer(filename=&#39;myfile&#39;, path=Path(tmpdirname))</span>
+<span class="sd">        &gt;&gt;&gt; vect2.features</span>
+<span class="sd">        [&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
+
+<span class="sd">        &gt;&gt;&gt; from bof.process import Process</span>
+<span class="sd">        &gt;&gt;&gt; p1 = Process()</span>
+<span class="sd">        &gt;&gt;&gt; p1.fit([&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; with tempfile.TemporaryDirectory() as tmpdirname:</span>
+<span class="sd">        ...     p1.save(filename=&#39;myfile&#39;, compress=True, path=tmpdirname)</span>
+<span class="sd">        ...     p2 = Process(filename=&#39;myfile&#39;, path=Path(tmpdirname))</span>
+<span class="sd">        &gt;&gt;&gt; p2.extractOne(&quot;rififo&quot;)</span>
+<span class="sd">        (&#39;rififi&#39;, 63.1578947368421)</span>
+
 <span class="sd">        &gt;&gt;&gt; from bof.factortree import FactorTree</span>
 <span class="sd">        &gt;&gt;&gt; tree1 = FactorTree([&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;])</span>
 <span class="sd">        &gt;&gt;&gt; with tempfile.TemporaryDirectory() as tmpdirname:</span>

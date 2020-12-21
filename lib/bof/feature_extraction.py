@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.sparse import coo_matrix
 
-from .common import default_preprocessor, make_random_bool_generator, set_seed
+from .common import default_preprocessor, make_random_bool_generator, set_seed, MixInIO
 
 
 def number_of_factors(length, n_range=None):
@@ -68,7 +68,7 @@ def build_end(n_range=None):
         return lambda s, l: l
 
 
-class CountVectorizer:
+class CountVectorizer(MixInIO):
     """
     Counts the factors of a list of document.
 
@@ -78,6 +78,10 @@ class CountVectorizer:
         Preprocessing function to apply to texts before adding them to the factor tree.
     n_range: :py:class:`int` or None, optional
         Maximum factor size. If `None`, all factors will be extracted.
+    filename: :py:class:`str`, optional
+        If set, load from corresponding file.
+    path: :py:class:`str` or :py:class:`~pathlib.Path`, optional
+        If set, specify the directory where the file is located.
 
     Attributes
     ----------
@@ -108,15 +112,17 @@ class CountVectorizer:
     >>> vectorizer.features
     ['r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif']
     """
-
-    def __init__(self, n_range=5, preprocessor=None):
-        self.m = 0
-        self.features_ = dict()
-        self.features = list()
-        self.n_range = n_range
-        if preprocessor is None:
-            preprocessor = default_preprocessor
-        self.preprocessor = preprocessor
+    def __init__(self, n_range=5, preprocessor=None, filename=None, path='.'):
+        if filename is not None:
+            self.load(filename=filename, path=path)
+        else:
+            self.m = 0
+            self.features_ = dict()
+            self.features = list()
+            self.n_range = n_range
+            if preprocessor is None:
+                preprocessor = default_preprocessor
+            self.preprocessor = preprocessor
 
     def fit_transform(self, corpus, reset=True):
         """

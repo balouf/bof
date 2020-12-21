@@ -31,6 +31,24 @@ class MixInIO:
         Examples
         ----------
         >>> import tempfile
+        >>> from bof.feature_extraction import CountVectorizer
+        >>> vect1 = CountVectorizer(n_range=3)
+        >>> vect1.fit(["riri", "fifi", "rififi"])
+        >>> with tempfile.TemporaryDirectory() as tmpdirname:
+        ...     vect1.save(filename='myfile', compress=True, path=tmpdirname)
+        ...     vect2 = CountVectorizer(filename='myfile', path=Path(tmpdirname))
+        >>> vect2.features
+        ['r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif']
+
+        >>> from bof.process import Process
+        >>> p1 = Process()
+        >>> p1.fit(["riri", "fifi", "rififi"])
+        >>> with tempfile.TemporaryDirectory() as tmpdirname:
+        ...     p1.save(filename='myfile', compress=True, path=tmpdirname)
+        ...     p2 = Process(filename='myfile', path=Path(tmpdirname))
+        >>> p2.extractOne("rififo")
+        ('rififi', 63.1578947368421)
+
         >>> from bof.factortree import FactorTree
         >>> tree1 = FactorTree(["riri", "fifi", "rififi"])
         >>> with tempfile.TemporaryDirectory() as tmpdirname:

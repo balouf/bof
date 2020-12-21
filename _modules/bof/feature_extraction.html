@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bof.feature_extraction &mdash; Bag of Factors 0.2.0 documentation</title>
+  <title>bof.feature_extraction &mdash; Bag of Factors 0.3.0 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.2.0
+                0.3.0
               </div>
             
           
@@ -159,7 +159,7 @@
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">coo_matrix</span>
 
-<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">default_preprocessor</span><span class="p">,</span> <span class="n">make_random_bool_generator</span><span class="p">,</span> <span class="n">set_seed</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">default_preprocessor</span><span class="p">,</span> <span class="n">make_random_bool_generator</span><span class="p">,</span> <span class="n">set_seed</span><span class="p">,</span> <span class="n">MixInIO</span>
 
 
 <div class="viewcode-block" id="number_of_factors"><a class="viewcode-back" href="../../reference/index.html#bof.feature_extraction.number_of_factors">[docs]</a><span class="k">def</span> <span class="nf">number_of_factors</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">n_range</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -226,7 +226,7 @@
         <span class="k">return</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">,</span> <span class="n">l</span><span class="p">:</span> <span class="n">l</span></div>
 
 
-<div class="viewcode-block" id="CountVectorizer"><a class="viewcode-back" href="../../reference/index.html#bof.feature_extraction.CountVectorizer">[docs]</a><span class="k">class</span> <span class="nc">CountVectorizer</span><span class="p">:</span>
+<div class="viewcode-block" id="CountVectorizer"><a class="viewcode-back" href="../../reference/index.html#bof.feature_extraction.CountVectorizer">[docs]</a><span class="k">class</span> <span class="nc">CountVectorizer</span><span class="p">(</span><span class="n">MixInIO</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Counts the factors of a list of document.</span>
 
@@ -236,6 +236,10 @@
 <span class="sd">        Preprocessing function to apply to texts before adding them to the factor tree.</span>
 <span class="sd">    n_range: :py:class:`int` or None, optional</span>
 <span class="sd">        Maximum factor size. If `None`, all factors will be extracted.</span>
+<span class="sd">    filename: :py:class:`str`, optional</span>
+<span class="sd">        If set, load from corresponding file.</span>
+<span class="sd">    path: :py:class:`str` or :py:class:`~pathlib.Path`, optional</span>
+<span class="sd">        If set, specify the directory where the file is located.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -266,15 +270,17 @@
 <span class="sd">    &gt;&gt;&gt; vectorizer.features</span>
 <span class="sd">    [&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_range</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">preprocessor</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">features_</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span> <span class="o">=</span> <span class="n">n_range</span>
-        <span class="k">if</span> <span class="n">preprocessor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">preprocessor</span> <span class="o">=</span> <span class="n">default_preprocessor</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">preprocessor</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_range</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">preprocessor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">features_</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span> <span class="o">=</span> <span class="n">n_range</span>
+            <span class="k">if</span> <span class="n">preprocessor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">preprocessor</span> <span class="o">=</span> <span class="n">default_preprocessor</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span> <span class="o">=</span> <span class="n">preprocessor</span>
 
 <div class="viewcode-block" id="CountVectorizer.fit_transform"><a class="viewcode-back" href="../../reference/index.html#bof.feature_extraction.CountVectorizer.fit_transform">[docs]</a>    <span class="k">def</span> <span class="nf">fit_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

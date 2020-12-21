@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reference &mdash; Bag of Factors 0.2.0 documentation</title>
+  <title>Reference &mdash; Bag of Factors 0.3.0 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.2.0
+                0.3.0
               </div>
             
           
@@ -179,7 +179,7 @@
 <p>The main difference is that the sets of available scorers differ, as the Levenshtein distance is replaced by the Joint Complexity distance.</p>
 <span class="target" id="module-bof.process"></span><dl class="py class">
 <dt id="bof.process.Process">
-<em class="property">class </em><code class="sig-prename descclassname">bof.process.</code><code class="sig-name descname">Process</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_range</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">preprocessor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">length_impact</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">allow_updates</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/process.html#Process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.process.Process" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">bof.process.</code><code class="sig-name descname">Process</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_range</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">preprocessor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">length_impact</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">allow_updates</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">'.'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/process.html#Process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.process.Process" title="Permalink to this definition">¶</a></dt>
 <dd><p>The process class is used to compute the closest choices from a list of queries base on joint complexity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -188,6 +188,8 @@
 <li><p><strong>preprocessor</strong> (<em>callable</em><em>, </em><em>optional</em>) – Preprocessing function to apply to texts before adding them to the factor tree.</p></li>
 <li><p><strong>length_impact</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Importance of the length difference between two texts when computing the scores.</p></li>
 <li><p><strong>allow_updates</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – When transforming queries, are new factors kept in the <a class="reference internal" href="#bof.feature_extraction.CountVectorizer" title="bof.feature_extraction.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a></p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – If set, load from corresponding file.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>, optional) – If set, specify the directory where the file is located.</p></li>
 </ul>
 </dd>
 </dl>
@@ -249,7 +251,8 @@
 <dl class="py method">
 <dt id="bof.process.Process.dedupe">
 <code class="sig-name descname">dedupe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contains_dup</span></em>, <em class="sig-param"><span class="n">threshold</span><span class="o">=</span><span class="default_value">60.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/process.html#Process.dedupe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.process.Process.dedupe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Inspired by fuzzywuzzy’s dedupe function to remove (near) duplicates. Currently barely optimized. BUGGED!!!!</p>
+<dd><p>Inspired by fuzzywuzzy’s dedupe function to remove (near) duplicates.
+Currently barely optimized (and probably bugged).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -448,9 +451,11 @@ If <cite>queries</cite> is a list of texts, the list of tuples containing the be
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>Notice the number of factors:
-&gt;&gt;&gt; p.vectorizer.m
-18</p>
+<p>Notice the number of factors:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">m</span>
+<span class="go">18</span>
+</pre></div>
+</div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">&quot;rir&quot;</span><span class="p">,</span> <span class="s2">&quot;fido&quot;</span><span class="p">,</span> <span class="s2">&quot;rafifi&quot;</span><span class="p">,</span> <span class="s2">&quot;screugneuhneu&quot;</span><span class="p">])</span> 
 <span class="go">array([[71.42857143,  9.09090909, 18.75      ],</span>
 <span class="go">       [ 6.25      , 21.42857143, 14.28571429],</span>
@@ -458,21 +463,21 @@ If <cite>queries</cite> is a list of texts, the list of tuples containing the be
 <span class="go">       [ 1.92307692,  0.        ,  1.69491525]])</span>
 </pre></div>
 </div>
-<p>The factors have been augmented with the ones from the queries:
-&gt;&gt;&gt; p.vectorizer.m
-79</p>
-<p>This is could be a memory issue if you keep entering very different queries. To keep the factors clean after
-a transform, set <cite>allow_updates</cite> to False.
-&gt;&gt;&gt; p.allow_updates = False
-&gt;&gt;&gt; p.fit([“riri”, “fifi”, “rififi”])
-&gt;&gt;&gt; p.transform([“rir”, “fido”, “rafifi”, “screugneuhneu”]) # doctest: +NORMALIZE_WHITESPACE
-array([[71.42857143,  9.09090909, 18.75      ],</p>
-<blockquote>
-<div><p>[ 6.25      , 21.42857143, 14.28571429],
-[ 9.09090909, 41.17647059, 34.7826087 ],
-[ 1.92307692,  0.        ,  1.69491525]])</p>
-</div></blockquote>
+<p>The factors have been augmented with the ones from the queries:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">m</span>
+<span class="go">79</span>
+</pre></div>
+</div>
+<p>This is could be a memory issue if you keep entering very different queries. To keep the factors clean after
+a transform, set <cite>allow_updates</cite> to False.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">allow_updates</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">&quot;rir&quot;</span><span class="p">,</span> <span class="s2">&quot;fido&quot;</span><span class="p">,</span> <span class="s2">&quot;rafifi&quot;</span><span class="p">,</span> <span class="s2">&quot;screugneuhneu&quot;</span><span class="p">])</span> 
+<span class="go">array([[71.42857143,  9.09090909, 18.75      ],</span>
+<span class="go">       [ 6.25      , 21.42857143, 14.28571429],</span>
+<span class="go">       [ 9.09090909, 41.17647059, 34.7826087 ],</span>
+<span class="go">       [ 1.92307692,  0.        ,  1.69491525]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">m</span>
 <span class="go">18</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
 <span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
@@ -634,13 +639,15 @@ queries.</p>
 </ul>
 <span class="target" id="module-bof.feature_extraction"></span><dl class="py class">
 <dt id="bof.feature_extraction.CountVectorizer">
-<em class="property">class </em><code class="sig-prename descclassname">bof.feature_extraction.</code><code class="sig-name descname">CountVectorizer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_range</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">preprocessor</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">bof.feature_extraction.</code><code class="sig-name descname">CountVectorizer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_range</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">preprocessor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">'.'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Counts the factors of a list of document.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>preprocessor</strong> (<em>callable</em><em>, </em><em>optional</em>) – Preprocessing function to apply to texts before adding them to the factor tree.</p></li>
 <li><p><strong>n_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or None, optional) – Maximum factor size. If <cite>None</cite>, all factors will be extracted.</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – If set, load from corresponding file.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>, optional) – If set, specify the directory where the file is located.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1005,7 +1012,27 @@ This allows to pre-allocate working memory.</p>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">tempfile</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bof.factortree</span> <span class="kn">import</span> <span class="n">FactorTree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bof.feature_extraction</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vect1</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">n_range</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vect1</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdirname</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">vect1</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myfile&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">tmpdirname</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">vect2</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myfile&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="n">tmpdirname</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vect2</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bof.process</span> <span class="kn">import</span> <span class="n">Process</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">Process</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdirname</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">p1</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myfile&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">tmpdirname</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">p2</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myfile&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="n">tmpdirname</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span><span class="o">.</span><span class="n">extractOne</span><span class="p">(</span><span class="s2">&quot;rififo&quot;</span><span class="p">)</span>
+<span class="go">(&#39;rififi&#39;, 63.1578947368421)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">bof.factortree</span> <span class="kn">import</span> <span class="n">FactorTree</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tree1</span> <span class="o">=</span> <span class="n">FactorTree</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdirname</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">tree1</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myfile&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">tmpdirname</span><span class="p">)</span>
