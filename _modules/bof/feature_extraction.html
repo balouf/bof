@@ -159,7 +159,7 @@
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">coo_matrix</span>
 
-<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">default_preprocessor</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">default_preprocessor</span><span class="p">,</span> <span class="n">make_random_bool_generator</span><span class="p">,</span> <span class="n">set_seed</span>
 
 
 <div class="viewcode-block" id="number_of_factors"><a class="viewcode-back" href="../../reference/index.html#bof.feature_extraction.number_of_factors">[docs]</a><span class="k">def</span> <span class="nf">number_of_factors</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">n_range</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -254,6 +254,7 @@
 <span class="sd">    &gt;&gt;&gt; vectorizer = CountVectorizer(n_range=3)</span>
 
 <span class="sd">    Build the factor matrix of a corpus of texts.</span>
+
 <span class="sd">    &gt;&gt;&gt; corpus = [&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;]</span>
 <span class="sd">    &gt;&gt;&gt; vectorizer.fit_transform(corpus=corpus).toarray() # doctest: +NORMALIZE_WHITESPACE</span>
 <span class="sd">    array([[2, 2, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0],</span>
@@ -364,11 +365,11 @@
             <span class="n">document_indices</span><span class="p">[</span><span class="n">start_ptr</span><span class="p">:</span><span class="n">ptr</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
 
         <span class="k">return</span> <span class="n">coo_matrix</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">tot_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uintc</span><span class="p">),</span> <span class="p">(</span><span class="n">document_indices</span><span class="p">,</span> <span class="n">feature_indices</span><span class="p">)),</span>
-                           <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span></div>
+                          <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="CountVectorizer.fit"><a class="viewcode-back" href="../../reference/index.html#bof.feature_extraction.CountVectorizer.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Build the features. Does not keep build the factor matrix.</span>
+<span class="sd">        Build the features. Does not build the factor matrix.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -389,7 +390,7 @@
 <span class="sd">        &gt;&gt;&gt; vectorizer = CountVectorizer(n_range=3)</span>
 <span class="sd">        &gt;&gt;&gt; vectorizer.fit([&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;])</span>
 
-<span class="sd">        The `fir` method does not return anything, but the factors have been populated:</span>
+<span class="sd">        The `fit` method does not return anything, but the factors have been populated:</span>
 
 <span class="sd">        &gt;&gt;&gt; vectorizer.features</span>
 <span class="sd">        [&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
@@ -397,7 +398,6 @@
 <span class="sd">        We fit another corpus.</span>
 
 <span class="sd">        &gt;&gt;&gt; vectorizer.fit([&quot;riri&quot;, &quot;fifi&quot;])</span>
-
 
 <span class="sd">        The factors have been implicitly reset (`rif` is gone in this toy example):</span>
 
@@ -493,7 +493,81 @@
         <span class="n">document_indices</span> <span class="o">=</span> <span class="n">document_indices</span><span class="p">[:</span><span class="n">ptr</span><span class="p">]</span>
 
         <span class="k">return</span> <span class="n">coo_matrix</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uintc</span><span class="p">),</span> <span class="p">(</span><span class="n">document_indices</span><span class="p">,</span> <span class="n">feature_indices</span><span class="p">)),</span>
-                           <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span></div></div>
+                          <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="CountVectorizer.sampling_fit"><a class="viewcode-back" href="../../reference/index.html#bof.feature_extraction.CountVectorizer.sampling_fit">[docs]</a>    <span class="k">def</span> <span class="nf">sampling_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sampling_rate</span><span class="o">=.</span><span class="mi">5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build a partial factor tree where only a random subset of factors are selected. Note that there is no</span>
+<span class="sd">        `sampling_fit_transform` method, as mutualizing the processes would introduce incoherences in the factor</span>
+<span class="sd">        description: you have to do a `sampling_fit` followed by a `transform`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        corpus: :py:class:`list` of :py:class:`str`</span>
+<span class="sd">            Texts to analyze.</span>
+<span class="sd">        reset: :py:class:`bool`</span>
+<span class="sd">            Clears FactorTree. If False, FactorTree will be updated instead.</span>
+<span class="sd">        sampling_rate: :py:class:`float`</span>
+<span class="sd">            Probability to explore factors starting from one given position in the text.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">        We fit a corpus to a tree a normal way to see the complete list of factors of size at most 3..</span>
+
+<span class="sd">        &gt;&gt;&gt; vectorizer = CountVectorizer()</span>
+<span class="sd">        &gt;&gt;&gt; vectorizer.fit([&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; vectorizer.features</span>
+<span class="sd">        [&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
+
+<span class="sd">        Now we use a sampling fit instead. Only a subset of the factors are selected.</span>
+
+<span class="sd">        &gt;&gt;&gt; set_seed(2012)</span>
+<span class="sd">        &gt;&gt;&gt; vectorizer.sampling_fit([&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; vectorizer.features</span>
+<span class="sd">        [&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
+
+<span class="sd">        We random fit another corpus. We reset the seed to reproduce the example above.</span>
+
+<span class="sd">        &gt;&gt;&gt; set_seed(2012)</span>
+<span class="sd">        &gt;&gt;&gt; vectorizer.sampling_fit([&quot;riri&quot;, &quot;fifi&quot;])</span>
+
+<span class="sd">        The factors have been implicitly reset.</span>
+
+<span class="sd">        &gt;&gt;&gt; vectorizer.features</span>
+<span class="sd">        [&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;]</span>
+
+<span class="sd">        We add another corpus to the fit by setting `reset` to `False`:</span>
+
+<span class="sd">        &gt;&gt;&gt; vectorizer.sampling_fit([&quot;rififi&quot;], reset=False)</span>
+
+<span class="sd">        The list of features has been updated:</span>
+
+<span class="sd">        &gt;&gt;&gt; vectorizer.features</span>
+<span class="sd">        [&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">reset</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">features_</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">rb</span> <span class="o">=</span> <span class="n">make_random_bool_generator</span><span class="p">(</span><span class="n">probability_true</span><span class="o">=</span><span class="n">sampling_rate</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">build_end</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_range</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">txt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">corpus</span><span class="p">):</span>
+            <span class="n">txt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">rb</span><span class="p">():</span>
+                    <span class="n">f</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">txt</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">length</span><span class="p">)]:</span>
+                        <span class="n">f</span> <span class="o">+=</span> <span class="n">letter</span>
+                        <span class="k">if</span> <span class="n">f</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">+=</span> <span class="mi">1</span></div></div>
 </pre></div>
 
            </div>
