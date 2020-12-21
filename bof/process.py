@@ -3,6 +3,7 @@ import numpy as np
 from numba import njit, prange
 
 from .feature_extraction import CountVectorizer
+from .common import MixInIO
 
 
 @njit(parallel=True)
@@ -175,7 +176,7 @@ def get_best_choice(choices, scores, score_cutoff):
         return choices[index], scores[index]
 
 
-class Process:
+class Process(MixInIO):
     """
     The process class is used to compute the closest choices from a list of queries base on joint complexity.
 
@@ -189,6 +190,10 @@ class Process:
         Importance of the length difference between two texts when computing the scores.
     allow_updates: :py:class:`bool`
         When transforming queries, are new factors kept in the :py:class:`~bof.feature_extraction.CountVectorizer`
+    filename: :py:class:`str`, optional
+        If set, load from corresponding file.
+    path: :py:class:`str` or :py:class:`~pathlib.Path`, optional
+        If set, specify the directory where the file is located.
 
     Attributes
     ----------
@@ -203,15 +208,19 @@ class Process:
     choices_length: :py:class:`int`
         Number of choices
     """
-    def __init__(self, n_range=5, preprocessor=None, length_impact=.5, allow_updates=True):
-        self.length_impact = length_impact
-        self.allow_updates = allow_updates
-        self.vectorizer = CountVectorizer(n_range=n_range, preprocessor=preprocessor)
+    def __init__(self, n_range=5, preprocessor=None, length_impact=.5, allow_updates=True,
+                 filename=None, path='.'):
+        if filename is not None:
+            self.load(filename=filename, path=path)
+        else:
+            self.length_impact = length_impact
+            self.allow_updates = allow_updates
+            self.vectorizer = CountVectorizer(n_range=n_range, preprocessor=preprocessor)
 
-        self.choices = None
-        self.choices_matrix = None
-        self.choices_factors = None
-        self.choices_length = None
+            self.choices = None
+            self.choices_matrix = None
+            self.choices_factors = None
+            self.choices_length = None
 
     def reset(self):
         """
