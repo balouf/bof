@@ -3,12 +3,11 @@ History
 =======
 
 ---------------------------------------------------
-0.3.0 (2020-12-15): CountVectorizer simplification
+0.3.0 (2020-12-15): CountVectorizer and Process
 ---------------------------------------------------
 
-* The CountVectorizer class is lighter and faster. Only features are kept inside.
+* The core is now the CountVectorizer class. Lighter and faster. Only features are kept inside.
 * New process module inspired by fuzzywuzzy!
-* Dealing with embeddings is delegated to other modules.
 
 
 ---------------------------------

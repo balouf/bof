@@ -1,11 +1,11 @@
 import heapq
 import numpy as np
-from numba import njit
+from numba import njit, prange
 
 from .feature_extraction import CountVectorizer
 
 
-@njit
+@njit(parallel=True)
 def jit_common_factors(queries_length, xind, xptr, choices_length, yind, yptr, m):
     """
     Jitted function to compute the common factors between a corpus of queries and a corpus of choices.
@@ -34,7 +34,7 @@ def jit_common_factors(queries_length, xind, xptr, choices_length, yind, yptr, m
         queries.
     """
     res = np.zeros((queries_length, choices_length), dtype=np.int32)
-    for i in range(queries_length):
+    for i in prange(queries_length):
         for k in xind[xptr[i]:xptr[i + 1]]:
             if k < m:  # NB with sorted_indices, could be a break, but no guarantee enforced
                 for j in yind[yptr[k]:yptr[k + 1]]:
@@ -42,7 +42,7 @@ def jit_common_factors(queries_length, xind, xptr, choices_length, yind, yptr, m
     return res
 
 
-@njit
+@njit(parallel=True)
 def jit_jc(queries_factors, choices_factors, common_factors, length_impact):
     """
     Jitted function to compute a joint complexity between a corpus of queries and a corpus of choices.
@@ -63,7 +63,7 @@ def jit_jc(queries_factors, choices_factors, common_factors, length_impact):
 
     """
     res = np.zeros((len(queries_factors), len(choices_factors)))
-    for i in range(len(queries_factors)):
+    for i in prange(len(queries_factors)):
         for j in range(len(choices_factors)):
             mi, ma = sorted([queries_factors[i], choices_factors[j]])
             renorm = 2 * (length_impact * ma + (1 - length_impact) * mi)
@@ -71,7 +71,7 @@ def jit_jc(queries_factors, choices_factors, common_factors, length_impact):
     return res
 
 
-@njit
+@njit(parallel=True)
 def jit_square_factors(xind, xptr, yind, yptr, n, length_impact):
     """
     Jitted function to compute the joint complexity between texts of a corpus.
@@ -98,7 +98,7 @@ def jit_square_factors(xind, xptr, yind, yptr, n, length_impact):
     """
     self_factors = xptr[1:] - xptr[:-1]
     common_factors = np.zeros((n, n), dtype=np.int32)
-    for i in range(n):
+    for i in prange(n):
         for k in xind[xptr[i]:xptr[i + 1]]:
             for j in yind[yptr[k]:yptr[k + 1]]:
                 common_factors[i, j] += 1
@@ -315,10 +315,12 @@ class Process:
 
         Examples
         ---------
+
         >>> p = Process()
         >>> p.fit(["riri", "fifi", "rififi"])
 
         Notice the number of factors:
+
         >>> p.vectorizer.m
         18
 
@@ -329,11 +331,13 @@ class Process:
                [ 1.92307692,  0.        ,  1.69491525]])
 
         The factors have been augmented with the ones from the queries:
+
         >>> p.vectorizer.m
         79
 
         This is could be a memory issue if you keep entering very different queries. To keep the factors clean after
         a transform, set `allow_updates` to False.
+
         >>> p.allow_updates = False
         >>> p.fit(["riri", "fifi", "rififi"])
         >>> p.transform(["rir", "fido", "rafifi", "screugneuhneu"]) # doctest: +NORMALIZE_WHITESPACE
@@ -454,7 +458,8 @@ class Process:
 
     def dedupe(self, contains_dup, threshold=60.0):
         """
-        Inspired by fuzzywuzzy's dedupe function to remove (near) duplicates. Currently barely optimized. BUGGED!!!!
+        Inspired by fuzzywuzzy's dedupe function to remove (near) duplicates.
+        Currently barely optimized (and probably bugged).
 
         Parameters
         ----------
@@ -496,3 +501,11 @@ class Process:
                 for i in closes:
                     indexes[i] = closest
         return [contains_dup[i] for i in np.unique(indexes)]
+
+# Trigger jit compilation on import.
+def dry_run():
+    p = Process()
+    p.fit(["riri", "fifi", "rififi"])
+    p.transform(["rir", "fido"])
+    p.dedupe(["riri", "fifi", "rififi"])
+dry_run()
