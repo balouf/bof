@@ -7,6 +7,7 @@ History
 ---------------------------------------------------
 
 * The CountVectorizer class is lighter and faster. Only features are kept inside.
+* New process module inspired by fuzzywuzzy!
 * Dealing with embeddings is delegated to other modules.
 
 
