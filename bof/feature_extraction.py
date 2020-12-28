@@ -116,13 +116,19 @@ class CountVectorizer(MixInIO):
         if filename is not None:
             self.load(filename=filename, path=path)
         else:
-            self.m = 0
             self.features_ = dict()
-            self.features = list()
             self.n_range = n_range
             if preprocessor is None:
                 preprocessor = default_preprocessor
             self.preprocessor = preprocessor
+
+    @property
+    def m(self):
+        return len(self.features_)
+
+    @property
+    def features(self):
+        return list(self.features_)
 
     def fit_transform(self, corpus, reset=True):
         """
@@ -186,9 +192,7 @@ class CountVectorizer(MixInIO):
         ['f', 'fi', 'fif', 'i', 'if', 'ifi', 'r', 'ri', 'rif', 'rir', 'ir', 'iri']
         """
         if reset:
-            self.m = 0
             self.features_ = dict()
-            self.features = list()
         tot_size = sum(number_of_factors(len(self.preprocessor(txt)), self.n_range) for txt in corpus)
         feature_indices = np.zeros(tot_size, dtype=np.uintc)
         document_indices = np.zeros(tot_size, dtype=np.uintc)
@@ -202,16 +206,9 @@ class CountVectorizer(MixInIO):
                 f = ""
                 for letter in txt[start:end(start, length)]:
                     f += letter
-                    if f in self.features_:
-                        feature_indices[ptr] = self.features_[f]
-                    else:
-                        self.features_[f] = self.m
-                        self.features.append(f)
-                        feature_indices[ptr] = self.m
-                        self.m += 1
+                    feature_indices[ptr] = self.features_.setdefault(f, len(self.features_))
                     ptr += 1
             document_indices[start_ptr:ptr] = i
-
         return coo_matrix((np.ones(tot_size, dtype=np.uintc), (document_indices, feature_indices)),
                           shape=(len(corpus), self.m)).tocsr()
 
@@ -262,9 +259,7 @@ class CountVectorizer(MixInIO):
         ['r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif']
         """
         if reset:
-            self.m = 0
             self.features_ = dict()
-            self.features = list()
         end = build_end(self.n_range)
         for i, txt in enumerate(corpus):
             txt = self.preprocessor(txt)
@@ -273,10 +268,7 @@ class CountVectorizer(MixInIO):
                 f = ""
                 for letter in txt[start:end(start, length)]:
                     f += letter
-                    if f not in self.features_:
-                        self.features_[f] = self.m
-                        self.features.append(f)
-                        self.m += 1
+                    self.features_.setdefault(f, len(self.features_))
 
     def transform(self, corpus):
         """
@@ -400,8 +392,6 @@ class CountVectorizer(MixInIO):
         """
         if reset:
             self.features_ = dict()
-            self.features = list()
-            self.m = 0
         rb = make_random_bool_generator(probability_true=sampling_rate)
         end = build_end(self.n_range)
         for i, txt in enumerate(corpus):
@@ -412,7 +402,4 @@ class CountVectorizer(MixInIO):
                     f = ""
                     for letter in txt[start:end(start, length)]:
                         f += letter
-                        if f not in self.features_:
-                            self.features_[f] = self.m
-                            self.features.append(f)
-                            self.m += 1
+                        self.features_.setdefault(f, len(self.features_))
