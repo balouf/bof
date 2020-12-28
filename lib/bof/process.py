@@ -368,10 +368,9 @@ class Process(MixInIO):
                                                   self.choices_matrix.indptr,
                                                   m)
         if not self.allow_updates:
-            for f in self.vectorizer.features[m:]:
-                self.vectorizer.features_.pop(f)
-            self.vectorizer.features = self.vectorizer.features[:m]
-            self.vectorizer.m = m
+            extra_entries = self.vectorizer.m - m
+            for _ in range(extra_entries):
+                self.vectorizer.features_.popitem()
 
         return jit_jc(queries_factors, self.choices_factors, common_factor_matrix, self.length_impact)
 
