@@ -14,7 +14,8 @@
             "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/numpy/core/include/numpy/ufuncobject.h"
         ],
         "include_dirs": [
-            "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/numpy/core/include"
+            "/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/numpy/core/include",
+            "."
         ],
         "language": "c++",
         "name": "bof.cython.count",
