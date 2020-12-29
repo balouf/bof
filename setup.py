@@ -2,7 +2,10 @@
 
 """The setup script."""
 
-from setuptools import setup, find_packages
+from Cython.Build import cythonize
+import numpy as np
+
+from setuptools import setup, find_packages, Extension
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -12,9 +15,13 @@ with open('HISTORY.rst') as history_file:
 
 requirements = ['dill', 'numba', 'numpy', 'scipy']
 
-setup_requirements = ['pytest-runner',]
+setup_requirements = ['pytest-runner', ]
 
-test_requirements = ['pytest>=3',]
+test_requirements = ['pytest>=3', ]
+
+cfunc = cythonize(Extension(name="bof.cython.count", sources=["bof/cython/count.pyx"],
+                            include_dirs=[np.get_include()]),
+                            compiler_directives = {"language_level": 3, "embedsignature": True})
 
 setup(
     author="Fabien Mathieu",
@@ -45,4 +52,5 @@ setup(
     url='https://github.com/balouf/bof',
     version='0.3.1',
     zip_safe=False,
+    ext_modules=cfunc
 )

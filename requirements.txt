@@ -5,9 +5,11 @@ sphinx-rtd-theme
 
 dill~=0.3.3
 numba~=0.52.0
-bof~=0.1.0
+bof~=0.3.1
 pytest~=6.1.2
 setuptools~=51.0.0
 
 numpy~=1.19.4
 scipy~=1.5.4
+
+Cython~=0.29.21

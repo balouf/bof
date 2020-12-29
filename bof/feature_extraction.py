@@ -2,6 +2,7 @@ import numpy as np
 from scipy.sparse import coo_matrix
 
 from .common import default_preprocessor, make_random_bool_generator, set_seed, MixInIO
+from bof.cython.count import c_fit_transform
 
 
 def number_of_factors(length, n_range=None):
@@ -193,24 +194,16 @@ class CountVectorizer(MixInIO):
         """
         if reset:
             self.features_ = dict()
-        tot_size = sum(number_of_factors(len(self.preprocessor(txt)), self.n_range) for txt in corpus)
-        feature_indices = np.zeros(tot_size, dtype=np.uintc)
-        document_indices = np.zeros(tot_size, dtype=np.uintc)
-        ptr = 0
-        end = build_end(self.n_range)
-        for i, txt in enumerate(corpus):
-            start_ptr = ptr
-            txt = self.preprocessor(txt)
-            length = len(txt)
-            for start in range(length):
-                f = ""
-                for letter in txt[start:end(start, length)]:
-                    f += letter
-                    feature_indices[ptr] = self.features_.setdefault(f, len(self.features_))
-                    ptr += 1
-            document_indices[start_ptr:ptr] = i
-        return coo_matrix((np.ones(tot_size, dtype=np.uintc), (document_indices, feature_indices)),
-                          shape=(len(corpus), self.m)).tocsr()
+
+        if self.n_range is None:
+            use_range = False
+            n_range = 0
+        else:
+            use_range = True
+            n_range = self.n_range
+
+        return c_fit_transform(corpus, self.features_, self.preprocessor, n_range, use_range)
+
 
     def fit(self, corpus, reset=True):
         """
