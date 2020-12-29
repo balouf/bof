@@ -4,7 +4,7 @@ include HISTORY.rst
 include LICENSE
 include README.rst
 
-recursive-include *.pyx *.cpp
+include bof/cython/count.pyx
 
 recursive-include tests *
 recursive-exclude * __pycache__
