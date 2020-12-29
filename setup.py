@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
 """The setup script."""
-
-from Cython.Build import cythonize
+import os
 import numpy as np
 
 from setuptools import setup, find_packages, Extension
@@ -19,9 +18,46 @@ setup_requirements = ['pytest-runner', ]
 
 test_requirements = ['pytest>=3', ]
 
-cfunc = cythonize(Extension(name="bof.cython.count", sources=["bof/cython/count.pyx"],
-                            include_dirs=[np.get_include(), "."]),
-                            compiler_directives = {"language_level": 3, "embedsignature": True})
+
+try:
+    from Cython.Build import cythonize
+except ImportError:
+    cythonize = None
+
+
+# https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#distributing-cython-modules
+def no_cythonize(extensions, **_ignore):
+    for extension in extensions:
+        sources = []
+        for sfile in extension.sources:
+            path, ext = os.path.splitext(sfile)
+            if ext in (".pyx", ".py"):
+                if extension.language == "c++":
+                    ext = ".cpp"
+                else:
+                    ext = ".c"
+                sfile = path + ext
+            sources.append(sfile)
+        extension.sources[:] = sources
+    return extensions
+
+
+extensions = [
+    Extension(name="bof.cython.count", sources=["bof/cython/count.pyx"], language="c++"),
+]
+
+
+if cythonize is not None:
+    compiler_directives = {"language_level": 3, "embedsignature": True}
+    extensions = cythonize(extensions, compiler_directives=compiler_directives)
+else:
+    extensions = no_cythonize(extensions)
+
+
+
+# cfunc = cythonize(Extension(name="bof.cython.count", sources=["bof/cython/count.pyx"],
+#                             include_dirs=[np.get_include(), "."]),
+#                             compiler_directives = {"language_level": 3, "embedsignature": True})
 
 setup(
     author="Fabien Mathieu",
@@ -52,5 +88,5 @@ setup(
     url='https://github.com/balouf/bof',
     version='0.3.1',
     zip_safe=False,
-    ext_modules=cfunc
+    ext_modules=extensions
 )
