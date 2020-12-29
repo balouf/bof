@@ -20,7 +20,7 @@ setup_requirements = ['pytest-runner', ]
 test_requirements = ['pytest>=3', ]
 
 cfunc = cythonize(Extension(name="bof.cython.count", sources=["bof/cython/count.pyx"],
-                            include_dirs=[np.get_include()]),
+                            include_dirs=[np.get_include(), "."]),
                             compiler_directives = {"language_level": 3, "embedsignature": True})
 
 setup(
