@@ -43,7 +43,8 @@ def no_cythonize(extensions, **_ignore):
 
 
 extensions = [
-    Extension(name="bof.cython.count", sources=["bof/cython/count.pyx"], language="c++"),
+    Extension(name="bof.cython.count", sources=["bof/cython/count.pyx"], language="c++",
+              include_dirs=[np.get_include(), "."]),
 ]
 
 
