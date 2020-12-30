@@ -74,7 +74,7 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/balouf/bof',
-    version='0.3.1',
+    version='0.3.2',
     zip_safe=False,
     ext_modules=get_cython_extensions()
 )
