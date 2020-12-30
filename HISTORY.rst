@@ -2,6 +2,24 @@
 History
 =======
 
+
+---------------------------------------------------
+0.3.2 (2020-12-30): Going Cython
+---------------------------------------------------
+
+* First attempt to use Cython
+* Right now only the fit_transform method of CountVectorizer has been cythonized, for testing wheels.
+* If all goes well, numba will probably be abandoned and all the heavy-lifting will be in Cython.
+
+
+-----------------------------------------------------
+0.3.1 (2020-12-27): Simplification of core algorithm
+-----------------------------------------------------
+
+* Attributes of the CountVectorizer have been reduced to the minimum: one dict!
+* Now faster than sklearn counterpart! (The reason been only one case is considered here so we can ditch a lot of checks and attributes).
+
+
 ---------------------------------------------------
 0.3.0 (2020-12-15): CountVectorizer and Process
 ---------------------------------------------------
