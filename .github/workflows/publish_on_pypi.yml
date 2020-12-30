@@ -10,7 +10,7 @@ on: [push]
 #    types: [created]
 
 env:
-    CIBW_SKIP: 'cp27-* cp35-*'
+    CIBW_SKIP: 'cp27-* cp35-* pp*'
 
 jobs:
   build_wheels:
@@ -51,7 +51,7 @@ jobs:
       - uses: actions/setup-python@v2
         name: Install Python
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.7'
 
       - name: Build sdist
         run: python setup.py sdist
