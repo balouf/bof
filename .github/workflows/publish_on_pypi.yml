@@ -3,9 +3,11 @@
 
 name: publish on PyPI
 
-on:
-  release:
-    types: [created]
+on: [push]
+
+#on:
+#  release:
+#    types: [created]
 
 env:
     CIBW_SKIP: 'cp27-*'
