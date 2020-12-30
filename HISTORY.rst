@@ -2,6 +2,14 @@
 History
 =======
 
+---------------------------------------------------
+0.3.3 (2021-01-??): Full Cython
+---------------------------------------------------
+
+* All core CountVectorizer methods ported to Cython
+* Process numba methods converted to Cython
+* No Numba anymore ( :( )
+
 
 ---------------------------------------------------
 0.3.2 (2020-12-30): Going Cython
