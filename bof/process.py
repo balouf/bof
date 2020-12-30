@@ -371,6 +371,9 @@ class Process(MixInIO):
             extra_entries = self.vectorizer.m - m
             for _ in range(extra_entries):
                 self.vectorizer.features_.popitem()
+        else:
+            _, n = self.choices_matrix.shape
+            self.choices_matrix.resize(self.vectorizer.m, n)
 
         return jit_jc(queries_factors, self.choices_factors, common_factor_matrix, self.length_impact)
 
