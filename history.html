@@ -93,6 +93,9 @@
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">History</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#full-cython">0.3.3 (2021-01-??): Full Cython</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#going-cython">0.3.2 (2020-12-30): Going Cython</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simplification-of-core-algorithm">0.3.1 (2020-12-28): Simplification of core algorithm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#countvectorizer-and-process">0.3.0 (2020-12-15): CountVectorizer and Process</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#fit-transform">0.2.0 (2020-12-15): Fit/Transform</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#upgrades">0.1.1 (2020-12-12): Upgrades</a></li>
@@ -166,6 +169,29 @@
             
   <div class="section" id="history">
 <h1>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="full-cython">
+<h2>0.3.3 (2021-01-??): Full Cython<a class="headerlink" href="#full-cython" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>All core CountVectorizer methods ported to Cython</p></li>
+<li><p>Process numba methods converted to Cython</p></li>
+<li><p>No Numba anymore ( :( )</p></li>
+</ul>
+</div>
+<div class="section" id="going-cython">
+<h2>0.3.2 (2020-12-30): Going Cython<a class="headerlink" href="#going-cython" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>First attempt to use Cython</p></li>
+<li><p>Right now only the fit_transform method of CountVectorizer has been cythonized, for testing wheels.</p></li>
+<li><p>If all goes well, numba will probably be abandoned and all the heavy-lifting will be in Cython.</p></li>
+</ul>
+</div>
+<div class="section" id="simplification-of-core-algorithm">
+<h2>0.3.1 (2020-12-28): Simplification of core algorithm<a class="headerlink" href="#simplification-of-core-algorithm" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Attributes of the CountVectorizer have been reduced to the minimum: one dict!</p></li>
+<li><p>Now faster than sklearn counterpart! (The reason been only one case is considered here so we can ditch a lot of checks and attributes).</p></li>
+</ul>
+</div>
 <div class="section" id="countvectorizer-and-process">
 <h2>0.3.0 (2020-12-15): CountVectorizer and Process<a class="headerlink" href="#countvectorizer-and-process" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
