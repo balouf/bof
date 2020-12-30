@@ -13,7 +13,7 @@ History
 
 
 -----------------------------------------------------
-0.3.1 (2020-12-27): Simplification of core algorithm
+0.3.1 (2020-12-28): Simplification of core algorithm
 -----------------------------------------------------
 
 * Attributes of the CountVectorizer have been reduced to the minimum: one dict!
