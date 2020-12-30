@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """The setup script."""
-import os
+from pathlib import Path
 import numpy as np
 
 from setuptools import setup, find_packages, Extension
@@ -26,39 +26,26 @@ except ImportError:
 
 
 # https://cython.readthedocs.io/en/latest/src/userguide/source_files_and_compilation.html#distributing-cython-modules
-def no_cythonize(extensions, **_ignore):
-    for extension in extensions:
-        sources = []
-        for sfile in extension.sources:
-            path, ext = os.path.splitext(sfile)
-            if ext in (".pyx", ".py"):
-                if extension.language == "c++":
-                    ext = ".cpp"
-                else:
-                    ext = ".c"
-                sfile = path + ext
-            sources.append(sfile)
-        extension.sources[:] = sources
+def pyx_to_ext(p, cyth=True):
+    name = ".".join(p.with_suffix('').parts)
+    if cyth is not None:
+        sources = [str(p)]
+    else:
+        sources = [str(p.with_suffix(".cpp"))]
+    return Extension(name=name, sources=sources, language="c++", include_dirs=[np.get_include(), "."])
+
+
+def get_cython_extensions():
+    sources = Path('bof').rglob('*.pyx')
+    if cythonize is not None:
+        print(Path.cwd())
+        extensions = [pyx_to_ext(s) for s in sources]
+        compiler_directives = {"language_level": 3, "embedsignature": True}
+        extensions = cythonize(extensions, compiler_directives=compiler_directives)
+    else:
+        extensions = [pyx_to_ext(s, None) for s in sources]
     return extensions
 
-
-extensions = [
-    Extension(name="bof.cython.count", sources=["bof/cython/count.pyx"], language="c++",
-              include_dirs=[np.get_include(), "."]),
-]
-
-
-if cythonize is not None:
-    compiler_directives = {"language_level": 3, "embedsignature": True}
-    extensions = cythonize(extensions, compiler_directives=compiler_directives)
-else:
-    extensions = no_cythonize(extensions)
-
-
-
-# cfunc = cythonize(Extension(name="bof.cython.count", sources=["bof/cython/count.pyx"],
-#                             include_dirs=[np.get_include(), "."]),
-#                             compiler_directives = {"language_level": 3, "embedsignature": True})
 
 setup(
     author="Fabien Mathieu",
@@ -89,5 +76,5 @@ setup(
     url='https://github.com/balouf/bof',
     version='0.3.1',
     zip_safe=False,
-    ext_modules=extensions
+    ext_modules=get_cython_extensions()
 )
