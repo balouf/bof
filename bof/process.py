@@ -359,7 +359,7 @@ class Process(MixInIO):
         >>> p.vectorizer.features
         ['r', 'ri', 'rir', 'riri', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'fifi', 'if', 'ifi', 'rif', 'rifi', 'rifif', 'ifif', 'ififi']
         """
-        m = self.vectorizer.m
+        m, _ = self.choices_matrix.shape
         queries_matrix = self.vectorizer.fit_transform(queries, reset=False)
         queries_factors = queries_matrix.indptr[1:] - queries_matrix.indptr[0:-1]
         queries_length = len(queries)
@@ -371,9 +371,6 @@ class Process(MixInIO):
             extra_entries = self.vectorizer.m - m
             for _ in range(extra_entries):
                 self.vectorizer.features_.popitem()
-        else:
-            _, n = self.choices_matrix.shape
-            self.choices_matrix.resize(self.vectorizer.m, n)
 
         return jit_jc(queries_factors, self.choices_factors, common_factor_matrix, self.length_impact)
 

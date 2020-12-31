@@ -2,34 +2,10 @@ import numpy as np
 from scipy.sparse import coo_matrix
 
 from .common import default_preprocessor, make_random_bool_generator, set_seed, MixInIO
-from bof.cython.count import c_fit_transform
+from bof.cython.count import fit_transform, fit, transform, sampling_fit
 
 
 def number_of_factors(length, n_range=None):
-    """
-    Return the number of factors (with multiplicity) of size at most `n_range` that exist in a text of length `length`.
-    This allows to pre-allocate working memory.
-
-    Parameters
-    ----------
-    length: :py:class:`int`
-        Length of the text.
-    n_range: :py:class:`int` or None
-        Maximal factor size. If `None`, all factors are considered.
-
-    Returns
-    -------
-    int
-        The number of factors (with multiplicity).
-
-    Examples
-    --------
-    >>> l = len("riri")
-    >>> number_of_factors(l)
-    10
-    >>> number_of_factors(l, n_range=2)
-    7
-    """
     if n_range is None or n_range > length:
         return length * (length + 1) // 2
     return n_range * (length - n_range) + n_range * (n_range + 1) // 2
@@ -202,7 +178,7 @@ class CountVectorizer(MixInIO):
             use_range = True
             n_range = self.n_range
 
-        return c_fit_transform(corpus, self.features_, self.preprocessor, n_range, use_range)
+        return fit_transform(corpus, self.features_, self.preprocessor, n_range, use_range)
 
 
     def fit(self, corpus, reset=True):
@@ -253,15 +229,27 @@ class CountVectorizer(MixInIO):
         """
         if reset:
             self.features_ = dict()
-        end = build_end(self.n_range)
-        for i, txt in enumerate(corpus):
-            txt = self.preprocessor(txt)
-            length = len(txt)
-            for start in range(length):
-                f = ""
-                for letter in txt[start:end(start, length)]:
-                    f += letter
-                    self.features_.setdefault(f, len(self.features_))
+
+        if self.n_range is None:
+            use_range = False
+            n_range = 0
+        else:
+            use_range = True
+            n_range = self.n_range
+
+        fit(corpus, self.features_, self.preprocessor, n_range, use_range)
+
+        # if reset:
+        #     self.features_ = dict()
+        # end = build_end(self.n_range)
+        # for i, txt in enumerate(corpus):
+        #     txt = self.preprocessor(txt)
+        #     length = len(txt)
+        #     for start in range(length):
+        #         f = ""
+        #         for letter in txt[start:end(start, length)]:
+        #             f += letter
+        #             self.features_.setdefault(f, len(self.features_))
 
     def transform(self, corpus):
         """
@@ -304,31 +292,40 @@ class CountVectorizer(MixInIO):
         The features have not been updated. For example, the only factors reported for "rfi" are "r", "i", "f", and
         "fi". Factors that were not fit (e.g. `rf`) are discarded.
         """
-        tot_size = sum(number_of_factors(len(txt.strip().lower()), self.n_range) for txt in corpus)
-        feature_indices = np.zeros(tot_size, dtype=np.uintc)
-        document_indices = np.zeros(tot_size, dtype=np.uintc)
-        ptr = 0
-        end = build_end(self.n_range)
-        for i, txt in enumerate(corpus):
-            start_ptr = ptr
-            txt = self.preprocessor(txt)
-            length = len(txt)
-            for start in range(length):
-                f = ""
-                for letter in txt[start:end(start, length)]:
-                    f += letter
-                    if f in self.features_:
-                        feature_indices[ptr] = self.features_[f]
-                        ptr += 1
-            document_indices[start_ptr:ptr] = i
+        if self.n_range is None:
+            use_range = False
+            n_range = 0
+        else:
+            use_range = True
+            n_range = self.n_range
 
-        feature_indices = feature_indices[:ptr]
-        document_indices = document_indices[:ptr]
+        return transform(corpus, self.features_, self.preprocessor, n_range, use_range)
 
-        return coo_matrix((np.ones(ptr, dtype=np.uintc), (document_indices, feature_indices)),
-                          shape=(len(corpus), self.m)).tocsr()
+        # tot_size = sum(number_of_factors(len(txt.strip().lower()), self.n_range) for txt in corpus)
+        # feature_indices = np.zeros(tot_size, dtype=np.uintc)
+        # document_indices = np.zeros(tot_size, dtype=np.uintc)
+        # ptr = 0
+        # end = build_end(self.n_range)
+        # for i, txt in enumerate(corpus):
+        #     start_ptr = ptr
+        #     txt = self.preprocessor(txt)
+        #     length = len(txt)
+        #     for start in range(length):
+        #         f = ""
+        #         for letter in txt[start:end(start, length)]:
+        #             f += letter
+        #             if f in self.features_:
+        #                 feature_indices[ptr] = self.features_[f]
+        #                 ptr += 1
+        #     document_indices[start_ptr:ptr] = i
+        #
+        # feature_indices = feature_indices[:ptr]
+        # document_indices = document_indices[:ptr]
+        #
+        # return coo_matrix((np.ones(ptr, dtype=np.uintc), (document_indices, feature_indices)),
+        #                   shape=(len(corpus), self.m)).tocsr()
 
-    def sampling_fit(self, corpus, reset=True, sampling_rate=.5):
+    def sampling_fit(self, corpus, reset=True, sampling_rate=.5, seed=42):
         """
         Build a partial factor tree where only a random subset of factors are selected. Note that there is no
         `sampling_fit_transform` method, as mutualizing the processes would introduce incoherences in the factor
@@ -359,20 +356,18 @@ class CountVectorizer(MixInIO):
 
         Now we use a sampling fit instead. Only a subset of the factors are selected.
 
-        >>> set_seed(2012)
         >>> vectorizer.sampling_fit(["riri", "fifi", "rififi"])
         >>> vectorizer.features
-        ['r', 'ri', 'rir', 'riri', 'i', 'ir', 'iri', 'f', 'fi', 'if', 'ifi', 'ifif', 'ififi']
+        ['i', 'ir', 'iri', 'f', 'fi', 'fif', 'fifi', 'if', 'ifi', 'r', 'ri', 'rif', 'rifi', 'rifif']
 
         We random fit another corpus. We reset the seed to reproduce the example above.
 
-        >>> set_seed(2012)
         >>> vectorizer.sampling_fit(["riri", "fifi"])
 
         The factors have been implicitly reset.
 
         >>> vectorizer.features
-        ['r', 'ri', 'rir', 'riri', 'i', 'ir', 'iri', 'f', 'fi']
+        ['i', 'ir', 'iri', 'f', 'fi', 'fif', 'fifi', 'if', 'ifi']
 
         We add another corpus to the fit by setting `reset` to `False`:
 
@@ -381,18 +376,26 @@ class CountVectorizer(MixInIO):
         The list of features has been updated:
 
         >>> vectorizer.features
-        ['r', 'ri', 'rir', 'riri', 'i', 'ir', 'iri', 'f', 'fi', 'if', 'ifi', 'ifif', 'ififi']
+        ['i', 'ir', 'iri', 'f', 'fi', 'fif', 'fifi', 'if', 'ifi', 'ifif', 'ififi']
         """
         if reset:
             self.features_ = dict()
-        rb = make_random_bool_generator(probability_true=sampling_rate)
-        end = build_end(self.n_range)
-        for i, txt in enumerate(corpus):
-            txt = self.preprocessor(txt)
-            length = len(txt)
-            for start in range(length):
-                if rb():
-                    f = ""
-                    for letter in txt[start:end(start, length)]:
-                        f += letter
-                        self.features_.setdefault(f, len(self.features_))
+        if self.n_range is None:
+            use_range = False
+            n_range = 0
+        else:
+            use_range = True
+            n_range = self.n_range
+
+        sampling_fit(corpus, self.features_, self.preprocessor, n_range, use_range, sampling_rate, seed)
+        # rb = make_random_bool_generator(probability_true=sampling_rate)
+        # end = build_end(self.n_range)
+        # for i, txt in enumerate(corpus):
+        #     txt = self.preprocessor(txt)
+        #     length = len(txt)
+        #     for start in range(length):
+        #         if rb():
+        #             f = ""
+        #             for letter in txt[start:end(start, length)]:
+        #                 f += letter
+        #                 self.features_.setdefault(f, len(self.features_))
