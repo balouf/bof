@@ -17,10 +17,6 @@ The main difference is that the sets of available scorers differ, as the Levensh
     :members:
 
 
-.. automodule:: bof.cython.count
-    :members:
-
-
 Fuzz
 ------
 

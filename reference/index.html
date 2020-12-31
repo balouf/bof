@@ -221,7 +221,7 @@
 <dd><p>The factor matrix of the choices.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.5.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.6.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -617,11 +617,6 @@ queries.</p>
 </div>
 </dd></dl>
 
-<span class="target" id="module-bof.cython.count"></span><dl class="py function">
-<dt id="bof.cython.count.c_fit_transform">
-<code class="sig-prename descclassname">bof.cython.count.</code><code class="sig-name descname">c_fit_transform</code><span class="sig-paren">(</span><em class="sig-param">list corpus</em>, <em class="sig-param">dict features_</em>, <em class="sig-param">preprocessor</em>, <em class="sig-param">int n_range=7</em>, <em class="sig-param">bool use_range=True</em><span class="sig-paren">)</span><a class="headerlink" href="#bof.cython.count.c_fit_transform" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </div>
 <div class="section" id="fuzz">
 <h2>Fuzz<a class="headerlink" href="#fuzz" title="Permalink to this headline">¶</a></h2>
@@ -771,7 +766,7 @@ queries.</p>
 <dd class="field-even"><p>A sparse matrix that indicates for each document of the corpus its factors and their multiplicity.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.5.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.6.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -822,7 +817,7 @@ queries.</p>
 
 <dl class="py method">
 <dt id="bof.feature_extraction.CountVectorizer.sampling_fit">
-<code class="sig-name descname">sampling_fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">corpus</span></em>, <em class="sig-param"><span class="n">reset</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">sampling_rate</span><span class="o">=</span><span class="default_value">0.5</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.sampling_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.sampling_fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">sampling_fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">corpus</span></em>, <em class="sig-param"><span class="n">reset</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">sampling_rate</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">42</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.sampling_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.sampling_fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a partial factor tree where only a random subset of factors are selected. Note that there is no
 <cite>sampling_fit_transform</cite> method, as mutualizing the processes would introduce incoherences in the factor
 description: you have to do a <cite>sampling_fit</cite> followed by a <cite>transform</cite>.</p>
@@ -850,20 +845,18 @@ description: you have to do a <cite>sampling_fit</cite> followed by a <cite>tran
 </pre></div>
 </div>
 <p>Now we use a sampling fit instead. Only a subset of the factors are selected.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">set_seed</span><span class="p">(</span><span class="mi">2012</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">sampling_fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">sampling_fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
-<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
+<span class="go">[&#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;]</span>
 </pre></div>
 </div>
 <p>We random fit another corpus. We reset the seed to reproduce the example above.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">set_seed</span><span class="p">(</span><span class="mi">2012</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">sampling_fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">sampling_fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>The factors have been implicitly reset.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
-<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;]</span>
+<span class="go">[&#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;if&#39;, &#39;ifi&#39;]</span>
 </pre></div>
 </div>
 <p>We add another corpus to the fit by setting <cite>reset</cite> to <cite>False</cite>:</p>
@@ -872,7 +865,7 @@ description: you have to do a <cite>sampling_fit</cite> followed by a <cite>tran
 </div>
 <p>The list of features has been updated:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
-<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
+<span class="go">[&#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -890,7 +883,7 @@ description: you have to do a <cite>sampling_fit</cite> followed by a <cite>tran
 corpus is not returned but is internally preserved.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.5.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.6.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -946,35 +939,6 @@ It avoids to test the value of n_range all the time when doing factor extraction
 <span class="go">12</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">end</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 <span class="go">15</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt id="bof.feature_extraction.number_of_factors">
-<code class="sig-prename descclassname">bof.feature_extraction.</code><code class="sig-name descname">number_of_factors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">length</span></em>, <em class="sig-param"><span class="n">n_range</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#number_of_factors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.number_of_factors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the number of factors (with multiplicity) of size at most <cite>n_range</cite> that exist in a text of length <cite>length</cite>.
-This allows to pre-allocate working memory.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Length of the text.</p></li>
-<li><p><strong>n_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or None) – Maximal factor size. If <cite>None</cite>, all factors are considered.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The number of factors (with multiplicity).</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="s2">&quot;riri&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">number_of_factors</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
-<span class="go">10</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">number_of_factors</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">n_range</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="go">7</span>
 </pre></div>
 </div>
 </dd></dl>

@@ -160,37 +160,13 @@
 <span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">coo_matrix</span>
 
 <span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">default_preprocessor</span><span class="p">,</span> <span class="n">make_random_bool_generator</span><span class="p">,</span> <span class="n">set_seed</span><span class="p">,</span> <span class="n">MixInIO</span>
-<span class="kn">from</span> <span class="nn">bof.cython.count</span> <span class="kn">import</span> <span class="n">c_fit_transform</span>
+<span class="kn">from</span> <span class="nn">bof.cython.count</span> <span class="kn">import</span> <span class="n">fit_transform</span><span class="p">,</span> <span class="n">fit</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span> <span class="n">sampling_fit</span>
 
 
-<div class="viewcode-block" id="number_of_factors"><a class="viewcode-back" href="../../reference/index.html#bof.feature_extraction.number_of_factors">[docs]</a><span class="k">def</span> <span class="nf">number_of_factors</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">n_range</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Return the number of factors (with multiplicity) of size at most `n_range` that exist in a text of length `length`.</span>
-<span class="sd">    This allows to pre-allocate working memory.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    length: :py:class:`int`</span>
-<span class="sd">        Length of the text.</span>
-<span class="sd">    n_range: :py:class:`int` or None</span>
-<span class="sd">        Maximal factor size. If `None`, all factors are considered.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    int</span>
-<span class="sd">        The number of factors (with multiplicity).</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; l = len(&quot;riri&quot;)</span>
-<span class="sd">    &gt;&gt;&gt; number_of_factors(l)</span>
-<span class="sd">    10</span>
-<span class="sd">    &gt;&gt;&gt; number_of_factors(l, n_range=2)</span>
-<span class="sd">    7</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">number_of_factors</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">n_range</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">n_range</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">n_range</span> <span class="o">&gt;</span> <span class="n">length</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">length</span> <span class="o">*</span> <span class="p">(</span><span class="n">length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
-    <span class="k">return</span> <span class="n">n_range</span> <span class="o">*</span> <span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="n">n_range</span><span class="p">)</span> <span class="o">+</span> <span class="n">n_range</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_range</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span></div>
+    <span class="k">return</span> <span class="n">n_range</span> <span class="o">*</span> <span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="n">n_range</span><span class="p">)</span> <span class="o">+</span> <span class="n">n_range</span> <span class="o">*</span> <span class="p">(</span><span class="n">n_range</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
 
 
 <div class="viewcode-block" id="build_end"><a class="viewcode-back" href="../../reference/index.html#bof.feature_extraction.build_end">[docs]</a><span class="k">def</span> <span class="nf">build_end</span><span class="p">(</span><span class="n">n_range</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -360,7 +336,7 @@
             <span class="n">use_range</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="n">n_range</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span>
 
-        <span class="k">return</span> <span class="n">c_fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="p">,</span> <span class="n">n_range</span><span class="p">,</span> <span class="n">use_range</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="p">,</span> <span class="n">n_range</span><span class="p">,</span> <span class="n">use_range</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="CountVectorizer.fit"><a class="viewcode-back" href="../../reference/index.html#bof.feature_extraction.CountVectorizer.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -411,15 +387,27 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">reset</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">features_</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-        <span class="n">end</span> <span class="o">=</span> <span class="n">build_end</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_range</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">txt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">corpus</span><span class="p">):</span>
-            <span class="n">txt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
-            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
-                <span class="n">f</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-                <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">txt</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">length</span><span class="p">)]:</span>
-                    <span class="n">f</span> <span class="o">+=</span> <span class="n">letter</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="p">))</span></div>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">use_range</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">n_range</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">use_range</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">n_range</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span>
+
+        <span class="n">fit</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="p">,</span> <span class="n">n_range</span><span class="p">,</span> <span class="n">use_range</span><span class="p">)</span></div>
+
+        <span class="c1"># if reset:</span>
+        <span class="c1">#     self.features_ = dict()</span>
+        <span class="c1"># end = build_end(self.n_range)</span>
+        <span class="c1"># for i, txt in enumerate(corpus):</span>
+        <span class="c1">#     txt = self.preprocessor(txt)</span>
+        <span class="c1">#     length = len(txt)</span>
+        <span class="c1">#     for start in range(length):</span>
+        <span class="c1">#         f = &quot;&quot;</span>
+        <span class="c1">#         for letter in txt[start:end(start, length)]:</span>
+        <span class="c1">#             f += letter</span>
+        <span class="c1">#             self.features_.setdefault(f, len(self.features_))</span>
 
 <div class="viewcode-block" id="CountVectorizer.transform"><a class="viewcode-back" href="../../reference/index.html#bof.feature_extraction.CountVectorizer.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -462,31 +450,40 @@
 <span class="sd">        The features have not been updated. For example, the only factors reported for &quot;rfi&quot; are &quot;r&quot;, &quot;i&quot;, &quot;f&quot;, and</span>
 <span class="sd">        &quot;fi&quot;. Factors that were not fit (e.g. `rf`) are discarded.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">tot_size</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">number_of_factors</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()),</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span><span class="p">)</span> <span class="k">for</span> <span class="n">txt</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">)</span>
-        <span class="n">feature_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tot_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uintc</span><span class="p">)</span>
-        <span class="n">document_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tot_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uintc</span><span class="p">)</span>
-        <span class="n">ptr</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">end</span> <span class="o">=</span> <span class="n">build_end</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_range</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">txt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">corpus</span><span class="p">):</span>
-            <span class="n">start_ptr</span> <span class="o">=</span> <span class="n">ptr</span>
-            <span class="n">txt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
-            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
-                <span class="n">f</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-                <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">txt</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">length</span><span class="p">)]:</span>
-                    <span class="n">f</span> <span class="o">+=</span> <span class="n">letter</span>
-                    <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="p">:</span>
-                        <span class="n">feature_indices</span><span class="p">[</span><span class="n">ptr</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="p">[</span><span class="n">f</span><span class="p">]</span>
-                        <span class="n">ptr</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">document_indices</span><span class="p">[</span><span class="n">start_ptr</span><span class="p">:</span><span class="n">ptr</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">use_range</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">n_range</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">use_range</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">n_range</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span>
 
-        <span class="n">feature_indices</span> <span class="o">=</span> <span class="n">feature_indices</span><span class="p">[:</span><span class="n">ptr</span><span class="p">]</span>
-        <span class="n">document_indices</span> <span class="o">=</span> <span class="n">document_indices</span><span class="p">[:</span><span class="n">ptr</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="p">,</span> <span class="n">n_range</span><span class="p">,</span> <span class="n">use_range</span><span class="p">)</span></div>
 
-        <span class="k">return</span> <span class="n">coo_matrix</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uintc</span><span class="p">),</span> <span class="p">(</span><span class="n">document_indices</span><span class="p">,</span> <span class="n">feature_indices</span><span class="p">)),</span>
-                          <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">corpus</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span></div>
+        <span class="c1"># tot_size = sum(number_of_factors(len(txt.strip().lower()), self.n_range) for txt in corpus)</span>
+        <span class="c1"># feature_indices = np.zeros(tot_size, dtype=np.uintc)</span>
+        <span class="c1"># document_indices = np.zeros(tot_size, dtype=np.uintc)</span>
+        <span class="c1"># ptr = 0</span>
+        <span class="c1"># end = build_end(self.n_range)</span>
+        <span class="c1"># for i, txt in enumerate(corpus):</span>
+        <span class="c1">#     start_ptr = ptr</span>
+        <span class="c1">#     txt = self.preprocessor(txt)</span>
+        <span class="c1">#     length = len(txt)</span>
+        <span class="c1">#     for start in range(length):</span>
+        <span class="c1">#         f = &quot;&quot;</span>
+        <span class="c1">#         for letter in txt[start:end(start, length)]:</span>
+        <span class="c1">#             f += letter</span>
+        <span class="c1">#             if f in self.features_:</span>
+        <span class="c1">#                 feature_indices[ptr] = self.features_[f]</span>
+        <span class="c1">#                 ptr += 1</span>
+        <span class="c1">#     document_indices[start_ptr:ptr] = i</span>
+        <span class="c1">#</span>
+        <span class="c1"># feature_indices = feature_indices[:ptr]</span>
+        <span class="c1"># document_indices = document_indices[:ptr]</span>
+        <span class="c1">#</span>
+        <span class="c1"># return coo_matrix((np.ones(ptr, dtype=np.uintc), (document_indices, feature_indices)),</span>
+        <span class="c1">#                   shape=(len(corpus), self.m)).tocsr()</span>
 
-<div class="viewcode-block" id="CountVectorizer.sampling_fit"><a class="viewcode-back" href="../../reference/index.html#bof.feature_extraction.CountVectorizer.sampling_fit">[docs]</a>    <span class="k">def</span> <span class="nf">sampling_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sampling_rate</span><span class="o">=.</span><span class="mi">5</span><span class="p">):</span>
+<div class="viewcode-block" id="CountVectorizer.sampling_fit"><a class="viewcode-back" href="../../reference/index.html#bof.feature_extraction.CountVectorizer.sampling_fit">[docs]</a>    <span class="k">def</span> <span class="nf">sampling_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sampling_rate</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build a partial factor tree where only a random subset of factors are selected. Note that there is no</span>
 <span class="sd">        `sampling_fit_transform` method, as mutualizing the processes would introduce incoherences in the factor</span>
@@ -517,20 +514,18 @@
 
 <span class="sd">        Now we use a sampling fit instead. Only a subset of the factors are selected.</span>
 
-<span class="sd">        &gt;&gt;&gt; set_seed(2012)</span>
 <span class="sd">        &gt;&gt;&gt; vectorizer.sampling_fit([&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;])</span>
 <span class="sd">        &gt;&gt;&gt; vectorizer.features</span>
-<span class="sd">        [&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
+<span class="sd">        [&#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;]</span>
 
 <span class="sd">        We random fit another corpus. We reset the seed to reproduce the example above.</span>
 
-<span class="sd">        &gt;&gt;&gt; set_seed(2012)</span>
 <span class="sd">        &gt;&gt;&gt; vectorizer.sampling_fit([&quot;riri&quot;, &quot;fifi&quot;])</span>
 
 <span class="sd">        The factors have been implicitly reset.</span>
 
 <span class="sd">        &gt;&gt;&gt; vectorizer.features</span>
-<span class="sd">        [&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;]</span>
+<span class="sd">        [&#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;if&#39;, &#39;ifi&#39;]</span>
 
 <span class="sd">        We add another corpus to the fit by setting `reset` to `False`:</span>
 
@@ -539,21 +534,29 @@
 <span class="sd">        The list of features has been updated:</span>
 
 <span class="sd">        &gt;&gt;&gt; vectorizer.features</span>
-<span class="sd">        [&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
+<span class="sd">        [&#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">reset</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">features_</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-        <span class="n">rb</span> <span class="o">=</span> <span class="n">make_random_bool_generator</span><span class="p">(</span><span class="n">probability_true</span><span class="o">=</span><span class="n">sampling_rate</span><span class="p">)</span>
-        <span class="n">end</span> <span class="o">=</span> <span class="n">build_end</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_range</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">txt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">corpus</span><span class="p">):</span>
-            <span class="n">txt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
-            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">start</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">rb</span><span class="p">():</span>
-                    <span class="n">f</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-                    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">txt</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">length</span><span class="p">)]:</span>
-                        <span class="n">f</span> <span class="o">+=</span> <span class="n">letter</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="p">))</span></div></div>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">use_range</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">n_range</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">use_range</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">n_range</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_range</span>
+
+        <span class="n">sampling_fit</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">features_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="p">,</span> <span class="n">n_range</span><span class="p">,</span> <span class="n">use_range</span><span class="p">,</span> <span class="n">sampling_rate</span><span class="p">,</span> <span class="n">seed</span><span class="p">)</span></div></div>
+        <span class="c1"># rb = make_random_bool_generator(probability_true=sampling_rate)</span>
+        <span class="c1"># end = build_end(self.n_range)</span>
+        <span class="c1"># for i, txt in enumerate(corpus):</span>
+        <span class="c1">#     txt = self.preprocessor(txt)</span>
+        <span class="c1">#     length = len(txt)</span>
+        <span class="c1">#     for start in range(length):</span>
+        <span class="c1">#         if rb():</span>
+        <span class="c1">#             f = &quot;&quot;</span>
+        <span class="c1">#             for letter in txt[start:end(start, length)]:</span>
+        <span class="c1">#                 f += letter</span>
+        <span class="c1">#                 self.features_.setdefault(f, len(self.features_))</span>
 </pre></div>
 
            </div>
