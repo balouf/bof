@@ -12,6 +12,7 @@ cimport numpy as np
 
 
 cdef number_of_factors(int length, n_range=None):
+    """Testing ds"""
     if n_range is None or n_range > length:
         return length * (length + 1) // 2
     return n_range * (length - n_range) + n_range * (n_range + 1) // 2
@@ -24,7 +25,6 @@ def c_fit_transform(list corpus, dict features_, preprocessor,
     tot_size = sum(number_of_factors(len(preprocessor(txt)), n_range) for txt in corpus)
     cdef np.ndarray[np.uint_t] feature_indices = np.zeros(tot_size, dtype=np.uint)
     cdef np.ndarray[np.uint_t] document_indices = np.zeros(tot_size, dtype=np.uint)
-    ptr = 0
     for i, txt in enumerate(corpus):
         start_ptr = ptr
         txt = preprocessor(txt)
