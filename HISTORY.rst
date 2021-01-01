@@ -3,12 +3,12 @@ History
 =======
 
 ---------------------------------------------------
-0.3.3 (2021-01-??): Full Cython
+0.3.3 (2021-01-01): Cython/Numba balanced
 ---------------------------------------------------
 
 * All core CountVectorizer methods ported to Cython
-* Process numba methods converted to Cython
-* No Numba anymore ( :( )
+* Process numba methods NOT converted to Cython as Numba seems to be 20% faster for csr manipulation.
+* Numba functions are cached to avoid compilation lag.
 
 
 ---------------------------------------------------
