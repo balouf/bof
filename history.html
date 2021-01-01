@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>History &mdash; Bag of Factors 0.3.2 documentation</title>
+  <title>History &mdash; Bag of Factors 0.3.3 documentation</title>
   
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.3.2
+                0.3.3
               </div>
             
           
@@ -172,7 +172,7 @@
 <div class="section" id="cython-numba-balanced">
 <h2>0.3.3 (2021-01-01): Cython/Numba balanced<a class="headerlink" href="#cython-numba-balanced" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>All core CountVectorizer methods ported to Cython</p></li>
+<li><p>All core CountVectorizer methods ported to Cython. Roughly 2.5X faster than sklearn counterpart (mainly because some features like min_df/max_df are not implemented).</p></li>
 <li><p>Process numba methods NOT converted to Cython as Numba seems to be 20% faster for csr manipulation.</p></li>
 <li><p>Numba functions are cached to avoid compilation lag.</p></li>
 </ul>
