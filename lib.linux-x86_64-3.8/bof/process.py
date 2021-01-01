@@ -6,7 +6,7 @@ from .feature_extraction import CountVectorizer
 from .common import MixInIO
 
 
-@njit(parallel=True)
+@njit(cache=True, parallel=True)
 def jit_common_factors(queries_length, xind, xptr, choices_length, yind, yptr, m):
     """
     Jitted function to compute the common factors between a corpus of queries and a corpus of choices.
@@ -43,7 +43,7 @@ def jit_common_factors(queries_length, xind, xptr, choices_length, yind, yptr, m
     return res
 
 
-@njit(parallel=True)
+@njit(cache=True, parallel=True)
 def jit_jc(queries_factors, choices_factors, common_factors, length_impact):
     """
     Jitted function to compute a joint complexity between a corpus of queries and a corpus of choices.
@@ -72,7 +72,7 @@ def jit_jc(queries_factors, choices_factors, common_factors, length_impact):
     return res
 
 
-@njit(parallel=True)
+@njit(cache=True, parallel=True)
 def jit_square_factors(xind, xptr, yind, yptr, n, length_impact):
     """
     Jitted function to compute the joint complexity between texts of a corpus.

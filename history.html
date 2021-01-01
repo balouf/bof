@@ -93,7 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">History</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#full-cython">0.3.3 (2021-01-??): Full Cython</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cython-numba-balanced">0.3.3 (2021-01-01): Cython/Numba balanced</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#going-cython">0.3.2 (2020-12-30): Going Cython</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#simplification-of-core-algorithm">0.3.1 (2020-12-28): Simplification of core algorithm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#countvectorizer-and-process">0.3.0 (2020-12-15): CountVectorizer and Process</a></li>
@@ -169,12 +169,12 @@
             
   <div class="section" id="history">
 <h1>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="full-cython">
-<h2>0.3.3 (2021-01-??): Full Cython<a class="headerlink" href="#full-cython" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="cython-numba-balanced">
+<h2>0.3.3 (2021-01-01): Cython/Numba balanced<a class="headerlink" href="#cython-numba-balanced" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>All core CountVectorizer methods ported to Cython</p></li>
-<li><p>Process numba methods converted to Cython</p></li>
-<li><p>No Numba anymore ( :( )</p></li>
+<li><p>Process numba methods NOT converted to Cython as Numba seems to be 20% faster for csr manipulation.</p></li>
+<li><p>Numba functions are cached to avoid compilation lag.</p></li>
 </ul>
 </div>
 <div class="section" id="going-cython">

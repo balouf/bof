@@ -164,7 +164,7 @@
 <span class="kn">from</span> <span class="nn">.common</span> <span class="kn">import</span> <span class="n">MixInIO</span>
 
 
-<div class="viewcode-block" id="jit_common_factors"><a class="viewcode-back" href="../../reference/index.html#bof.process.jit_common_factors">[docs]</a><span class="nd">@njit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="jit_common_factors"><a class="viewcode-back" href="../../reference/index.html#bof.process.jit_common_factors">[docs]</a><span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">jit_common_factors</span><span class="p">(</span><span class="n">queries_length</span><span class="p">,</span> <span class="n">xind</span><span class="p">,</span> <span class="n">xptr</span><span class="p">,</span> <span class="n">choices_length</span><span class="p">,</span> <span class="n">yind</span><span class="p">,</span> <span class="n">yptr</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Jitted function to compute the common factors between a corpus of queries and a corpus of choices.</span>
@@ -201,7 +201,7 @@
     <span class="k">return</span> <span class="n">res</span></div>
 
 
-<div class="viewcode-block" id="jit_jc"><a class="viewcode-back" href="../../reference/index.html#bof.process.jit_jc">[docs]</a><span class="nd">@njit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="jit_jc"><a class="viewcode-back" href="../../reference/index.html#bof.process.jit_jc">[docs]</a><span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">jit_jc</span><span class="p">(</span><span class="n">queries_factors</span><span class="p">,</span> <span class="n">choices_factors</span><span class="p">,</span> <span class="n">common_factors</span><span class="p">,</span> <span class="n">length_impact</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Jitted function to compute a joint complexity between a corpus of queries and a corpus of choices.</span>
@@ -230,7 +230,7 @@
     <span class="k">return</span> <span class="n">res</span></div>
 
 
-<div class="viewcode-block" id="jit_square_factors"><a class="viewcode-back" href="../../reference/index.html#bof.process.jit_square_factors">[docs]</a><span class="nd">@njit</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="jit_square_factors"><a class="viewcode-back" href="../../reference/index.html#bof.process.jit_square_factors">[docs]</a><span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">jit_square_factors</span><span class="p">(</span><span class="n">xind</span><span class="p">,</span> <span class="n">xptr</span><span class="p">,</span> <span class="n">yind</span><span class="p">,</span> <span class="n">yptr</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">length_impact</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Jitted function to compute the joint complexity between texts of a corpus.</span>
