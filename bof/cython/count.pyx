@@ -2,9 +2,6 @@
 # distutils: define_macros=NPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION
 # distutils: extra_compile_args = -std=c++11
 
-
-from libcpp cimport bool
-
 import cython
 from scipy.sparse import coo_matrix
 import numpy as np
@@ -29,7 +26,7 @@ def make_rg(float sampling_rate=.5, int seed=42):
         return dist(gen)<sampling_rate
     return r
 
-cdef number_of_factors(int length, n_range=None):
+cdef number_of_factors(int length, int n_range):
     """
     Return the number of factors (with multiplicity) of size at most `n_range` that exist in a text of length `length`.
     This allows to pre-allocate working memory.
@@ -38,8 +35,8 @@ cdef number_of_factors(int length, n_range=None):
     ----------
     length: :py:class:`int`
         Length of the text.
-    n_range: :py:class:`int` or None
-        Maximal factor size. If `None`, all factors are considered.
+    n_range: :py:class:`int`
+        Maximal factor size. If 0, all factors are considered.
 
     Returns
     -------
@@ -54,7 +51,7 @@ cdef number_of_factors(int length, n_range=None):
     >>> number_of_factors(l, n_range=2)
     7
     """
-    if n_range is None or n_range > length:
+    if n_range == 0  or n_range > length:
         return length * (length + 1) // 2
     return n_range * (length - n_range) + n_range * (n_range + 1) // 2
 
@@ -64,7 +61,7 @@ cdef number_of_factors(int length, n_range=None):
 @cython.initializedcheck(False)
 @cython.nonecheck(False)
 def fit_transform(list corpus, dict features, preprocessor,
-                  int n_range=7, bool use_range=True):
+                  int n_range=7):
     cdef str txt, sub_text, factor
     cdef int ptr=0, end, start, current, length, i, j, m=len(features), tot_size
     tot_size = sum(number_of_factors(len(preprocessor(txt)), n_range) for txt in corpus)
@@ -77,7 +74,7 @@ def fit_transform(list corpus, dict features, preprocessor,
         txt = preprocessor(txt)
         length = len(txt)
         for start in range(length):
-            end = min(start+n_range, length) if use_range else length
+            end = min(start+n_range, length) if n_range>0 else length
             sub_text = txt[start:end]
             for current in range(1, end-start+1):
                 factor = sub_text[:current]
@@ -96,14 +93,14 @@ def fit_transform(list corpus, dict features, preprocessor,
 @cython.initializedcheck(False)
 @cython.nonecheck(False)
 def fit(list corpus, dict features, preprocessor,
-                  int n_range=7, bool use_range=True):
+                  int n_range=7):
     cdef str txt, sub_text, factor
     cdef int start, current, end, length, i, j, m=len(features)
     for txt in corpus:
         txt = preprocessor(txt)
         length = len(txt)
         for start in range(length):
-            end = min(start+n_range, length) if use_range else length
+            end = min(start+n_range, length) if n_range>0 else length
             sub_text = txt[start:end]
             for current in range(1, end-start+1):
                 factor = sub_text[:current]
@@ -117,7 +114,7 @@ def fit(list corpus, dict features, preprocessor,
 @cython.initializedcheck(False)
 @cython.nonecheck(False)
 def sampling_fit(list corpus, dict features, preprocessor,
-                  int n_range=7, bool use_range=True, float sampling_rate=.5, int seed=42):
+                  int n_range=7, float sampling_rate=.5, int seed=42):
 
     rg = make_rg(sampling_rate, seed)
 
@@ -128,7 +125,7 @@ def sampling_fit(list corpus, dict features, preprocessor,
         length = len(txt)
         for start in range(length):
             if rg():
-                end = min(start+n_range, length) if use_range else length
+                end = min(start+n_range, length) if n_range>0 else length
                 sub_text = txt[start:end]
                 for current in range(1, end-start+1):
                     factor = sub_text[:current]
@@ -142,7 +139,7 @@ def sampling_fit(list corpus, dict features, preprocessor,
 @cython.initializedcheck(False)
 @cython.nonecheck(False)
 def transform(list corpus, dict features, preprocessor,
-                  int n_range=7, bool use_range=True):
+                  int n_range=7):
     cdef str txt, sub_text, factor
     cdef int ptr=0, end, start, current, length, i, j, m=len(features), tot_size
     tot_size = sum(number_of_factors(len(preprocessor(txt)), n_range) for txt in corpus)
@@ -155,7 +152,7 @@ def transform(list corpus, dict features, preprocessor,
         txt = preprocessor(txt)
         length = len(txt)
         for start in range(length):
-            end = min(start+n_range, length) if use_range else length
+            end = min(start+n_range, length) if n_range>0 else length
             sub_text = txt[start:end]
             for current in range(1, end-start+1):
                 factor = sub_text[:current]
