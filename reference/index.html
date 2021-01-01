@@ -652,34 +652,12 @@ queries.</p>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="bof.feature_extraction.CountVectorizer.features">
-<code class="sig-name descname">features</code><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.features" title="Permalink to this definition">¶</a></dt>
-<dd><p>List of factors.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
 <dt id="bof.feature_extraction.CountVectorizer.features_">
 <code class="sig-name descname">features_</code><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.features_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary that maps factors to their index in the list.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> -&gt; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="bof.feature_extraction.CountVectorizer.m">
-<code class="sig-name descname">m</code><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.m" title="Permalink to this definition">¶</a></dt>
-<dd><p>Number of factors.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -702,6 +680,21 @@ queries.</p>
 <span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
 </pre></div>
 </div>
+<dl class="py method">
+<dt id="bof.feature_extraction.CountVectorizer.features">
+<em class="property">property </em><code class="sig-name descname">features</code><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the list of features (internally, features are stored as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> that associates factors to
+indexes).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>features</strong> – List of factors.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="bof.feature_extraction.CountVectorizer.fit">
 <code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">corpus</span></em>, <em class="sig-param"><span class="n">reset</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.fit" title="Permalink to this definition">¶</a></dt>
@@ -813,6 +806,43 @@ queries.</p>
 <span class="go">[&#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;i&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rif&#39;, &#39;rir&#39;, &#39;ir&#39;, &#39;iri&#39;]</span>
 </pre></div>
 </div>
+<p>Setting n_range to None will compute all factors.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">n_range</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span> 
+<span class="go">array([[2, 2, 1, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],</span>
+<span class="go">       [0, 0, 0, 0, 2, 0, 0, 2, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],</span>
+<span class="go">       [1, 1, 0, 0, 3, 0, 0, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1]],</span>
+<span class="go">       dtype=uint32)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bof.feature_extraction.CountVectorizer.m">
+<em class="property">property </em><code class="sig-name descname">m</code><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.m" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>m</strong> – Number of factors.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bof.feature_extraction.CountVectorizer.no_none_range">
+<code class="sig-name descname">no_none_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.no_none_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.no_none_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace None n_range by 0 before passing to cython code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -827,6 +857,7 @@ description: you have to do a <cite>sampling_fit</cite> followed by a <cite>tran
 <li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Texts to analyze.</p></li>
 <li><p><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Clears FactorTree. If False, FactorTree will be updated instead.</p></li>
 <li><p><strong>sampling_rate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Probability to explore factors starting from one given position in the text.</p></li>
+<li><p><strong>seed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Seed of the random generator.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -919,7 +950,7 @@ corpus is not returned but is internally preserved.</p>
 It avoids to test the value of n_range all the time when doing factor extraction.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>n_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or None) – Maximal factor size. If <cite>None</cite>, all factors are considered.</p>
+<dd class="field-odd"><p><strong>n_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or None) – Maximal factor size. If 0 or <cite>None</cite>, all factors are considered.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p></p>
@@ -939,6 +970,35 @@ It avoids to test the value of n_range all the time when doing factor extraction
 <span class="go">12</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">end</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 <span class="go">15</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="bof.feature_extraction.number_of_factors">
+<code class="sig-prename descclassname">bof.feature_extraction.</code><code class="sig-name descname">number_of_factors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">length</span></em>, <em class="sig-param"><span class="n">n_range</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#number_of_factors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.number_of_factors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of factors (with multiplicity) of size at most <cite>n_range</cite> that exist in a text of length <cite>length</cite>.
+This allows to pre-allocate working memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Length of the text.</p></li>
+<li><p><strong>n_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or None) – Maximal factor size. If <cite>None</cite>, all factors are considered.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The number of factors (with multiplicity).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="s2">&quot;riri&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number_of_factors</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="go">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">number_of_factors</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">n_range</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">7</span>
 </pre></div>
 </div>
 </dd></dl>
