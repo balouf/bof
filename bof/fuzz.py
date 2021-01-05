@@ -51,11 +51,11 @@ def jit_jc(queries_factors, choices_factors, common_factors, length_impact):
     Parameters
     ----------
     queries_factors: :class:`~numpy.ndarray`
-        Vector of the number of unique factors for each query
+        Vector of the number of unique factors for each query.
     choices_factors: :class:`~numpy.ndarray`
-        Vector of the number of unique factors for each choice
+        Vector of the number of unique factors for each choice.
     common_factors: :class:`~numpy.ndarray`
-        Matrix of the number of common unique factors between queries and choices
+        Matrix of the number of common unique factors between queries and choices.
     length_impact: :py:class:`float`
         Importance of the length difference between two texts when computing the scores.
 
