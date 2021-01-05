@@ -33,7 +33,35 @@ Bag of Factors allow you to analyze a corpus from its factors.
 Features
 --------
 
-* TODO
+
+Feature Extraction
+-------------------
+
+The :py:mod:`~bof.feature_extraction` module mimicks the module https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text
+with a focus on character-based extraction.
+
+The main differences are:
+
+- it is slightly faster;
+- the features can be incrementally updated;
+- it is possible to fit only a random sample of factors to reduce space and computation time.
+
+The main entry point for this module is the :py:class:`~bof.feature_extraction.CountVectorizer` class, which mimicks its *scikit-learn* counterpart.
+It is in fact very similar to using `char` or `char_wb` analyzer option from that module.
+
+
+
+Fuzz
+--------
+
+.. include:: reference/fuzz.rst
+
+
+----------------
+Getting Started
+----------------
+
+Look at examples from the reference section.
 
 -------
 Credits

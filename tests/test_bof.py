@@ -5,7 +5,7 @@
 import pytest
 
 
-from bof import factortree
+from bof import feature_extraction, fuzz
 
 
 @pytest.fixture

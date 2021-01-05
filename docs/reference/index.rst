@@ -3,43 +3,41 @@ Reference
 =========
 
 
-Process
+Fuzz
 --------
 
-The `process` modules mimicks the process module from
+The `fuzz` module mimicks the fuzzywuzzy-like package like
 
 - fuzzywuzzy (https://github.com/seatgeek/fuzzywuzzy)
 - rapidfuzz (https://github.com/maxbachmann/rapidfuzz)
 
-The main difference is that the sets of available scorers differ, as the Levenshtein distance is replaced by the Joint Complexity distance.
+The main difference is that the Levenshtein distance is replaced by the Joint Complexity distance. The API is also
+slightly change to enable new features:
 
-.. automodule:: bof.process
+- The list of possible choices can be pre-trained (*fit*) to accelerate the computation in the case a stream of queries
+  is sent against the same list of choices.
+- Instead of one single query, a list of queries can be used. Computations will be parallelized.
+
+The main `fuzz` entry point is the `Process` class.
+
+.. automodule:: bof.fuzz
     :members:
 
 
-Fuzz
-------
+Feature Extraction
+-------------------
 
-The `fuzz` modules mimicks the fuzz module from
-
-- fuzzywuzzy (https://github.com/seatgeek/fuzzywuzzy)
-- rapidfuzz (https://github.com/maxbachmann/rapidfuzz)
-
-The main difference is that the sets of available scorers differ, as the Levenshtein distance is replaced by the Joint Complexity distance.
-
-MODULE TO BE WRITTEN
-
-
-CountVectorizer
-----------------
-
-The `CountVectorizer` class mimicks the module https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html. It is in fact very similar to using `char` or `char_wb` analyzer option from that module.
+The `feature_extraction` module mimicks the module https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text
+with a focus on character-based extraction.
 
 The main differences are:
 
 - it is slightly faster;
 - the features can be incrementally updated;
 - it is possible to fit only a random sample of factors to reduce space and computation time.
+
+The main entry point for this module is the `CountVectorizer` class, which mimicks its *scikit-learn* counterpart.
+It is in fact very similar to using `char` or `char_wb` analyzer option from that module.
 
 .. automodule:: bof.feature_extraction
     :members:
@@ -51,22 +49,4 @@ Common
 The `common` module contains miscellaneous classes and functions.
 
 .. automodule:: bof.common
-    :members:
-
-
-Joint Complexity (DEPRECATED)
-------------------------------
-
-The `jc` module contains function to compute joint complexity between texts.
-
-.. automodule:: bof.jc
-    :members:
-
-
-Factor Tree (DEPRECATED)
--------------------------
-
-The `factortree` module contains the core engine of the *Bag of Factors* package.
-
-.. automodule:: bof.factortree
     :members:

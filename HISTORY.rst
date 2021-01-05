@@ -3,6 +3,15 @@ History
 =======
 
 ---------------------------------------------------
+0.3.4 (2021-01-05): Cleaning
+---------------------------------------------------
+
+* Renaming process.py to fuzz.py to emphasize that the module aims at being an alternative to the fuzzywuzzy package.
+* Removed modules FactorTree and JC, as they waht they did is now covered by the feature_extraction and fuzz modules.
+* General cleaning / rewriting.
+
+
+---------------------------------------------------
 0.3.3 (2021-01-01): Cython/Numba balanced
 ---------------------------------------------------
 

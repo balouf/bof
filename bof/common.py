@@ -40,7 +40,18 @@ class MixInIO:
         >>> vect2.features
         ['r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif']
 
-        >>> from bof.process import Process
+        >>> with tempfile.TemporaryDirectory() as tmpdirname:
+        ...     vect1.save(filename='myfile', compress=True, path=tmpdirname)
+        ...     dir_content = [f.name for f in Path(tmpdirname).glob('*')]
+        ...     vect2 = CountVectorizer(filename='myfile', path=Path(tmpdirname))
+        ...     vect1.save(filename='myfile', compress=True, path=tmpdirname) # doctest.ELLIPSIS
+        File ...myfile.pkl.gz already exists! Use erase option to overwrite.
+        >>> dir_content
+        ['myfile.pkl.gz']
+        >>> vect2.m
+        12
+
+        >>> from bof.fuzz import Process
         >>> p1 = Process()
         >>> p1.fit(["riri", "fifi", "rififi"])
         >>> with tempfile.TemporaryDirectory() as tmpdirname:
@@ -49,37 +60,25 @@ class MixInIO:
         >>> p2.extractOne("rififo")
         ('rififi', 63.1578947368421)
 
-        >>> from bof.factortree import FactorTree
-        >>> tree1 = FactorTree(["riri", "fifi", "rififi"])
         >>> with tempfile.TemporaryDirectory() as tmpdirname:
-        ...     tree1.save(filename='myfile', compress=True, path=tmpdirname)
-        ...     dir_content = [f.name for f in Path(tmpdirname).glob('*')]
-        ...     tree2 = FactorTree(filename='myfile', path=Path(tmpdirname))
-        ...     tree1.save(filename='myfile', compress=True, path=tmpdirname) # doctest.ELLIPSIS
-        File ...myfile.pkl.gz already exists! Use erase option to overwrite.
-        >>> dir_content
-        ['myfile.pkl.gz']
-        >>> tree2.self_factors
-        [8, 8, 15]
-
-        >>> with tempfile.TemporaryDirectory() as tmpdirname:
-        ...     tree1.save(filename='myfile', path=tmpdirname)
-        ...     tree1.save(filename='myfile', path=tmpdirname) # doctest.ELLIPSIS
+        ...     p1.save(filename='myfile', path=tmpdirname)
+        ...     p1.save(filename='myfile', path=tmpdirname) # doctest.ELLIPSIS
         File ...myfile.pkl already exists! Use erase option to overwrite.
 
-        >>> tree1.txt_fit_transform("titi")
+        >>> vect1.fit_transform(["titi"], reset=False).toarray()
+        array([[0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 1, 1, 1]], dtype=uint32)
         >>> with tempfile.TemporaryDirectory() as tmpdirname:
-        ...     tree1.save(filename='myfile', path=tmpdirname)
-        ...     tree1.save(filename='myfile', path=tmpdirname, erase=True)
-        ...     tree2.load(filename='myfile', path=tmpdirname)
+        ...     vect1.save(filename='myfile', path=tmpdirname)
+        ...     vect1.save(filename='myfile', path=tmpdirname, erase=True)
+        ...     vect2.load(filename='myfile', path=tmpdirname)
         ...     dir_content = [f.name for f in Path(tmpdirname).glob('*')]
         >>> dir_content
         ['myfile.pkl']
-        >>> tree2.corpus
-        ['riri', 'fifi', 'rififi', 'titi']
+        >>> vect2.features
+        ['r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif', 't', 'ti', 'tit', 'it', 'iti']
 
         >>> with tempfile.TemporaryDirectory() as tmpdirname:
-        ...    tree2.load(filename='thisfilenamedoesnotexist') # doctest.ELLIPSIS
+        ...    vect2.load(filename='thisfilenamedoesnotexist', path=tmpdirname) # doctest.ELLIPSIS
         Traceback (most recent call last):
          ...
         FileNotFoundError: [Errno 2] No such file or directory: ...
