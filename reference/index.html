@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Reference &mdash; Bag of Factors 0.3.3 documentation</title>
+  <title>Reference &mdash; Bag of Factors 0.3.4 documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.3
+                0.3.4
               </div>
             
           
@@ -173,7 +173,7 @@
 <h1>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="fuzz">
 <h2>Fuzz<a class="headerlink" href="#fuzz" title="Permalink to this headline">¶</a></h2>
-<p>The <cite>fuzz</cite> module mimicks the fuzzywuzzy-like package like</p>
+<p>The <a class="reference internal" href="#module-bof.fuzz" title="bof.fuzz"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fuzz</span></code></a> module mimicks the fuzzywuzzy-like packages like</p>
 <ul class="simple">
 <li><p>fuzzywuzzy (<a class="reference external" href="https://github.com/seatgeek/fuzzywuzzy">https://github.com/seatgeek/fuzzywuzzy</a>)</p></li>
 <li><p>rapidfuzz (<a class="reference external" href="https://github.com/maxbachmann/rapidfuzz">https://github.com/maxbachmann/rapidfuzz</a>)</p></li>
@@ -181,11 +181,11 @@
 <p>The main difference is that the Levenshtein distance is replaced by the Joint Complexity distance. The API is also
 slightly change to enable new features:</p>
 <ul class="simple">
-<li><p>The list of possible choices can be pre-trained (<em>fit</em>) to accelerate the computation in the case a stream of queries
-is sent against the same list of choices.</p></li>
+<li><p>The list of possible choices can be pre-trained (<a class="reference internal" href="#bof.fuzz.Process.fit" title="bof.fuzz.Process.fit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fit()</span></code></a>) to accelerate the computation in
+the case a stream of queries is sent against the same list of choices.</p></li>
 <li><p>Instead of one single query, a list of queries can be used. Computations will be parallelized.</p></li>
 </ul>
-<p>The main <cite>fuzz</cite> entry point is the <cite>Process</cite> class.</p>
+<p>The main <a class="reference internal" href="#module-bof.fuzz" title="bof.fuzz"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fuzz</span></code></a> entry point is the <a class="reference internal" href="#bof.fuzz.Process" title="bof.fuzz.Process"><code class="xref py py-class docutils literal notranslate"><span class="pre">Process</span></code></a> class.</p>
 <span class="target" id="module-bof.fuzz"></span><dl class="py class">
 <dt id="bof.fuzz.Process">
 <em class="property">class </em><code class="sig-prename descclassname">bof.fuzz.</code><code class="sig-name descname">Process</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_range</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">preprocessor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">length_impact</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">allow_updates</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">'.'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.fuzz.Process" title="Permalink to this definition">¶</a></dt>
@@ -571,9 +571,9 @@ queries.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>queries_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Vector of the number of unique factors for each query</p></li>
-<li><p><strong>choices_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Vector of the number of unique factors for each choice</p></li>
-<li><p><strong>common_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Matrix of the number of common unique factors between queries and choices</p></li>
+<li><p><strong>queries_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Vector of the number of unique factors for each query.</p></li>
+<li><p><strong>choices_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Vector of the number of unique factors for each choice.</p></li>
+<li><p><strong>common_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Matrix of the number of common unique factors between queries and choices.</p></li>
 <li><p><strong>length_impact</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Importance of the length difference between two texts when computing the scores.</p></li>
 </ul>
 </dd>
@@ -629,7 +629,7 @@ queries.</p>
 </div>
 <div class="section" id="feature-extraction">
 <h2>Feature Extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h2>
-<p>The <cite>feature_extraction</cite> module mimicks the module <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text">https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text</a>
+<p>The <a class="reference internal" href="#module-bof.feature_extraction" title="bof.feature_extraction"><code class="xref py py-mod docutils literal notranslate"><span class="pre">feature_extraction</span></code></a> module mimicks the module <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text">https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text</a>
 with a focus on character-based extraction.</p>
 <p>The main differences are:</p>
 <ul class="simple">
@@ -637,8 +637,10 @@ with a focus on character-based extraction.</p>
 <li><p>the features can be incrementally updated;</p></li>
 <li><p>it is possible to fit only a random sample of factors to reduce space and computation time.</p></li>
 </ul>
-<p>The main entry point for this module is the <cite>CountVectorizer</cite> class, which mimicks its <em>scikit-learn</em> counterpart.
-It is in fact very similar to using <cite>char</cite> or <cite>char_wb</cite> analyzer option from that module.</p>
+<p>The main entry point for this module is the <a class="reference internal" href="#bof.feature_extraction.CountVectorizer" title="bof.feature_extraction.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> class, which mimicks
+its <em>scikit-learn</em> counterpart (also named <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="(in scikit-learn v0.24)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a>).
+It is in fact very similar to sklearn’s <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="(in scikit-learn v0.24)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> using <cite>char</cite> or
+<cite>char_wb</cite> analyzer option from that module.</p>
 <span class="target" id="module-bof.feature_extraction"></span><dl class="py class">
 <dt id="bof.feature_extraction.CountVectorizer">
 <em class="property">class </em><code class="sig-prename descclassname">bof.feature_extraction.</code><code class="sig-name descname">CountVectorizer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_range</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">preprocessor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">'.'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer" title="Permalink to this definition">¶</a></dt>

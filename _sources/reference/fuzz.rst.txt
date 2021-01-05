@@ -1,4 +1,4 @@
-The :py:mod:`~bof.feature_extraction` :py:mod:`~bof.fuzz` module mimicks the fuzzywuzzy-like package like
+The :py:mod:`~bof.fuzz` module mimicks the fuzzywuzzy-like packages like
 
 - fuzzywuzzy (https://github.com/seatgeek/fuzzywuzzy)
 - rapidfuzz (https://github.com/maxbachmann/rapidfuzz)
@@ -10,4 +10,4 @@ slightly change to enable new features:
   the case a stream of queries is sent against the same list of choices.
 - Instead of one single query, a list of queries can be used. Computations will be parallelized.
 
-The main :py:mod:`~bof.process` entry point is the :py:class:`~bof.fuzz.Process` class. Twist again.
+The main :py:mod:`~bof.fuzz` entry point is the :py:class:`~bof.fuzz.Process` class.
