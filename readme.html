@@ -188,7 +188,7 @@
 <h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="feature-extraction">
 <h3>Feature Extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="reference/index.html#module-bof.feature_extraction" title="bof.feature_extraction"><code class="xref py py-mod docutils literal notranslate"><span class="pre">feature_extraction</span></code></a> module mimicks the module <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text">https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text</a>
+<p>The <cite>feature_extraction</cite> module mimicks the module <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text">https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text</a>
 with a focus on character-based extraction.</p>
 <p>The main differences are:</p>
 <ul class="simple">
@@ -196,14 +196,14 @@ with a focus on character-based extraction.</p>
 <li><p>the features can be incrementally updated;</p></li>
 <li><p>it is possible to fit only a random sample of factors to reduce space and computation time.</p></li>
 </ul>
-<p>The main entry point for this module is the <a class="reference internal" href="reference/index.html#bof.feature_extraction.CountVectorizer" title="bof.feature_extraction.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> class, which mimicks
-its <em>scikit-learn</em> counterpart (also named <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="(in scikit-learn v0.24)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a>).
-It is in fact very similar to sklearn’s <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="(in scikit-learn v0.24)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> using <cite>char</cite> or
+<p>The main entry point for this module is the <cite>CountVectorizer</cite> class, which mimicks
+its <em>scikit-learn</em> counterpart (also named <cite>CountVectorizer</cite>).
+It is in fact very similar to sklearn’s <cite>CountVectorizer</cite> using <cite>char</cite> or
 <cite>char_wb</cite> analyzer option from that module.</p>
 </div>
 <div class="section" id="fuzz">
 <h3>Fuzz<a class="headerlink" href="#fuzz" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="reference/index.html#module-bof.fuzz" title="bof.fuzz"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fuzz</span></code></a> module mimicks the fuzzywuzzy-like packages like</p>
+<p>The <cite>fuzz</cite> module mimicks the fuzzywuzzy-like packages like</p>
 <ul class="simple">
 <li><p>fuzzywuzzy (<a class="reference external" href="https://github.com/seatgeek/fuzzywuzzy">https://github.com/seatgeek/fuzzywuzzy</a>)</p></li>
 <li><p>rapidfuzz (<a class="reference external" href="https://github.com/maxbachmann/rapidfuzz">https://github.com/maxbachmann/rapidfuzz</a>)</p></li>
@@ -211,11 +211,11 @@ It is in fact very similar to sklearn’s <a class="reference external" href="ht
 <p>The main difference is that the Levenshtein distance is replaced by the Joint Complexity distance. The API is also
 slightly change to enable new features:</p>
 <ul class="simple">
-<li><p>The list of possible choices can be pre-trained (<a class="reference internal" href="reference/index.html#bof.fuzz.Process.fit" title="bof.fuzz.Process.fit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fit()</span></code></a>) to accelerate the computation in
+<li><p>The list of possible choices can be pre-trained (<cite>fit</cite>) to accelerate the computation in
 the case a stream of queries is sent against the same list of choices.</p></li>
 <li><p>Instead of one single query, a list of queries can be used. Computations will be parallelized.</p></li>
 </ul>
-<p>The main <a class="reference internal" href="reference/index.html#module-bof.fuzz" title="bof.fuzz"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fuzz</span></code></a> entry point is the <a class="reference internal" href="reference/index.html#bof.fuzz.Process" title="bof.fuzz.Process"><code class="xref py py-class docutils literal notranslate"><span class="pre">Process</span></code></a> class.</p>
+<p>The main <cite>fuzz</cite> entry point is the <cite>Process</cite> class.</p>
 </div>
 </div>
 <div class="section" id="getting-started">
