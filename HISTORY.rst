@@ -7,8 +7,9 @@ History
 ---------------------------------------------------
 
 * Renaming process.py to fuzz.py to emphasize that the module aims at being an alternative to the fuzzywuzzy package.
-* Removed modules FactorTree and JC, as they waht they did is now covered by the feature_extraction and fuzz modules.
-* General cleaning / rewriting.
+* Removed modules FactorTree and JC. What they did is now essentially covered by the feature_extraction and fuzz
+  modules.
+* General cleaning / rewriting of the documentation.
 
 
 ---------------------------------------------------

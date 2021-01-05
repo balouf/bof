@@ -37,18 +37,7 @@ Features
 Feature Extraction
 -------------------
 
-The :py:mod:`~bof.feature_extraction` module mimicks the module https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text
-with a focus on character-based extraction.
-
-The main differences are:
-
-- it is slightly faster;
-- the features can be incrementally updated;
-- it is possible to fit only a random sample of factors to reduce space and computation time.
-
-The main entry point for this module is the :py:class:`~bof.feature_extraction.CountVectorizer` class, which mimicks its *scikit-learn* counterpart.
-It is in fact very similar to using `char` or `char_wb` analyzer option from that module.
-
+.. include:: reference/feature_extraction.rst
 
 
 Fuzz
@@ -61,7 +50,9 @@ Fuzz
 Getting Started
 ----------------
 
-Look at examples from the reference section.
+Look at examples from the reference_ section.
+
+.. include:: HISTORY.rst
 
 -------
 Credits
@@ -71,3 +62,4 @@ This package was created with Cookiecutter_ and the `francois-durand/package_hel
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`francois-durand/package_helper_2`: https://github.com/francois-durand/package_helper_2
+.. _reference: https://balouf.github.io/bof/reference/index.html
