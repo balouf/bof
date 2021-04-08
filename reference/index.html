@@ -188,7 +188,7 @@ the case a stream of queries is sent against the same list of choices.</p></li>
 <p>The main <a class="reference internal" href="#module-bof.fuzz" title="bof.fuzz"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fuzz</span></code></a> entry point is the <a class="reference internal" href="#bof.fuzz.Process" title="bof.fuzz.Process"><code class="xref py py-class docutils literal notranslate"><span class="pre">Process</span></code></a> class.</p>
 <span class="target" id="module-bof.fuzz"></span><dl class="py class">
 <dt id="bof.fuzz.Process">
-<em class="property">class </em><code class="sig-prename descclassname">bof.fuzz.</code><code class="sig-name descname">Process</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_range</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">preprocessor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">length_impact</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">allow_updates</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">'.'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.fuzz.Process" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bof.fuzz.</span></code><code class="sig-name descname"><span class="pre">Process</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preprocessor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_impact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_updates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.Process" title="Permalink to this definition">¶</a></dt>
 <dd><p>The process class is used to compute the closest choices from a list of queries base on joint complexity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -204,7 +204,7 @@ the case a stream of queries is sent against the same list of choices.</p></li>
 </dl>
 <dl class="py attribute">
 <dt id="bof.fuzz.Process.vectorizer">
-<code class="sig-name descname">vectorizer</code><a class="headerlink" href="#bof.fuzz.Process.vectorizer" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">vectorizer</span></code><a class="headerlink" href="#bof.fuzz.Process.vectorizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>The vectorizer used to compute factors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -215,7 +215,7 @@ the case a stream of queries is sent against the same list of choices.</p></li>
 
 <dl class="py attribute">
 <dt id="bof.fuzz.Process.choices">
-<code class="sig-name descname">choices</code><a class="headerlink" href="#bof.fuzz.Process.choices" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">choices</span></code><a class="headerlink" href="#bof.fuzz.Process.choices" title="Permalink to this definition">¶</a></dt>
 <dd><p>The possible choices.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -226,29 +226,29 @@ the case a stream of queries is sent against the same list of choices.</p></li>
 
 <dl class="py attribute">
 <dt id="bof.fuzz.Process.choices_matrix">
-<code class="sig-name descname">choices_matrix</code><a class="headerlink" href="#bof.fuzz.Process.choices_matrix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">choices_matrix</span></code><a class="headerlink" href="#bof.fuzz.Process.choices_matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>The factor matrix of the choices.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.6.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.6.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="bof.fuzz.Process.choices_factors">
-<code class="sig-name descname">choices_factors</code><a class="headerlink" href="#bof.fuzz.Process.choices_factors" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">choices_factors</span></code><a class="headerlink" href="#bof.fuzz.Process.choices_factors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of unique factors of each choice</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="bof.fuzz.Process.choices_length">
-<code class="sig-name descname">choices_length</code><a class="headerlink" href="#bof.fuzz.Process.choices_length" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">choices_length</span></code><a class="headerlink" href="#bof.fuzz.Process.choices_length" title="Permalink to this definition">¶</a></dt>
 <dd><p>Number of choices</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -259,7 +259,7 @@ the case a stream of queries is sent against the same list of choices.</p></li>
 
 <dl class="py method">
 <dt id="bof.fuzz.Process.dedupe">
-<code class="sig-name descname">dedupe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">contains_dup</span></em>, <em class="sig-param"><span class="n">threshold</span><span class="o">=</span><span class="default_value">60.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.dedupe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.fuzz.Process.dedupe" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">dedupe</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contains_dup</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.dedupe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.Process.dedupe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inspired by fuzzywuzzy’s dedupe function to remove (near) duplicates.
 Currently barely optimized (and probably bugged).</p>
 <dl class="field-list simple">
@@ -293,7 +293,7 @@ Currently barely optimized (and probably bugged).</p>
 
 <dl class="py method">
 <dt id="bof.fuzz.Process.extract">
-<code class="sig-name descname">extract</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">queries</span></em>, <em class="sig-param"><span class="n">choices</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">limit</span><span class="o">=</span><span class="default_value">5</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.extract"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.fuzz.Process.extract" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">extract</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.Process.extract" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the best matches amongst a list of choices.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -330,7 +330,7 @@ If <cite>queries</cite> is a list of texts, the list of list of tuples containin
 
 <dl class="py method">
 <dt id="bof.fuzz.Process.extractOne">
-<code class="sig-name descname">extractOne</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">queries</span></em>, <em class="sig-param"><span class="n">choices</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">score_cutoff</span><span class="o">=</span><span class="default_value">40.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.extractOne"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.fuzz.Process.extractOne" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">extractOne</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.extractOne"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.Process.extractOne" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the best match amongst a list of choices.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -363,7 +363,7 @@ If <cite>queries</cite> is a list of texts, the list of tuples containing the be
 
 <dl class="py method">
 <dt id="bof.fuzz.Process.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">choices</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.fuzz.Process.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">fit</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.Process.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the factors of a list of choices.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -425,7 +425,7 @@ If <cite>queries</cite> is a list of texts, the list of tuples containing the be
 
 <dl class="py method">
 <dt id="bof.fuzz.Process.reset">
-<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.fuzz.Process.reset" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">reset</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.Process.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Clear choices from the object.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">()</span>
@@ -445,7 +445,7 @@ If <cite>queries</cite> is a list of texts, the list of tuples containing the be
 
 <dl class="py method">
 <dt id="bof.fuzz.Process.transform">
-<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">queries</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.fuzz.Process.transform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">transform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queries</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.Process.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the joint complexities of queries against choices,</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -498,13 +498,13 @@ a transform, set <cite>allow_updates</cite> to False.</p>
 
 <dl class="py function">
 <dt id="bof.fuzz.get_best_choice">
-<code class="sig-prename descclassname">bof.fuzz.</code><code class="sig-name descname">get_best_choice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">choices</span></em>, <em class="sig-param"><span class="n">scores</span></em>, <em class="sig-param"><span class="n">score_cutoff</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#get_best_choice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.fuzz.get_best_choice" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bof.fuzz.</span></code><code class="sig-name descname"><span class="pre">get_best_choice</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score_cutoff</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#get_best_choice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.get_best_choice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a list of choices with scores, extract the best choice.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>choices</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – List of choices.</p></li>
-<li><p><strong>scores</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Score of the choices (must have the same size as <cite>choices</cite>)</p></li>
+<li><p><strong>scores</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Score of the choices (must have the same size as <cite>choices</cite>)</p></li>
 <li><p><strong>score_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Minimal score that the result must achieve to be considered a match</p></li>
 </ul>
 </dd>
@@ -519,13 +519,13 @@ a transform, set <cite>allow_updates</cite> to False.</p>
 
 <dl class="py function">
 <dt id="bof.fuzz.get_best_choices">
-<code class="sig-prename descclassname">bof.fuzz.</code><code class="sig-name descname">get_best_choices</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">choices</span></em>, <em class="sig-param"><span class="n">scores</span></em>, <em class="sig-param"><span class="n">limit</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#get_best_choices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.fuzz.get_best_choices" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bof.fuzz.</span></code><code class="sig-name descname"><span class="pre">get_best_choices</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#get_best_choices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.get_best_choices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given a list of choices with scores, extract the best choices.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>choices</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – List of choices.</p></li>
-<li><p><strong>scores</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Score of the choices (must have the same size as <cite>choices</cite>)</p></li>
+<li><p><strong>scores</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Score of the choices (must have the same size as <cite>choices</cite>)</p></li>
 <li><p><strong>limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or None) – Maximal number of results to give. If None, all choices will be returned (sorted).</p></li>
 </ul>
 </dd>
@@ -540,17 +540,17 @@ a transform, set <cite>allow_updates</cite> to False.</p>
 
 <dl class="py function">
 <dt id="bof.fuzz.jit_common_factors">
-<code class="sig-prename descclassname">bof.fuzz.</code><code class="sig-name descname">jit_common_factors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">queries_length</span></em>, <em class="sig-param"><span class="n">xind</span></em>, <em class="sig-param"><span class="n">xptr</span></em>, <em class="sig-param"><span class="n">choices_length</span></em>, <em class="sig-param"><span class="n">yind</span></em>, <em class="sig-param"><span class="n">yptr</span></em>, <em class="sig-param"><span class="n">m</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#jit_common_factors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.fuzz.jit_common_factors" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bof.fuzz.</span></code><code class="sig-name descname"><span class="pre">jit_common_factors</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queries_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xptr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yptr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#jit_common_factors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.jit_common_factors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Jitted function to compute the common factors between a corpus of queries and a corpus of choices.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>queries_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of documents in the corpus of queries</p></li>
-<li><p><strong>xind</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Indices of the query factor matrix</p></li>
-<li><p><strong>xptr</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – pointers of the query factor matrix</p></li>
+<li><p><strong>xind</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Indices of the query factor matrix</p></li>
+<li><p><strong>xptr</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – pointers of the query factor matrix</p></li>
 <li><p><strong>choices_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of documents in the corpus of choices</p></li>
-<li><p><strong>yind</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Indices of the transposed choices factor matrix</p></li>
-<li><p><strong>yptr</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Pointers of the transposed choices factor matrix</p></li>
+<li><p><strong>yind</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Indices of the transposed choices factor matrix</p></li>
+<li><p><strong>yptr</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Pointers of the transposed choices factor matrix</p></li>
 <li><p><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Size of the factor space for choices</p></li>
 </ul>
 </dd>
@@ -559,21 +559,21 @@ a transform, set <cite>allow_updates</cite> to False.</p>
 queries.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt id="bof.fuzz.jit_jc">
-<code class="sig-prename descclassname">bof.fuzz.</code><code class="sig-name descname">jit_jc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">queries_factors</span></em>, <em class="sig-param"><span class="n">choices_factors</span></em>, <em class="sig-param"><span class="n">common_factors</span></em>, <em class="sig-param"><span class="n">length_impact</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#jit_jc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.fuzz.jit_jc" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bof.fuzz.</span></code><code class="sig-name descname"><span class="pre">jit_jc</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queries_factors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices_factors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">common_factors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_impact</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#jit_jc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.jit_jc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Jitted function to compute a joint complexity between a corpus of queries and a corpus of choices.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>queries_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Vector of the number of unique factors for each query.</p></li>
-<li><p><strong>choices_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Vector of the number of unique factors for each choice.</p></li>
-<li><p><strong>common_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Matrix of the number of common unique factors between queries and choices.</p></li>
+<li><p><strong>queries_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Vector of the number of unique factors for each query.</p></li>
+<li><p><strong>choices_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Vector of the number of unique factors for each choice.</p></li>
+<li><p><strong>common_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Matrix of the number of common unique factors between queries and choices.</p></li>
 <li><p><strong>length_impact</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Importance of the length difference between two texts when computing the scores.</p></li>
 </ul>
 </dd>
@@ -582,15 +582,15 @@ queries.</p>
 
 <dl class="py function">
 <dt id="bof.fuzz.jit_square_factors">
-<code class="sig-prename descclassname">bof.fuzz.</code><code class="sig-name descname">jit_square_factors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xind</span></em>, <em class="sig-param"><span class="n">xptr</span></em>, <em class="sig-param"><span class="n">yind</span></em>, <em class="sig-param"><span class="n">yptr</span></em>, <em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">length_impact</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#jit_square_factors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.fuzz.jit_square_factors" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bof.fuzz.</span></code><code class="sig-name descname"><span class="pre">jit_square_factors</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xptr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yptr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_impact</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#jit_square_factors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.jit_square_factors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Jitted function to compute the joint complexity between texts of a corpus.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>xind</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Indices of the factor matrix</p></li>
-<li><p><strong>xptr</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – pointers of the factor matrix</p></li>
-<li><p><strong>yind</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Indices of the transposed factor matrix</p></li>
-<li><p><strong>yptr</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Pointers of the transposed factor matrix</p></li>
+<li><p><strong>xind</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Indices of the factor matrix</p></li>
+<li><p><strong>xptr</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – pointers of the factor matrix</p></li>
+<li><p><strong>yind</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Indices of the transposed factor matrix</p></li>
+<li><p><strong>yptr</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Pointers of the transposed factor matrix</p></li>
 <li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Corpus size</p></li>
 <li><p><strong>length_impact</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Importance of the length difference between two texts when computing the scores.</p></li>
 </ul>
@@ -599,14 +599,14 @@ queries.</p>
 <dd class="field-even"><p>A <cite>n X n</cite> matrix that contains joint complexity scores of the corpus.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt id="bof.fuzz.txt_max">
-<code class="sig-prename descclassname">bof.fuzz.</code><code class="sig-name descname">txt_max</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">txt_list</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#txt_max"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.fuzz.txt_max" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bof.fuzz.</span></code><code class="sig-name descname"><span class="pre">txt_max</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txt_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#txt_max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.txt_max" title="Permalink to this definition">¶</a></dt>
 <dd><p>Auxiliary function that returns the index of the longest text from a list. In case of ties, alphabetic order is used.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -643,7 +643,7 @@ It is in fact very similar to sklearn’s <a class="reference external" href="ht
 <cite>char_wb</cite> analyzer option from that module.</p>
 <span class="target" id="module-bof.feature_extraction"></span><dl class="py class">
 <dt id="bof.feature_extraction.CountVectorizer">
-<em class="property">class </em><code class="sig-prename descclassname">bof.feature_extraction.</code><code class="sig-name descname">CountVectorizer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_range</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">preprocessor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">'.'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bof.feature_extraction.</span></code><code class="sig-name descname"><span class="pre">CountVectorizer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preprocessor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Counts the factors of a list of document.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -657,7 +657,7 @@ It is in fact very similar to sklearn’s <a class="reference external" href="ht
 </dl>
 <dl class="py attribute">
 <dt id="bof.feature_extraction.CountVectorizer.features_">
-<code class="sig-name descname">features_</code><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.features_" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">features_</span></code><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.features_" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary that maps factors to their index in the list.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -686,7 +686,7 @@ It is in fact very similar to sklearn’s <a class="reference external" href="ht
 </div>
 <dl class="py method">
 <dt id="bof.feature_extraction.CountVectorizer.features">
-<em class="property">property </em><code class="sig-name descname">features</code><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.features" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">features</span></code><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.features" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the list of features (internally, features are stored as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> that associates factors to
 indexes).</p>
 <dl class="field-list simple">
@@ -701,7 +701,7 @@ indexes).</p>
 
 <dl class="py method">
 <dt id="bof.feature_extraction.CountVectorizer.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">corpus</span></em>, <em class="sig-param"><span class="n">reset</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">fit</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corpus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the features. Does not build the factor matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -750,7 +750,7 @@ indexes).</p>
 
 <dl class="py method">
 <dt id="bof.feature_extraction.CountVectorizer.fit_transform">
-<code class="sig-name descname">fit_transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">corpus</span></em>, <em class="sig-param"><span class="n">reset</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.fit_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.fit_transform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">fit_transform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corpus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.fit_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.fit_transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the features and return the factor matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -763,7 +763,7 @@ indexes).</p>
 <dd class="field-even"><p>A sparse matrix that indicates for each document of the corpus its factors and their multiplicity.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.6.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.6.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -823,7 +823,7 @@ indexes).</p>
 
 <dl class="py method">
 <dt id="bof.feature_extraction.CountVectorizer.m">
-<em class="property">property </em><code class="sig-name descname">m</code><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.m" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">m</span></code><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.m" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the number of features.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -837,7 +837,7 @@ indexes).</p>
 
 <dl class="py method">
 <dt id="bof.feature_extraction.CountVectorizer.no_none_range">
-<code class="sig-name descname">no_none_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.no_none_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.no_none_range" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">no_none_range</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.no_none_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.no_none_range" title="Permalink to this definition">¶</a></dt>
 <dd><p>Replace None n_range by 0 before passing to cython code</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -851,7 +851,7 @@ indexes).</p>
 
 <dl class="py method">
 <dt id="bof.feature_extraction.CountVectorizer.sampling_fit">
-<code class="sig-name descname">sampling_fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">corpus</span></em>, <em class="sig-param"><span class="n">reset</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">sampling_rate</span><span class="o">=</span><span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">42</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.sampling_fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.sampling_fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">sampling_fit</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corpus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.sampling_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.sampling_fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build a partial factor tree where only a random subset of factors are selected. Note that there is no
 <cite>sampling_fit_transform</cite> method, as mutualizing the processes would introduce incoherences in the factor
 description: you have to do a <cite>sampling_fit</cite> followed by a <cite>transform</cite>.</p>
@@ -907,7 +907,7 @@ description: you have to do a <cite>sampling_fit</cite> followed by a <cite>tran
 
 <dl class="py method">
 <dt id="bof.feature_extraction.CountVectorizer.transform">
-<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">corpus</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.transform" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">transform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corpus</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build factor matrix from the factors already computed. New factors are discarded.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -918,7 +918,7 @@ description: you have to do a <cite>sampling_fit</cite> followed by a <cite>tran
 corpus is not returned but is internally preserved.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.6.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.6.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -949,7 +949,7 @@ corpus is not returned but is internally preserved.</p>
 
 <dl class="py function">
 <dt id="bof.feature_extraction.build_end">
-<code class="sig-prename descclassname">bof.feature_extraction.</code><code class="sig-name descname">build_end</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_range</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#build_end"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.build_end" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bof.feature_extraction.</span></code><code class="sig-name descname"><span class="pre">build_end</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#build_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.build_end" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a function of a starting position <cite>s</cite> and a text length <cite>l</cite> that tells the end of scanning text from <cite>s</cite>.
 It avoids to test the value of n_range all the time when doing factor extraction.</p>
 <dl class="field-list simple">
@@ -980,7 +980,7 @@ It avoids to test the value of n_range all the time when doing factor extraction
 
 <dl class="py function">
 <dt id="bof.feature_extraction.number_of_factors">
-<code class="sig-prename descclassname">bof.feature_extraction.</code><code class="sig-name descname">number_of_factors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">length</span></em>, <em class="sig-param"><span class="n">n_range</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#number_of_factors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.feature_extraction.number_of_factors" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bof.feature_extraction.</span></code><code class="sig-name descname"><span class="pre">number_of_factors</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#number_of_factors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.number_of_factors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the number of factors (with multiplicity) of size at most <cite>n_range</cite> that exist in a text of length <cite>length</cite>.
 This allows to pre-allocate working memory.</p>
 <dl class="field-list simple">
@@ -1013,11 +1013,11 @@ This allows to pre-allocate working memory.</p>
 <p>The <cite>common</cite> module contains miscellaneous classes and functions.</p>
 <span class="target" id="module-bof.common"></span><dl class="py class">
 <dt id="bof.common.MixInIO">
-<em class="property">class </em><code class="sig-prename descclassname">bof.common.</code><code class="sig-name descname">MixInIO</code><a class="reference internal" href="../_modules/bof/common.html#MixInIO"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.common.MixInIO" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bof.common.</span></code><code class="sig-name descname"><span class="pre">MixInIO</span></code><a class="reference internal" href="../_modules/bof/common.html#MixInIO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.common.MixInIO" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provide basic save/load capacities to other classes.</p>
 <dl class="py method">
 <dt id="bof.common.MixInIO.load">
-<code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">'.'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#MixInIO.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.common.MixInIO.load" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">load</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#MixInIO.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.common.MixInIO.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load instance from file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1031,7 +1031,7 @@ This allows to pre-allocate working memory.</p>
 
 <dl class="py method">
 <dt id="bof.common.MixInIO.save">
-<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">'.'</span></em>, <em class="sig-param"><span class="n">erase</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">compress</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#MixInIO.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.common.MixInIO.save" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">save</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">erase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#MixInIO.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.common.MixInIO.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save instance to file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1109,7 +1109,7 @@ This allows to pre-allocate working memory.</p>
 
 <dl class="py function">
 <dt id="bof.common.default_preprocessor">
-<code class="sig-prename descclassname">bof.common.</code><code class="sig-name descname">default_preprocessor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">txt</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#default_preprocessor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.common.default_preprocessor" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bof.common.</span></code><code class="sig-name descname"><span class="pre">default_preprocessor</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#default_preprocessor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.common.default_preprocessor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Default string preprocessor: trim extra spaces and lower case from string <cite>txt</cite>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1131,7 +1131,7 @@ This allows to pre-allocate working memory.</p>
 
 <dl class="py function">
 <dt id="bof.common.make_random_bool_generator">
-<code class="sig-prename descclassname">bof.common.</code><code class="sig-name descname">make_random_bool_generator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">probability_true</span><span class="o">=</span><span class="default_value">0.5</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#make_random_bool_generator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.common.make_random_bool_generator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bof.common.</span></code><code class="sig-name descname"><span class="pre">make_random_bool_generator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">probability_true</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#make_random_bool_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.common.make_random_bool_generator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides a (possibly biased) random generator of booleans.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1155,7 +1155,7 @@ This allows to pre-allocate working memory.</p>
 
 <dl class="py function">
 <dt id="bof.common.set_seed">
-<code class="sig-prename descclassname">bof.common.</code><code class="sig-name descname">set_seed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">42</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#set_seed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bof.common.set_seed" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">bof.common.</span></code><code class="sig-name descname"><span class="pre">set_seed</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#set_seed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.common.set_seed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the seed of the numba random generator (which is distinct from the numpy random generator).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
