@@ -9,6 +9,7 @@ on:
 
 env:
     CIBW_SKIP: 'cp27-* cp35-* pp*'
+    CIBW_ARCHS_MACOS: 'x86_64 universal2 arm64'
 
 jobs:
   build_wheels:
@@ -28,7 +29,7 @@ jobs:
 
       - name: Install cibuildwheel
         run: |
-          python -m pip install cibuildwheel==1.7.2
+          python -m pip install cibuildwheel==1.10.0
       - name: Install Visual C++ for Python 2.7
         if: runner.os == 'Windows'
         run: |
