@@ -12,7 +12,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['dill', 'numba', 'numpy', 'scipy']
+requirements = ['dill', 'numba', 'numpy>=1.21.4', 'scipy']
 
 setup_requirements = ['pytest-runner', ]
 
