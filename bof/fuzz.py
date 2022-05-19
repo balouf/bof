@@ -1,9 +1,10 @@
 import heapq
+
 import numpy as np
 from numba import njit, prange
 
-from .feature_extraction import CountVectorizer
 from .common import MixInIO
+from .feature_extraction import CountVectorizer
 
 
 @njit(cache=True, parallel=True)
@@ -44,7 +45,7 @@ def jit_common_factors(queries_length, xind, xptr, choices_length, yind, yptr, m
 
 
 @njit(cache=True, parallel=True)
-def jit_jc(queries_factors, choices_factors, common_factors, length_impact):
+def jit_jc(queries_factors, choices_factors, common_factors, length_impact, threshold=0.):
     """
     Jitted function to compute a joint complexity between a corpus of queries and a corpus of choices.
 
@@ -58,17 +59,26 @@ def jit_jc(queries_factors, choices_factors, common_factors, length_impact):
         Matrix of the number of common unique factors between queries and choices.
     length_impact: :py:class:`float`
         Importance of the length difference between two texts when computing the scores.
+    threshold: :class:`float`
+        Don't compute JC is common factors is less than threshold X (# query factors)
 
     Returns
     -------
-
+    :class:`~numpy.ndarray`
+        Joint Complexity matrix
     """
     res = np.zeros((len(queries_factors), len(choices_factors)))
     for i in prange(len(queries_factors)):
+        query_factors = queries_factors[i]
         for j in range(len(choices_factors)):
-            mi, ma = sorted([queries_factors[i], choices_factors[j]])
-            renorm = 2 * (length_impact * ma + (1 - length_impact) * mi)
-            res[i, j] = 100 * common_factors[i, j] / (renorm - common_factors[i, j])
+            cf = common_factors[i, j]
+            choice_factors = choices_factors[j]
+            if cf > query_factors*threshold:
+                if query_factors < choice_factors:
+                    renorm = 2 * (length_impact * choice_factors + (1 - length_impact) * query_factors)
+                else:
+                    renorm = 2 * (length_impact * query_factors + (1 - length_impact) * choice_factors)
+                res[i, j] = 100 * cf / (renorm - cf)
     return res
 
 
@@ -148,9 +158,13 @@ def get_best_choices(choices, scores, limit):
         List of tuples containing the choices and their scores.
     """
     if limit is None:
-        return sorted(zip(choices, scores), key=lambda i: i[1], reverse=True)
+        sorted_top = np.argsort[-scores]
+        # return sorted(zip(choices, scores), key=lambda i: i[1], reverse=True)
     else:
-        return heapq.nlargest(limit, zip(choices, scores), key=lambda i: i[1])
+        unsorted_top = np.argpartition(scores, -limit)[-limit:]
+        sorted_top = unsorted_top[np.argsort(-scores[unsorted_top])]
+    return [(choices[i], scores[i]) for i in sorted_top]
+        # return heapq.nlargest(limit, zip(choices, scores), key=lambda i: i[1])
 
 
 def get_best_choice(choices, scores, score_cutoff):
@@ -208,6 +222,7 @@ class Process(MixInIO):
     choices_length: :py:class:`int`
         Number of choices
     """
+
     def __init__(self, n_range=5, preprocessor=None, length_impact=.5, allow_updates=True,
                  filename=None, path='.'):
         if filename is not None:
@@ -310,14 +325,16 @@ class Process(MixInIO):
         self.choices_matrix = self.choices_matrix.T.tocsr()
         self.choices_length = len(choices)
 
-    def transform(self, queries):
+    def transform(self, queries, threshold=0.0):
         """
         Compute the joint complexities of queries against choices,
 
         Parameters
         ----------
         queries: :py:class:`list` of :py:class:`str`
-        The list of queries.
+            The list of queries.
+        threshold: :class:`float`
+            Relative threshold below which joint complexity is not actually computed.
 
         Returns
         -------
@@ -372,9 +389,10 @@ class Process(MixInIO):
             for _ in range(extra_entries):
                 self.vectorizer.features_.popitem()
 
-        return jit_jc(queries_factors, self.choices_factors, common_factor_matrix, self.length_impact)
+        return jit_jc(queries_factors, self.choices_factors, common_factor_matrix,
+                      self.length_impact, threshold=threshold)
 
-    def extract(self, queries, choices=None, limit=5):
+    def extract(self, queries, choices=None, limit=5, score_cutoff=40.0):
         """
         Find the best matches amongst a list of choices.
 
@@ -386,6 +404,8 @@ class Process(MixInIO):
             Possible choices. If None, the previously used (or fitted) choices will be used.
         limit: :py:class:`int` or None
             Maximal number of results to give. If None, all choices will be returned (sorted).
+        score_cutoff: :py:class:`float`, optional
+            Minimal score that a result must achieve to be considered a match
 
         Returns
         -------
@@ -415,7 +435,7 @@ class Process(MixInIO):
             is_str = False
         if choices is not None:
             self.fit(choices)
-        jc_array = self.transform(queries)
+        jc_array = self.transform(queries, threshold=score_cutoff/100)
         if is_str:
             return get_best_choices(self.choices, jc_array[0, :], limit)
         else:
@@ -503,12 +523,13 @@ class Process(MixInIO):
         for i in range(n):
             if unprocessed[i]:
                 closes = [j for j in range(n) if jc_matrix[i, j] > threshold]
-                closest = closes[ txt_max( [contains_dup[i] for i in closes] )  ]
+                closest = closes[txt_max([contains_dup[i] for i in closes])]
                 if indexes[closest] is not None:
                     closest = indexes[closest]
                 for i in closes:
                     indexes[i] = closest
         return [contains_dup[i] for i in np.unique(indexes)]
+
 
 # Trigger jit compilation on import.
 def dry_run():
@@ -516,4 +537,6 @@ def dry_run():
     p.fit(["riri", "fifi", "rififi"])
     p.transform(["rir", "fido"])
     p.dedupe(["riri", "fifi", "rififi"])
+
+
 dry_run()
