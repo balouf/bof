@@ -233,7 +233,7 @@
 <span class="sd">        List of tuples containing the choices and their scores.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">limit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">sorted_top</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">[</span><span class="o">-</span><span class="n">scores</span><span class="p">]</span>
+        <span class="n">sorted_top</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">scores</span><span class="p">)</span>
         <span class="c1"># return sorted(zip(choices, scores), key=lambda i: i[1], reverse=True)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">unsorted_top</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argpartition</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="o">-</span><span class="n">limit</span><span class="p">)[</span><span class="o">-</span><span class="n">limit</span><span class="p">:]</span>
