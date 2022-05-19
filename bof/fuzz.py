@@ -422,8 +422,8 @@ class Process(MixInIO):
         >>> p.extract("new york jets", choices, limit=None) # doctest: +NORMALIZE_WHITESPACE
         [('New York Jets', 100.0),
          ('New York Giants', 46.835443037974684),
-         ('Dallas Cowboys', 0.0),
-         ('Atlanta Falcons', 0.0)]
+         ('Atlanta Falcons', 0.0),
+         ('Dallas Cowboys', 0.0)]
         >>> p.extract(["new york", "atlanta"], choices, limit=2) # doctest: +NORMALIZE_WHITESPACE
         [[('New York Jets', 56.60377358490566), ('New York Giants', 47.61904761904762)],
          [('Atlanta Falcons', 37.28813559322034), ('New York Giants', 7.594936708860759)]]
