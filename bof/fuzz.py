@@ -158,7 +158,7 @@ def get_best_choices(choices, scores, limit):
         List of tuples containing the choices and their scores.
     """
     if limit is None:
-        sorted_top = np.argsort[-scores]
+        sorted_top = np.argsort(-scores)
         # return sorted(zip(choices, scores), key=lambda i: i[1], reverse=True)
     else:
         unsorted_top = np.argpartition(scores, -limit)[-limit:]
