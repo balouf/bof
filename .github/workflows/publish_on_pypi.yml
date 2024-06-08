@@ -30,6 +30,8 @@ jobs:
 
       - name: Build and publish
         run: |
+          poetry install
+          poetry update
           source .venv/bin/activate
           poetry version ${{ steps.vars.outputs.tag }}
           poetry build
