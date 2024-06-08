@@ -222,19 +222,15 @@ class Process:
         Number of choices
     """
 
-    def __init__(self, n_range=5, preprocessor=None, length_impact=.5, allow_updates=True,
-                 filename=None, path='.'):
-        if filename is not None:
-            self.load(filename=filename, path=path)
-        else:
-            self.length_impact = length_impact
-            self.allow_updates = allow_updates
-            self.vectorizer = CountVectorizer(n_range=n_range, preprocessor=preprocessor)
+    def __init__(self, n_range=5, preprocessor=None, length_impact=.5, allow_updates=True):
+        self.length_impact = length_impact
+        self.allow_updates = allow_updates
+        self.vectorizer = CountVectorizer(n_range=n_range, preprocessor=preprocessor)
 
-            self.choices = None
-            self.choices_matrix = None
-            self.choices_factors = None
-            self.choices_length = None
+        self.choices = None
+        self.choices_matrix = None
+        self.choices_factors = None
+        self.choices_length = None
 
     def reset(self):
         """

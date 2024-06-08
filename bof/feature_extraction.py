@@ -110,15 +110,12 @@ class CountVectorizer:
     >>> vectorizer.features
     ['r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif']
     """
-    def __init__(self, n_range=5, preprocessor=None, filename=None, path='.'):
-        if filename is not None:
-            self.load(filename=filename, path=path)
-        else:
-            self.features_ = empty_features() # dict()
-            self.n_range = n_range
-            if preprocessor is None:
-                preprocessor = default_preprocessor
-            self.preprocessor = preprocessor
+    def __init__(self, n_range=5, preprocessor=None):
+        self.features_ = empty_features() # dict()
+        self.n_range = n_range
+        if preprocessor is None:
+            preprocessor = default_preprocessor
+        self.preprocessor = preprocessor
 
     @property
     def m(self):
