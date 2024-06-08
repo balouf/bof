@@ -5,7 +5,6 @@ description = "Bag of Factors allow you to analyze a corpus from its self_factor
 authors = ["Fabien Mathieu <loufab@gmail.com>"]
 license = "GNU General Public License v3"
 readme = "README.rst"
-build = 'build.py'
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
