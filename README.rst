@@ -7,11 +7,11 @@ Bag of Factors
         :target: https://pypi.python.org/pypi/bof
         :alt: PyPI Status
 
-.. image:: https://github.com/balouf/bof/workflows/build/badge.svg?branch=master
+.. image:: https://github.com/balouf/bof/workflows/build.yml/badge.svg?branch=master
         :target: https://github.com/balouf/bof/actions?query=workflow%3Abuild
         :alt: Build Status
 
-.. image:: https://github.com/balouf/bof/workflows/docs/badge.svg?branch=master
+.. image:: https://github.com/balouf/bof/workflows/docs.yml/badge.svg?branch=master
         :target: https://github.com/balouf/bof/actions?query=workflow%3Adocs
         :alt: Documentation Status
 
