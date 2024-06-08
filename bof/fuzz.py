@@ -288,7 +288,7 @@ class Process:
 
         Numbe of unique factors for each choice:
 
-        >>> p.choices_factors
+        >>> p.choices_factors.astype(int)
         array([ 7,  7, 14])
 
         The matrix that associates factors to choices:
@@ -311,7 +311,7 @@ class Process:
                [0, 0, 1],
                [0, 0, 1],
                [0, 0, 1],
-               [0, 0, 1]], dtype=int32)
+               [0, 0, 1]], dtype=uint32)
 
         The corresponding factors:
 
