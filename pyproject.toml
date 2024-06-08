@@ -14,10 +14,14 @@ numpy = "^1.26.4"
 numba = "^0.59.1"
 scipy = "^1.13.1"
 
-
 [tool.poetry.group.dev.dependencies]
 pytest-cov = "^5.0.0"
 tox = "^4.15.1"
+
+
+[tool.poetry.group.docs.dependencies]
+pydata-sphinx-theme = "^0.15.3"
+sphinx-mdinclude = "^0.6.1"
 
 [build-system]
 requires = ["poetry-core"]
