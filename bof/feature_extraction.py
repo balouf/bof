@@ -2,7 +2,7 @@
 # from bof.cython.count import fit_transform, fit, transform, sampling_fit
 from bof.numba import (jit_fit_transform, jit_fit, jit_transform, jit_sampling_fit,
                        empty_features, number_of_factors, default_preprocessor)
-from scipy.sparse import coo_matrix
+from scipy.sparse import coo_matrix, csr_matrix
 import numpy as np
 
 
@@ -103,7 +103,7 @@ class CountVectorizer:
     >>> vectorizer.fit_transform(corpus=corpus).toarray() # doctest: +NORMALIZE_WHITESPACE
     array([[2, 2, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0],
            [0, 0, 0, 2, 0, 0, 2, 2, 1, 1, 1, 0],
-           [1, 1, 0, 3, 0, 0, 2, 2, 1, 2, 2, 1]], dtype=uint32)
+           [1, 1, 0, 3, 0, 0, 2, 2, 1, 2, 2, 1]])
 
     List the factors in the corpus:
 
@@ -182,7 +182,7 @@ class CountVectorizer:
         >>> vectorizer.fit_transform(["riri", "fifi", "rififi"]).toarray() # doctest: +NORMALIZE_WHITESPACE
         array([[2, 2, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0],
                [0, 0, 0, 2, 0, 0, 2, 2, 1, 1, 1, 0],
-               [1, 1, 0, 3, 0, 0, 2, 2, 1, 2, 2, 1]], dtype=uint32)
+               [1, 1, 0, 3, 0, 0, 2, 2, 1, 2, 2, 1]])
 
         List of factors (of size at most 3):
 
@@ -193,7 +193,7 @@ class CountVectorizer:
 
         >>> vectorizer.fit_transform(["fifi", "rififi"]).toarray() # doctest: +NORMALIZE_WHITESPACE
         array([[2, 2, 1, 2, 1, 1, 0, 0, 0],
-               [2, 2, 1, 3, 2, 2, 1, 1, 1]], dtype=uint32)
+               [2, 2, 1, 3, 2, 2, 1, 1, 1]])
 
         Notice the implicit reset, as only factors from "fifi" and "rififi" are present:
 
@@ -206,7 +206,7 @@ class CountVectorizer:
         With `reset` set to `False`, we can add another list without discarding pre-existing factors.
 
         >>> vectorizer.fit_transform(["riri"], reset=False).toarray() # doctest: +NORMALIZE_WHITESPACE
-        array([[0, 0, 0, 2, 0, 0, 2, 2, 0, 1, 1, 1]], dtype=uint32)
+        array([[0, 0, 0, 2, 0, 0, 2, 2, 0, 1, 1, 1]])
 
         Notice the presence of empty columns, which corresponds to pre-existing factors that do not exist in "riri".
 
@@ -224,8 +224,7 @@ class CountVectorizer:
         >>> vectorizer.fit_transform(["riri", "fifi", "rififi"]).toarray() # doctest: +NORMALIZE_WHITESPACE
         array([[2, 2, 1, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                [0, 0, 0, 0, 2, 0, 0, 2, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-               [1, 1, 0, 0, 3, 0, 0, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1]],
-               dtype=uint32)
+               [1, 1, 0, 0, 3, 0, 0, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1]])
 
 
         """
@@ -238,8 +237,9 @@ class CountVectorizer:
                                                                            preprocessor=self.preprocessor,
                                                                            features=self.features_,
                                                                            n_range=self.n_range)
-        return coo_matrix((np.ones(tot_size, dtype=np.uintc), (document_indices, feature_indices)),
-                       shape=(len(corpus), m)).tocsr()
+        return csr_matrix(coo_matrix((np.ones(tot_size, dtype=np.uintc),
+                                      (document_indices, feature_indices)),
+                       shape=(len(corpus), m)), dtype=int)
 
     def fit(self, corpus, reset=True):
         """
@@ -319,7 +319,7 @@ class CountVectorizer:
         >>> vectorizer.fit_transform(["riri", "fifi", "rififi"]).toarray() # doctest: +NORMALIZE_WHITESPACE
         array([[2, 2, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0],
                [0, 0, 0, 2, 0, 0, 2, 2, 1, 1, 1, 0],
-               [1, 1, 0, 3, 0, 0, 2, 2, 1, 2, 2, 1]], dtype=uint32)
+               [1, 1, 0, 3, 0, 0, 2, 2, 1, 2, 2, 1]])
 
         The factors are:
 
@@ -330,7 +330,7 @@ class CountVectorizer:
 
         >>> vectorizer.transform(["fir", "rfi"]).toarray() # doctest: +NORMALIZE_WHITESPACE
         array([[1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0],
-               [1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0]], dtype=uint32)
+               [1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0]])
 
 
         The features have not been updated. For example, the only factors reported for "rfi" are "r", "i", "f", and
@@ -340,8 +340,9 @@ class CountVectorizer:
 
         tot_size, document_indices, feature_indices, m = jit_transform(corpus=corpus, preprocessor=self.preprocessor,
                                                                        features=self.features_, n_range=self.n_range)
-        return coo_matrix((np.ones(tot_size, dtype=np.uintc), (document_indices, feature_indices)),
-                          shape=(len(corpus), m)).tocsr()
+        return csr_matrix(coo_matrix((np.ones(tot_size, dtype=np.uintc),
+                           (document_indices, feature_indices)),
+                          shape=(len(corpus), m)), dtype=int)
 
     def sampling_fit(self, corpus, reset=True, sampling_rate=.5, seed=None):
         """

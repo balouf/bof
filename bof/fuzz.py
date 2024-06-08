@@ -311,7 +311,7 @@ class Process:
                [0, 0, 1],
                [0, 0, 1],
                [0, 0, 1],
-               [0, 0, 1]], dtype=uint32)
+               [0, 0, 1]], dtype=int32)
 
         The corresponding factors:
 
