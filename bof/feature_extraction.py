@@ -1,35 +1,39 @@
-from .common import default_preprocessor, MixInIO
-from bof.cython.count import fit_transform, fit, transform, sampling_fit
+# from bof.common import MixInIO
+# from bof.cython.count import fit_transform, fit, transform, sampling_fit
+from bof.numba import (jit_fit_transform, jit_fit, jit_transform, jit_sampling_fit,
+                       empty_features, number_of_factors, default_preprocessor)
+from scipy.sparse import coo_matrix
+import numpy as np
 
 
-def number_of_factors(length, n_range=None):
-    """
-    Return the number of factors (with multiplicity) of size at most `n_range` that exist in a text of length `length`.
-    This allows to pre-allocate working memory.
-
-    Parameters
-    ----------
-    length: :py:class:`int`
-        Length of the text.
-    n_range: :py:class:`int` or None
-        Maximal factor size. If `None`, all factors are considered.
-
-    Returns
-    -------
-    int
-        The number of factors (with multiplicity).
-
-    Examples
-    --------
-    >>> l = len("riri")
-    >>> number_of_factors(l)
-    10
-    >>> number_of_factors(l, n_range=2)
-    7
-    """
-    if n_range is None or n_range > length:
-        return length * (length + 1) // 2
-    return n_range * (length - n_range) + n_range * (n_range + 1) // 2
+# def number_of_factors(length, n_range=None):
+#     """
+#     Return the number of factors (with multiplicity) of size at most `n_range` that exist in a text of length `length`.
+#     This allows to pre-allocate working memory.
+#
+#     Parameters
+#     ----------
+#     length: :py:class:`int`
+#         Length of the text.
+#     n_range: :py:class:`int` or None
+#         Maximal factor size. If `None`, all factors are considered.
+#
+#     Returns
+#     -------
+#     int
+#         The number of factors (with multiplicity).
+#
+#     Examples
+#     --------
+#     >>> l = len("riri")
+#     >>> number_of_factors(l)
+#     10
+#     >>> number_of_factors(l, n_range=2)
+#     7
+#     """
+#     if n_range is None or n_range > length:
+#         return length * (length + 1) // 2
+#     return n_range * (length - n_range) + n_range * (n_range + 1) // 2
 
 
 def build_end(n_range=None):
@@ -66,7 +70,7 @@ def build_end(n_range=None):
         return lambda s, l: l
 
 
-class CountVectorizer(MixInIO):
+class CountVectorizer:
     """
     Counts the factors of a list of document.
 
@@ -110,7 +114,7 @@ class CountVectorizer(MixInIO):
         if filename is not None:
             self.load(filename=filename, path=path)
         else:
-            self.features_ = dict()
+            self.features_ = empty_features() # dict()
             self.n_range = n_range
             if preprocessor is None:
                 preprocessor = default_preprocessor
@@ -131,8 +135,8 @@ class CountVectorizer(MixInIO):
     @property
     def features(self):
         """
-        Get the list of features (internally, features are stored as a :py:class:`dict` that associates factors to
-        indexes).
+        Get the list of features (internally, features are stored as a Numba Typed :py:class:`dict`
+        that associates factors to indexes).
 
         Returns
         -------
@@ -226,11 +230,16 @@ class CountVectorizer(MixInIO):
 
         """
         if reset:
-            self.features_ = dict()
+            self.features_ = empty_features() # dict()
 
         self.no_none_range()
 
-        return fit_transform(corpus, self.features_, self.preprocessor, self.n_range)
+        tot_size, document_indices, feature_indices, m = jit_fit_transform(corpus=corpus,
+                                                                           preprocessor=self.preprocessor,
+                                                                           features=self.features_,
+                                                                           n_range=self.n_range)
+        return coo_matrix((np.ones(tot_size, dtype=np.uintc), (document_indices, feature_indices)),
+                       shape=(len(corpus), m)).tocsr()
 
     def fit(self, corpus, reset=True):
         """
@@ -279,11 +288,12 @@ class CountVectorizer(MixInIO):
         ['r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif']
         """
         if reset:
-            self.features_ = dict()
+            self.features_ = empty_features() # dict()
 
         self.no_none_range()
 
-        fit(corpus, self.features_, self.preprocessor, self.n_range)
+        jit_fit(corpus=corpus, preprocessor=self.preprocessor,
+                features=self.features_, n_range=self.n_range)
 
     def transform(self, corpus):
         """
@@ -328,9 +338,12 @@ class CountVectorizer(MixInIO):
         """
         self.no_none_range()
 
-        return transform(corpus, self.features_, self.preprocessor, self.n_range)
+        tot_size, document_indices, feature_indices, m = jit_transform(corpus=corpus, preprocessor=self.preprocessor,
+                                                                       features=self.features_, n_range=self.n_range)
+        return coo_matrix((np.ones(tot_size, dtype=np.uintc), (document_indices, feature_indices)),
+                          shape=(len(corpus), m)).tocsr()
 
-    def sampling_fit(self, corpus, reset=True, sampling_rate=.5, seed=42):
+    def sampling_fit(self, corpus, reset=True, sampling_rate=.5, seed=None):
         """
         Build a partial factor tree where only a random subset of factors are selected. Note that there is no
         `sampling_fit_transform` method, as mutualizing the processes would introduce incoherences in the factor
@@ -344,7 +357,7 @@ class CountVectorizer(MixInIO):
             Clears FactorTree. If False, FactorTree will be updated instead.
         sampling_rate: :py:class:`float`
             Probability to explore factors starting from one given position in the text.
-        seed: :py:class:`int`
+        seed: :py:class:`int`, optional
             Seed of the random generator.
 
         Returns
@@ -363,31 +376,33 @@ class CountVectorizer(MixInIO):
 
         Now we use a sampling fit instead. Only a subset of the factors are selected.
 
-        >>> vectorizer.sampling_fit(["riri", "fifi", "rififi"])
+        >>> vectorizer.sampling_fit(["riri", "fifi", "rififi"], seed=42)
         >>> vectorizer.features
-        ['i', 'ir', 'iri', 'f', 'fi', 'fif', 'fifi', 'if', 'ifi', 'r', 'ri', 'rif', 'rifi', 'rifif']
+        ['r', 'ri', 'rir', 'riri', 'f', 'fi', 'fif', 'fifi', 'i', 'if', 'ifi']
 
         We random fit another corpus. We reset the seed to reproduce the example above.
 
-        >>> vectorizer.sampling_fit(["riri", "fifi"])
+        >>> vectorizer.sampling_fit(["riri", "fifi"], sampling_rate=.2)
 
         The factors have been implicitly reset.
 
         >>> vectorizer.features
-        ['i', 'ir', 'iri', 'f', 'fi', 'fif', 'fifi', 'if', 'ifi']
+        ['r', 'ri', 'rir', 'riri', 'i', 'ir', 'iri']
 
         We add another corpus to the fit by setting `reset` to `False`:
 
-        >>> vectorizer.sampling_fit(["rififi"], reset=False)
+        >>> vectorizer.sampling_fit(["rififi"], reset=False, sampling_rate=.2)
 
         The list of features has been updated:
 
         >>> vectorizer.features
-        ['i', 'ir', 'iri', 'f', 'fi', 'fif', 'fifi', 'if', 'ifi', 'ifif', 'ififi']
+        ['r', 'ri', 'rir', 'riri', 'i', 'ir', 'iri', 'f', 'fi']
         """
         if reset:
-            self.features_ = dict()
+            self.features_ = empty_features() # dict()
 
         self.no_none_range()
 
-        sampling_fit(corpus, self.features_, self.preprocessor, self.n_range, sampling_rate, seed)
+        jit_sampling_fit(corpus=corpus, preprocessor=self.preprocessor,
+                         features=self.features_, n_range=self.n_range,
+                         rate=sampling_rate, seed=seed)

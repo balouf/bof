@@ -1,2 +1,120 @@
+[tool.poetry]
+name = "bof"
+version = "0.3.5"
+description = "Bag of Factors allow you to analyze a corpus from its self_factors."
+authors = ["Fabien Mathieu <loufab@gmail.com>"]
+license = "GNU General Public License v3"
+readme = "README.rst"
+build = 'build.py'
+
+[tool.poetry.dependencies]
+python = ">=3.9,<4.0"
+dill = "^0.3.8"
+numpy = "^1.26.4"
+numba = "^0.59.1"
+scipy = "^1.13.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest-cov = "^5.0.0"
+tox = "^4.15.1"
+
 [build-system]
-requires = ["setuptools", "wheel", "Cython", "numpy"]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+target-version = ['py37']
+preview = true
+
+[tool.mypy]
+files = ["alcics"]
+disallow_untyped_defs = "False"
+disallow_any_unimported = "True"
+no_implicit_optional = "True"
+check_untyped_defs = "True"
+warn_return_any = "True"
+warn_unused_ignores = "True"
+show_error_codes = "True"
+
+[tool.ruff]
+target-version = "py37"
+line-length = 120
+fix = true
+select = [
+    # flake8-2020
+    "YTT",
+    # flake8-bandit
+    "S",
+    # flake8-bugbear
+    "B",
+    # flake8-builtins
+    "A",
+    # flake8-comprehensions
+    "C4",
+    # flake8-debugger
+    "T10",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # mccabe
+    "C90",
+    # pycodestyle
+    "E", "W",
+    # pyflakes
+    "F",
+    # pygrep-hooks
+    "PGH",
+    # pyupgrade
+    "UP",
+    # ruff
+    "RUF",
+    # tryceratops
+    "TRY",
+]
+ignore = [
+    # LineTooLong
+    "E501",
+    # DoNotAssignLambda
+    "E731",
+]
+
+[tool.coverage.report]
+skip_empty = true
+
+[tool.coverage.run]
+branch = true
+source = ["bof"]
+
+[tool.coverage.html]
+directory = "cov"
+
+[tool.ruff.per-file-ignores]
+"tests/*" = ["S101"]
+
+[tool.pytest.ini_options]
+addopts = "--doctest-modules --cov --cov-config=pyproject.toml --cov-report xml --cov-report html --showlocals --capture=no --exitfirst --failed-first"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+skipsdist = true
+
+[gh-actions]
+python =
+    3.9: py39
+    3.10: py310
+    3.11: py311
+    3.12: py312
+
+[testenv]
+passenv = PYTHON_VERSION
+allowlist_externals = poetry
+commands =
+    poetry install -v
+    pytest
+"""
+
+[tool.poetry_bumpversion.file."bof/__init__.py"]

@@ -3,8 +3,7 @@ import heapq
 import numpy as np
 from numba import njit, prange
 
-from .common import MixInIO
-from .feature_extraction import CountVectorizer
+from bof.feature_extraction import CountVectorizer
 
 
 @njit(cache=True, parallel=True)
@@ -190,7 +189,7 @@ def get_best_choice(choices, scores, score_cutoff):
         return choices[index], scores[index]
 
 
-class Process(MixInIO):
+class Process:
     """
     The process class is used to compute the closest choices from a list of queries base on joint complexity.
 
@@ -252,7 +251,7 @@ class Process(MixInIO):
         >>> p.choices
         ['riri', 'fifi', 'rififi']
         >>> p.choices_factors
-        array([ 7,  7, 14], dtype=int32)
+        array([ 7,  7, 14])
         >>> p.reset()
         >>> p.choices is None
         True
@@ -290,7 +289,7 @@ class Process(MixInIO):
         Numbe of unique factors for each choice:
 
         >>> p.choices_factors
-        array([ 7,  7, 14], dtype=int32)
+        array([ 7,  7, 14])
 
         The matrix that associates factors to choices:
 
