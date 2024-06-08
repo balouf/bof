@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bof"
-version = "0.3.5"
+version = "0.4.0"
 description = "Bag of Factors allow you to analyze a corpus from its self_factors."
 authors = ["Fabien Mathieu <loufab@gmail.com>"]
 license = "GNU General Public License v3"
