@@ -250,7 +250,7 @@ class Process:
         >>> p.fit(["riri", "fifi", "rififi"])
         >>> p.choices
         ['riri', 'fifi', 'rififi']
-        >>> p.choices_factors
+        >>> p.choices_factors.astype(int)
         array([ 7,  7, 14])
         >>> p.reset()
         >>> p.choices is None
