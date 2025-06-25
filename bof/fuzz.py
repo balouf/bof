@@ -1,5 +1,3 @@
-import heapq
-
 import numpy as np
 from numba import njit, prange
 
@@ -36,15 +34,19 @@ def jit_common_factors(queries_length, xind, xptr, choices_length, yind, yptr, m
     """
     res = np.zeros((queries_length, choices_length), dtype=np.int32)
     for i in prange(queries_length):
-        for k in xind[xptr[i]:xptr[i + 1]]:
-            if k < m:  # NB with sorted_indices, could be a break, but no guarantee enforced
-                for j in yind[yptr[k]:yptr[k + 1]]:
+        for k in xind[xptr[i] : xptr[i + 1]]:
+            if (
+                k < m
+            ):  # NB with sorted_indices, could be a break, but no guarantee enforced
+                for j in yind[yptr[k] : yptr[k + 1]]:
                     res[i, j] += 1
     return res
 
 
 @njit(cache=True, parallel=True)
-def jit_jc(queries_factors, choices_factors, common_factors, length_impact, threshold=0.):
+def jit_jc(
+    queries_factors, choices_factors, common_factors, length_impact, threshold=0.0
+):
     """
     Jitted function to compute a joint complexity between a corpus of queries and a corpus of choices.
 
@@ -72,11 +74,17 @@ def jit_jc(queries_factors, choices_factors, common_factors, length_impact, thre
         for j in range(len(choices_factors)):
             cf = common_factors[i, j]
             choice_factors = choices_factors[j]
-            if cf > query_factors*threshold:
+            if cf > query_factors * threshold:
                 if query_factors < choice_factors:
-                    renorm = 2 * (length_impact * choice_factors + (1 - length_impact) * query_factors)
+                    renorm = 2 * (
+                        length_impact * choice_factors
+                        + (1 - length_impact) * query_factors
+                    )
                 else:
-                    renorm = 2 * (length_impact * query_factors + (1 - length_impact) * choice_factors)
+                    renorm = 2 * (
+                        length_impact * query_factors
+                        + (1 - length_impact) * choice_factors
+                    )
                 res[i, j] = 100 * cf / (renorm - cf)
     return res
 
@@ -109,8 +117,8 @@ def jit_square_factors(xind, xptr, yind, yptr, n, length_impact):
     self_factors = xptr[1:] - xptr[:-1]
     common_factors = np.zeros((n, n), dtype=np.int32)
     for i in prange(n):
-        for k in xind[xptr[i]:xptr[i + 1]]:
-            for j in yind[yptr[k]:yptr[k + 1]]:
+        for k in xind[xptr[i] : xptr[i + 1]]:
+            for j in yind[yptr[k] : yptr[k + 1]]:
                 common_factors[i, j] += 1
     return jit_jc(self_factors, self_factors, common_factors, length_impact)
 
@@ -163,7 +171,7 @@ def get_best_choices(choices, scores, limit):
         unsorted_top = np.argpartition(scores, -limit)[-limit:]
         sorted_top = unsorted_top[np.argsort(-scores[unsorted_top])]
     return [(choices[i], scores[i]) for i in sorted_top]
-        # return heapq.nlargest(limit, zip(choices, scores), key=lambda i: i[1])
+    # return heapq.nlargest(limit, zip(choices, scores), key=lambda i: i[1])
 
 
 def get_best_choice(choices, scores, score_cutoff):
@@ -222,7 +230,9 @@ class Process:
         Number of choices
     """
 
-    def __init__(self, n_range=5, preprocessor=None, length_impact=.5, allow_updates=True):
+    def __init__(
+        self, n_range=5, preprocessor=None, length_impact=0.5, allow_updates=True
+    ):
         self.length_impact = length_impact
         self.allow_updates = allow_updates
         self.vectorizer = CountVectorizer(n_range=n_range, preprocessor=preprocessor)
@@ -316,7 +326,9 @@ class Process:
         """
         self.choices = choices
         self.choices_matrix = self.vectorizer.fit_transform(choices)
-        self.choices_factors = self.choices_matrix.indptr[1:] - self.choices_matrix.indptr[0:-1]
+        self.choices_factors = (
+            self.choices_matrix.indptr[1:] - self.choices_matrix.indptr[0:-1]
+        )
         self.choices_matrix = self.choices_matrix.T.tocsr()
         self.choices_length = len(choices)
 
@@ -375,17 +387,27 @@ class Process:
         queries_matrix = self.vectorizer.fit_transform(queries, reset=False)
         queries_factors = queries_matrix.indptr[1:] - queries_matrix.indptr[0:-1]
         queries_length = len(queries)
-        common_factor_matrix = jit_common_factors(queries_length, queries_matrix.indices, queries_matrix.indptr,
-                                                  self.choices_length, self.choices_matrix.indices,
-                                                  self.choices_matrix.indptr,
-                                                  m)
+        common_factor_matrix = jit_common_factors(
+            queries_length,
+            queries_matrix.indices,
+            queries_matrix.indptr,
+            self.choices_length,
+            self.choices_matrix.indices,
+            self.choices_matrix.indptr,
+            m,
+        )
         if not self.allow_updates:
             extra_entries = self.vectorizer.m - m
             for _ in range(extra_entries):
                 self.vectorizer.features_.popitem()
 
-        return jit_jc(queries_factors, self.choices_factors, common_factor_matrix,
-                      self.length_impact, threshold=threshold)
+        return jit_jc(
+            queries_factors,
+            self.choices_factors,
+            common_factor_matrix,
+            self.length_impact,
+            threshold=threshold,
+        )
 
     def extract(self, queries, choices=None, limit=5, score_cutoff=40.0):
         """
@@ -416,12 +438,12 @@ class Process:
         [('New York Jets', 100.0), ('New York Giants', 46.835443037974684)]
         >>> p.extract("new york jets", choices, limit=None) # doctest: +NORMALIZE_WHITESPACE
         [('New York Jets', 100.0),
-         ('New York Giants', 46.835443037974684),
-         ('Atlanta Falcons', 0.0),
-         ('Dallas Cowboys', 0.0)]
+        ('New York Giants', 46.835443037974684),
+        ('Atlanta Falcons', 0.0),
+        ('Dallas Cowboys', 0.0)]
         >>> p.extract(["new york", "atlanta"], choices, limit=2, score_cutoff=0.0) # doctest: +NORMALIZE_WHITESPACE
         [[('New York Jets', 56.60377358490566), ('New York Giants', 47.61904761904762)],
-         [('Atlanta Falcons', 37.28813559322034), ('New York Giants', 7.594936708860759)]]
+        [('Atlanta Falcons', 37.28813559322034), ('New York Giants', 7.594936708860759)]]
         """
         if isinstance(queries, str):
             is_str = True
@@ -430,11 +452,14 @@ class Process:
             is_str = False
         if choices is not None:
             self.fit(choices)
-        jc_array = self.transform(queries, threshold=score_cutoff/100)
+        jc_array = self.transform(queries, threshold=score_cutoff / 100)
         if is_str:
             return get_best_choices(self.choices, jc_array[0, :], limit)
         else:
-            return [get_best_choices(self.choices, jc_array[i, :], limit) for i in range(len(queries))]
+            return [
+                get_best_choices(self.choices, jc_array[i, :], limit)
+                for i in range(len(queries))
+            ]
 
     def extractOne(self, queries, choices=None, score_cutoff=40.0):
         """
@@ -477,7 +502,10 @@ class Process:
         if is_str:
             return get_best_choice(self.choices, jc_array[0, :], score_cutoff)
         else:
-            return [get_best_choice(self.choices, jc_array[i, :], score_cutoff) for i in range(len(queries))]
+            return [
+                get_best_choice(self.choices, jc_array[i, :], score_cutoff)
+                for i in range(len(queries))
+            ]
 
     def dedupe(self, contains_dup, threshold=60.0):
         """
@@ -513,8 +541,9 @@ class Process:
         indexes = [None] * n
         x = self.vectorizer.fit_transform(contains_dup)
         y = x.T.tocsr()
-        res = []
-        jc_matrix = jit_square_factors(x.indices, x.indptr, y.indices, y.indptr, n, self.length_impact)
+        jc_matrix = jit_square_factors(
+            x.indices, x.indptr, y.indices, y.indptr, n, self.length_impact
+        )
         for i in range(n):
             if unprocessed[i]:
                 closes = [j for j in range(n) if jc_matrix[i, j] > threshold]

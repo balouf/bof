@@ -1,41 +1,23 @@
-==============
-Bag of Factors
-==============
+# Bag of Factors
 
-
-.. image:: https://img.shields.io/pypi/v/bof.svg
-        :target: https://pypi.python.org/pypi/bof
-        :alt: PyPI Status
-
-.. image:: https://github.com/balouf/bof/actions/workflows/build.yml/badge.svg?branch=master
-        :target: https://github.com/balouf/bof/actions?query=workflow%3Abuild
-        :alt: Build Status
-
-.. image:: https://github.com/balouf/bof/actions/workflows/docs.yml/badge.svg?branch=master
-        :target: https://github.com/balouf/bof/actions?query=workflow%3Adocs
-        :alt: Documentation Status
-
-
-.. image:: https://codecov.io/gh/balouf/bof/branch/master/graphs/badge.svg
-        :target: https://codecov.io/gh/balouf/bof/branch/master/graphs
-        :alt: Code Coverage
-
+[![PyPI Status](https://img.shields.io/pypi/v/bof.svg)](https://pypi.python.org/pypi/bof)
+[![Build Status](https://github.com/balouf/bof/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/balouf/bof/actions?query=workflow%3Abuild)
+[![Documentation Status](https://github.com/balouf/bof/actions/workflows/docs.yml/badge.svg?branch=master)](https://github.com/balouf/bof/actions?query=workflow%3Adocs)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Code Coverage](https://codecov.io/gh/balouf/bof/branch/master/graphs/badge.svg)](https://codecov.io/gh/balouf/bof/tree/main)
 
 
 Bag of Factors allow you to analyze a corpus from its factors.
 
 
-* Free software: GNU General Public License v3
+* Free software: MIT
 * Documentation: https://balouf.github.io/bof/.
 
 
---------
-Features
---------
+## Features
 
 
-Feature Extraction
--------------------
+### Feature Extraction
 
 The `feature_extraction` module mimicks the module https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text
 with a focus on character-based extraction.
@@ -52,8 +34,7 @@ It is in fact very similar to sklearn's `CountVectorizer` using `char` or
 `char_wb` analyzer option from that module.
 
 
-Fuzz
---------
+### Fuzz
 
 The `fuzz` module mimicks the fuzzywuzzy-like packages like
 
@@ -70,17 +51,12 @@ slightly change to enable new features:
 The main `fuzz` entry point is the `Process` class.
 
 
-
-----------------
-Getting Started
-----------------
+## Getting Started
 
 Look at examples from the reference_ section.
 
 
--------
-Credits
--------
+## Credits
 
 This package was created with Cookiecutter_ and the `francois-durand/package_helper_2`_ project template.
 

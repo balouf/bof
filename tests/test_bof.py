@@ -5,9 +5,6 @@
 import pytest
 
 
-from bof import feature_extraction, fuzz
-
-
 @pytest.fixture
 def response():
     """Sample pytest fixture.

@@ -1,5 +1,4 @@
 from numba import njit
-from scipy.sparse import coo_matrix
 import numpy as np
 
 
@@ -29,7 +28,7 @@ def number_of_factors(length, n_range=0):
     >>> number_of_factors(l, n_range=2)
     7
     """
-    if n_range == 0  or n_range > length:
+    if n_range == 0 or n_range > length:
         return length * (length + 1) // 2
     return n_range * (length - n_range) + n_range * (n_range + 1) // 2
 
@@ -59,12 +58,12 @@ def default_preprocessor(txt):
 
 @njit(cache=True)
 def empty_features():
-    return {'a': 1 for _ in range(0)}
+    return {"a": 1 for _ in range(0)}
 
 
 @njit(cache=True)
 def jit_fit_transform(corpus, preprocessor, features, n_range):
-    ptr=0
+    ptr = 0
     m = len(features)
     tot_size = 0
     for txt in corpus:
@@ -76,9 +75,9 @@ def jit_fit_transform(corpus, preprocessor, features, n_range):
         txt = preprocessor(txt)
         length = len(txt)
         for start in range(length):
-            end = min(start+n_range, length) if n_range>0 else length
+            end = min(start + n_range, length) if n_range > 0 else length
             sub_text = txt[start:end]
-            for current in range(1, end-start+1):
+            for current in range(1, end - start + 1):
                 factor = sub_text[:current]
                 if factor in features:
                     j = features[factor]
@@ -94,14 +93,14 @@ def jit_fit_transform(corpus, preprocessor, features, n_range):
 
 @njit(cache=True)
 def jit_fit(corpus, preprocessor, features, n_range):
-    m=len(features)
+    m = len(features)
     for txt in corpus:
         txt = preprocessor(txt)
         length = len(txt)
         for start in range(length):
-            end = min(start+n_range, length) if n_range>0 else length
+            end = min(start + n_range, length) if n_range > 0 else length
             sub_text = txt[start:end]
-            for current in range(1, end-start+1):
+            for current in range(1, end - start + 1):
                 factor = sub_text[:current]
                 if factor not in features:
                     features[factor] = m
@@ -112,15 +111,15 @@ def jit_fit(corpus, preprocessor, features, n_range):
 def jit_sampling_fit(corpus, preprocessor, features, n_range, rate, seed=None):
     if seed is not None:
         np.random.seed(seed)
-    m=len(features)
+    m = len(features)
     for txt in corpus:
         txt = preprocessor(txt)
         length = len(txt)
         for start in range(length):
             if np.random.rand() < rate:
-                end = min(start+n_range, length) if n_range>0 else length
+                end = min(start + n_range, length) if n_range > 0 else length
                 sub_text = txt[start:end]
-                for current in range(1, end-start+1):
+                for current in range(1, end - start + 1):
                     factor = sub_text[:current]
                     if factor not in features:
                         features[factor] = m

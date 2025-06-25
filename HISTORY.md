@@ -1,5 +1,11 @@
 # History
 
+## 0.4.1 (2025-06-25): Maintenance
+
+* Dependencies updated.
+* Switched management to UV and documentation to Myst's MD.
+* Ruff'd
+
 ## 0.4 (2021-04-08): Back to Numba
 
 * Cython is too difficult to maintain and Numba dict management is relatively OK since last time. Time to switch!

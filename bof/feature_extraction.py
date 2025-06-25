@@ -1,7 +1,13 @@
 # from bof.common import MixInIO
 # from bof.cython.count import fit_transform, fit, transform, sampling_fit
-from bof.numba import (jit_fit_transform, jit_fit, jit_transform, jit_sampling_fit,
-                       empty_features, number_of_factors, default_preprocessor)
+from bof.numba import (
+    jit_fit_transform,
+    jit_fit,
+    jit_transform,
+    jit_sampling_fit,
+    empty_features,
+    default_preprocessor,
+)
 from scipy.sparse import coo_matrix, csr_matrix
 import numpy as np
 
@@ -38,7 +44,7 @@ import numpy as np
 
 def build_end(n_range=None):
     """
-    Return a function of a starting position `s` and a text length `l` that tells the end of scanning text from `s`.
+    Return a function of a starting position `s` and a text length `tl` that tells the end of scanning text from `s`.
     It avoids to test the value of n_range all the time when doing factor extraction.
 
     Parameters
@@ -65,9 +71,9 @@ def build_end(n_range=None):
 
     """
     if n_range:
-        return lambda s, l: min(s + n_range, l)
+        return lambda s, tl: min(s + n_range, tl)
     else:
-        return lambda s, l: l
+        return lambda s, tl: tl
 
 
 class CountVectorizer:
@@ -110,8 +116,9 @@ class CountVectorizer:
     >>> vectorizer.features
     ['r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif']
     """
+
     def __init__(self, n_range=5, preprocessor=None):
-        self.features_ = empty_features() # dict()
+        self.features_ = empty_features()  # dict()
         self.n_range = n_range
         if preprocessor is None:
             preprocessor = default_preprocessor
@@ -226,17 +233,26 @@ class CountVectorizer:
 
         """
         if reset:
-            self.features_ = empty_features() # dict()
+            self.features_ = empty_features()  # dict()
 
         self.no_none_range()
 
-        tot_size, document_indices, feature_indices, m = jit_fit_transform(corpus=corpus,
-                                                                           preprocessor=self.preprocessor,
-                                                                           features=self.features_,
-                                                                           n_range=self.n_range)
-        return csr_matrix(coo_matrix((np.ones(tot_size, dtype=np.uintc),
-                                      (document_indices, feature_indices)),
-                       shape=(len(corpus), m)), dtype=np.uint32)
+        tot_size, document_indices, feature_indices, m = jit_fit_transform(
+            corpus=corpus,
+            preprocessor=self.preprocessor,
+            features=self.features_,
+            n_range=self.n_range,
+        )
+        return csr_matrix(
+            coo_matrix(
+                (
+                    np.ones(tot_size, dtype=np.uintc),
+                    (document_indices, feature_indices),
+                ),
+                shape=(len(corpus), m),
+            ),
+            dtype=np.uint32,
+        )
 
     def fit(self, corpus, reset=True):
         """
@@ -285,12 +301,16 @@ class CountVectorizer:
         ['r', 'ri', 'rir', 'i', 'ir', 'iri', 'f', 'fi', 'fif', 'if', 'ifi', 'rif']
         """
         if reset:
-            self.features_ = empty_features() # dict()
+            self.features_ = empty_features()  # dict()
 
         self.no_none_range()
 
-        jit_fit(corpus=corpus, preprocessor=self.preprocessor,
-                features=self.features_, n_range=self.n_range)
+        jit_fit(
+            corpus=corpus,
+            preprocessor=self.preprocessor,
+            features=self.features_,
+            n_range=self.n_range,
+        )
 
     def transform(self, corpus):
         """
@@ -335,13 +355,24 @@ class CountVectorizer:
         """
         self.no_none_range()
 
-        tot_size, document_indices, feature_indices, m = jit_transform(corpus=corpus, preprocessor=self.preprocessor,
-                                                                       features=self.features_, n_range=self.n_range)
-        return csr_matrix(coo_matrix((np.ones(tot_size, dtype=np.uintc),
-                           (document_indices, feature_indices)),
-                          shape=(len(corpus), m)), dtype=np.uint32)
+        tot_size, document_indices, feature_indices, m = jit_transform(
+            corpus=corpus,
+            preprocessor=self.preprocessor,
+            features=self.features_,
+            n_range=self.n_range,
+        )
+        return csr_matrix(
+            coo_matrix(
+                (
+                    np.ones(tot_size, dtype=np.uintc),
+                    (document_indices, feature_indices),
+                ),
+                shape=(len(corpus), m),
+            ),
+            dtype=np.uint32,
+        )
 
-    def sampling_fit(self, corpus, reset=True, sampling_rate=.5, seed=None):
+    def sampling_fit(self, corpus, reset=True, sampling_rate=0.5, seed=None):
         """
         Build a partial factor tree where only a random subset of factors are selected. Note that there is no
         `sampling_fit_transform` method, as mutualizing the processes would introduce incoherences in the factor
@@ -397,10 +428,15 @@ class CountVectorizer:
         ['r', 'ri', 'rir', 'riri', 'i', 'ir', 'iri', 'f', 'fi']
         """
         if reset:
-            self.features_ = empty_features() # dict()
+            self.features_ = empty_features()  # dict()
 
         self.no_none_range()
 
-        jit_sampling_fit(corpus=corpus, preprocessor=self.preprocessor,
-                         features=self.features_, n_range=self.n_range,
-                         rate=sampling_rate, seed=seed)
+        jit_sampling_fit(
+            corpus=corpus,
+            preprocessor=self.preprocessor,
+            features=self.features_,
+            n_range=self.n_range,
+            rate=sampling_rate,
+            seed=seed,
+        )

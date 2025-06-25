@@ -10,7 +10,9 @@ class MixInIO:
     Provide basic save/load capacities to other classes.
     """
 
-    def dump(self, filename: str, path='.', overwrite=False, compress=True, stemize=True):
+    def dump(
+        self, filename: str, path=".", overwrite=False, compress=True, stemize=True
+    ):
         """
         Save instance to file.
 
@@ -75,20 +77,24 @@ class MixInIO:
         if compress:
             destination = path / (fn.name + ".pkl.gz")
             if destination.exists() and not overwrite:
-                print(f"File {destination} already exists! Use overwrite option to overwrite.")
+                print(
+                    f"File {destination} already exists! Use overwrite option to overwrite."
+                )
             else:
                 with gzip.open(destination, "wb") as f:
                     pickle.dump(self, f)
         else:
             destination = path / (fn.name + ".pkl")
             if destination.exists() and not overwrite:
-                print(f"File {destination} already exists! Use overwrite option to overwrite.")
+                print(
+                    f"File {destination} already exists! Use overwrite option to overwrite."
+                )
             else:
                 with open(destination, "wb") as f:
                     pickle.dump(self, f)
 
     @classmethod
-    def load(cls, filename: str, path='.'):
+    def load(cls, filename: str, path="."):
         """
         Load instance from file.
 
@@ -102,28 +108,28 @@ class MixInIO:
         path = Path(path)
         dest = path / Path(filename).with_suffix(".pkl")
         if dest.exists():
-            with open(dest, 'rb') as f:
+            with open(dest, "rb") as f:
                 return pickle.load(f)
         else:
-            dest = dest.with_suffix('.pkl.gz')
+            dest = dest.with_suffix(".pkl.gz")
             if dest.exists():
                 with gzip.open(dest) as f:
                     return pickle.load(f)
             else:
-                raise FileNotFoundError(
-                    errno.ENOENT, os.strerror(errno.ENOENT), dest)
+                raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), dest)
 
 
 class ToyClass(MixInIO):
     def __init__(self, value=0):
         self.value = value
 
+
 # import gzip
 # import errno
 # import os
 # import dill as pickle
-import numpy as np
-from numba import njit
+# import numpy as np
+# from numba import njit
 
 # from pathlib import Path
 
