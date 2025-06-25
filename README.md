@@ -7,7 +7,7 @@
 [![Code Coverage](https://codecov.io/gh/balouf/bof/branch/master/graphs/badge.svg)](https://codecov.io/gh/balouf/bof/tree/main)
 
 
-Bag of Factors allow you to analyze a corpus from its factors.
+Bag of Factors allows you to analyze a corpus from its factors.
 
 
 * Free software: MIT
@@ -53,13 +53,13 @@ The main `fuzz` entry point is the `Process` class.
 
 ## Getting Started
 
-Look at examples from the reference_ section.
+Look at examples from the [reference] section.
 
 
 ## Credits
 
-This package was created with Cookiecutter_ and the `francois-durand/package_helper_2`_ project template.
+This package was created with [Cookiecutter] and the [package_helper_2] project template.
 
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`francois-durand/package_helper_2`: https://github.com/francois-durand/package_helper_2
-.. _reference: https://balouf.github.io/bof/reference/index.html
+[Cookiecutter]: https://github.com/audreyr/cookiecutter
+[package_helper_2]: https://github.com/francois-durand/package_helper_2
+[reference]: https://balouf.github.io/bof/reference/index.html
