@@ -7,7 +7,7 @@
 [![Code Coverage](https://codecov.io/gh/balouf/bof/branch/master/graphs/badge.svg)](https://codecov.io/gh/balouf/bof/tree/main)
 
 
-Bag of Factors allow you to analyze a corpus from its factors.
+Bag of Factors allows you to analyze a corpus from its factors.
 
 
 * Free software: MIT
