@@ -1,0 +1,1498 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Reference &#8212; Bag of Factors 0.4.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=ff822928"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=6dbb43f8"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/index';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Contributing" href="../contributing.html" />
+    <link rel="prev" title="Usage" href="../usage.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.4.2" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bag of Factors 0.4.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../readme.html">
+    Bag of Factors
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing.html">
+    Contributing
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../authors.html">
+    Credits
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../history.html">
+    History
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/balouf/bof" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../readme.html">
+    Bag of Factors
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../authors.html">
+    Credits
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../history.html">
+    History
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/balouf/bof" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Reference</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="reference">
+<h1>Reference<a class="headerlink" href="#reference" title="Link to this heading">#</a></h1>
+<section id="fuzz">
+<h2>Fuzz<a class="headerlink" href="#fuzz" title="Link to this heading">#</a></h2>
+<p>The <a class="reference internal" href="#module-bof.fuzz" title="bof.fuzz"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fuzz</span></code></a> module mimics the fuzzywuzzy-like packages like</p>
+<ul class="simple">
+<li><p>fuzzywuzzy (<a class="github reference external" href="https://github.com/seatgeek/fuzzywuzzy">seatgeek/fuzzywuzzy</a>)</p></li>
+<li><p>rapidfuzz (<a class="github reference external" href="https://github.com/maxbachmann/rapidfuzz">maxbachmann/rapidfuzz</a>)</p></li>
+</ul>
+<p>The main difference is that the Levenshtein distance is replaced by the Joint Complexity distance. The API is also
+slightly changed to enable new features:</p>
+<ul class="simple">
+<li><p>The list of possible choices can be pre-trained (<a class="reference internal" href="#bof.fuzz.Process.fit" title="bof.fuzz.Process.fit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fit()</span></code></a>) to accelerate the computation in
+the case a stream of queries is sent against the same list of choices.</p></li>
+<li><p>Instead of one single query, a list of queries can be used. Computations will be parallelized.</p></li>
+</ul>
+<p>The main <a class="reference internal" href="#module-bof.fuzz" title="bof.fuzz"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fuzz</span></code></a> entry point is the <a class="reference internal" href="#bof.fuzz.Process" title="bof.fuzz.Process"><code class="xref py py-class docutils literal notranslate"><span class="pre">Process</span></code></a> class.</p>
+<dl class="py class" id="module-bof.fuzz">
+<dt class="sig sig-object py" id="bof.fuzz.Process">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">bof.fuzz.</span></span><span class="sig-name descname"><span class="pre">Process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preprocessor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_impact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_updates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.Process" title="Link to this definition">#</a></dt>
+<dd><p>The process class is used to compute the closest choices from a list of queries base on joint complexity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or None, optional) – Maximum factor size. If <cite>None</cite>, all factors will be extracted.:</p></li>
+<li><p><strong>preprocessor</strong> (<em>callable</em><em>, </em><em>optional</em>) – Preprocessing function to apply to texts before adding them to the factor tree.</p></li>
+<li><p><strong>length_impact</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Importance of the length difference between two texts when computing the scores.</p></li>
+<li><p><strong>allow_updates</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – When transforming queries, are new factors kept in the <a class="reference internal" href="#bof.feature_extraction.CountVectorizer" title="bof.feature_extraction.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a></p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – If set, load from corresponding file.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>, optional) – If set, specify the directory where the file is located.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bof.fuzz.Process.vectorizer">
+<span class="sig-name descname"><span class="pre">vectorizer</span></span><a class="headerlink" href="#bof.fuzz.Process.vectorizer" title="Link to this definition">#</a></dt>
+<dd><p>The vectorizer used to compute factors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#bof.feature_extraction.CountVectorizer" title="bof.feature_extraction.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bof.fuzz.Process.choices">
+<span class="sig-name descname"><span class="pre">choices</span></span><a class="headerlink" href="#bof.fuzz.Process.choices" title="Link to this definition">#</a></dt>
+<dd><p>The possible choices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bof.fuzz.Process.choices_matrix">
+<span class="sig-name descname"><span class="pre">choices_matrix</span></span><a class="headerlink" href="#bof.fuzz.Process.choices_matrix" title="Link to this definition">#</a></dt>
+<dd><p>The factor matrix of the choices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.17.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bof.fuzz.Process.choices_factors">
+<span class="sig-name descname"><span class="pre">choices_factors</span></span><a class="headerlink" href="#bof.fuzz.Process.choices_factors" title="Link to this definition">#</a></dt>
+<dd><p>Number of unique factors of each choice</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bof.fuzz.Process.choices_length">
+<span class="sig-name descname"><span class="pre">choices_length</span></span><a class="headerlink" href="#bof.fuzz.Process.choices_length" title="Link to this definition">#</a></dt>
+<dd><p>Number of choices</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bof.fuzz.Process.dedupe">
+<span class="sig-name descname"><span class="pre">dedupe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contains_dup</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.dedupe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.Process.dedupe" title="Link to this definition">#</a></dt>
+<dd><p>Inspired by fuzzywuzzy’s dedupe function to remove (near) duplicates.
+Currently barely optimized (and probably bugged).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>contains_dup</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – A list of texts with possible nearly redundant entries.</p></li>
+<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, optional) – Minimal score that a result must achieve to be considered redundant.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">contains_dupes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Frodo Baggin&#39;</span><span class="p">,</span> <span class="s1">&#39;Frodo Baggins&#39;</span><span class="p">,</span> <span class="s1">&#39;F. Baggins&#39;</span><span class="p">,</span> <span class="s1">&#39;Samwise G.&#39;</span><span class="p">,</span> <span class="s1">&#39;Gandalf&#39;</span><span class="p">,</span> <span class="s1">&#39;Bilbo Baggins&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">dedupe</span><span class="p">(</span><span class="n">contains_dupes</span><span class="p">)</span>
+<span class="go">[&#39;Frodo Baggins&#39;, &#39;F. Baggins&#39;, &#39;Samwise G.&#39;, &#39;Gandalf&#39;, &#39;Bilbo Baggins&#39;]</span>
+</pre></div>
+</div>
+<p><cite>F. Baggins</cite> is kept because the length difference impacts the results. Let us ignore the length.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">length_impact</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">dedupe</span><span class="p">(</span><span class="n">contains_dupes</span><span class="p">)</span>
+<span class="go">[&#39;Frodo Baggins&#39;, &#39;Samwise G.&#39;, &#39;Gandalf&#39;, &#39;Bilbo Baggins&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bof.fuzz.Process.extract">
+<span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.Process.extract" title="Link to this definition">#</a></dt>
+<dd><p>Find the best matches amongst a list of choices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>queries</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Text (or list of texts) to match amongst the queries.</p></li>
+<li><p><strong>choices</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Possible choices. If None, the previously used (or fitted) choices will be used.</p></li>
+<li><p><strong>limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or None) – Maximal number of results to give. If None, all choices will be returned (sorted).</p></li>
+<li><p><strong>score_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, optional) – Minimal score that a result must achieve to be considered a match</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If <cite>queries</cite> is a single text, the list of tuples containing the best choices and their scores.
+If <cite>queries</cite> is a list of texts, the list of list of tuples containing the best choices and their scores.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">choices</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Atlanta Falcons&quot;</span><span class="p">,</span> <span class="s2">&quot;New York Jets&quot;</span><span class="p">,</span> <span class="s2">&quot;New York Giants&quot;</span><span class="p">,</span> <span class="s2">&quot;Dallas Cowboys&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&quot;new york jets&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">[(&#39;New York Jets&#39;, 100.0), (&#39;New York Giants&#39;, 46.835443037974684)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="s2">&quot;new york jets&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">[(&#39;New York Jets&#39;, 100.0),</span>
+<span class="go">(&#39;New York Giants&#39;, 46.835443037974684),</span>
+<span class="go">(&#39;Atlanta Falcons&#39;, 0.0),</span>
+<span class="go">(&#39;Dallas Cowboys&#39;, 0.0)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">extract</span><span class="p">([</span><span class="s2">&quot;new york&quot;</span><span class="p">,</span> <span class="s2">&quot;atlanta&quot;</span><span class="p">],</span> <span class="n">choices</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">score_cutoff</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="go">[[(&#39;New York Jets&#39;, 56.60377358490566), (&#39;New York Giants&#39;, 47.61904761904762)],</span>
+<span class="go">[(&#39;Atlanta Falcons&#39;, 37.28813559322034), (&#39;New York Giants&#39;, 7.594936708860759)]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bof.fuzz.Process.extractOne">
+<span class="sig-name descname"><span class="pre">extractOne</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.extractOne"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.Process.extractOne" title="Link to this definition">#</a></dt>
+<dd><p>Find the best match amongst a list of choices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>queries</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Text (or list of texts) to match amongst the queries.</p></li>
+<li><p><strong>choices</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – Possible choices. If None, the previously used (or fitted) choices will be used.</p></li>
+<li><p><strong>score_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, optional) – Minimal score that a result must achieve to be considered a match</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>If <cite>queries</cite> is a single text, a tuple containing the best choice and its score.
+If <cite>queries</cite> is a list of texts, the list of tuples containing the best choices and their scores.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">choices</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Atlanta Falcons&quot;</span><span class="p">,</span> <span class="s2">&quot;New York Jets&quot;</span><span class="p">,</span> <span class="s2">&quot;New York Giants&quot;</span><span class="p">,</span> <span class="s2">&quot;Dallas Cowboys&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">extractOne</span><span class="p">(</span><span class="s2">&quot;Cowboys&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="p">)</span>
+<span class="go">(&#39;Dallas Cowboys&#39;, 42.857142857142854)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">extractOne</span><span class="p">([</span><span class="s2">&quot;Cowboys&quot;</span><span class="p">,</span> <span class="s2">&quot;falcon&#39;s&quot;</span><span class="p">],</span> <span class="n">choices</span><span class="p">)</span>
+<span class="go">[(&#39;Dallas Cowboys&#39;, 42.857142857142854), None]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">extractOne</span><span class="p">([</span><span class="s2">&quot;Cowboys&quot;</span><span class="p">,</span> <span class="s2">&quot;falcon&#39;s&quot;</span><span class="p">],</span> <span class="n">choices</span><span class="p">,</span> <span class="n">score_cutoff</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="go">[(&#39;Dallas Cowboys&#39;, 42.857142857142854), (&#39;Atlanta Falcons&#39;, 30.88235294117647)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bof.fuzz.Process.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.Process.fit" title="Link to this definition">#</a></dt>
+<dd><p>Compute the factors of a list of choices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>choices</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>)</p></li>
+<li><p><strong>choices.</strong> (<em>The possible</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The choices:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">choices</span>
+<span class="go">[&#39;riri&#39;, &#39;fifi&#39;, &#39;rififi&#39;]</span>
+</pre></div>
+</div>
+<p>Number of unique factors for each choice:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">choices_factors</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="go">array([ 7,  7, 14])</span>
+</pre></div>
+</div>
+<p>The matrix that associates factors to choices:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">choices_matrix</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[2, 0, 1],</span>
+<span class="go">       [2, 0, 1],</span>
+<span class="go">       [1, 0, 0],</span>
+<span class="go">       [1, 0, 0],</span>
+<span class="go">       [2, 2, 3],</span>
+<span class="go">       [1, 0, 0],</span>
+<span class="go">       [1, 0, 0],</span>
+<span class="go">       [0, 2, 2],</span>
+<span class="go">       [0, 2, 2],</span>
+<span class="go">       [0, 1, 1],</span>
+<span class="go">       [0, 1, 1],</span>
+<span class="go">       [0, 1, 2],</span>
+<span class="go">       [0, 1, 2],</span>
+<span class="go">       [0, 0, 1],</span>
+<span class="go">       [0, 0, 1],</span>
+<span class="go">       [0, 0, 1],</span>
+<span class="go">       [0, 0, 1],</span>
+<span class="go">       [0, 0, 1]], dtype=uint32)</span>
+</pre></div>
+</div>
+<p>The corresponding factors:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bof.fuzz.Process.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.Process.reset" title="Link to this definition">#</a></dt>
+<dd><p>Clear choices from the object.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">choices</span>
+<span class="go">[&#39;riri&#39;, &#39;fifi&#39;, &#39;rififi&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">choices_factors</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="go">array([ 7,  7, 14])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">choices</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">choices_factors</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bof.fuzz.Process.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#Process.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.Process.transform" title="Link to this definition">#</a></dt>
+<dd><p>Compute the joint complexities of queries against choices,</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>queries</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The list of queries.</p></li>
+<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Relative threshold below which joint complexity is not actually computed.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Notice the number of factors:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">m</span>
+<span class="go">18</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">&quot;rir&quot;</span><span class="p">,</span> <span class="s2">&quot;fido&quot;</span><span class="p">,</span> <span class="s2">&quot;rafifi&quot;</span><span class="p">,</span> <span class="s2">&quot;screugneuhneu&quot;</span><span class="p">])</span>
+<span class="go">array([[71.42857143,  9.09090909, 18.75      ],</span>
+<span class="go">       [ 6.25      , 21.42857143, 14.28571429],</span>
+<span class="go">       [ 9.09090909, 41.17647059, 34.7826087 ],</span>
+<span class="go">       [ 1.92307692,  0.        ,  1.69491525]])</span>
+</pre></div>
+</div>
+<p>The factors have been augmented with the ones from the queries:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">m</span>
+<span class="go">79</span>
+</pre></div>
+</div>
+<p>This is could be a memory issue if you keep entering very different queries. To keep the factors clean after
+a transform, set <cite>allow_updates</cite> to False.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">allow_updates</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">&quot;rir&quot;</span><span class="p">,</span> <span class="s2">&quot;fido&quot;</span><span class="p">,</span> <span class="s2">&quot;rafifi&quot;</span><span class="p">,</span> <span class="s2">&quot;screugneuhneu&quot;</span><span class="p">])</span>
+<span class="go">array([[71.42857143,  9.09090909, 18.75      ],</span>
+<span class="go">       [ 6.25      , 21.42857143, 14.28571429],</span>
+<span class="go">       [ 9.09090909, 41.17647059, 34.7826087 ],</span>
+<span class="go">       [ 1.92307692,  0.        ,  1.69491525]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">m</span>
+<span class="go">18</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bof.fuzz.get_best_choice">
+<span class="sig-prename descclassname"><span class="pre">bof.fuzz.</span></span><span class="sig-name descname"><span class="pre">get_best_choice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score_cutoff</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#get_best_choice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.get_best_choice" title="Link to this definition">#</a></dt>
+<dd><p>Given a list of choices with scores, extract the best choice.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>choices</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – List of choices.</p></li>
+<li><p><strong>scores</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Score of the choices (must have the same size as <cite>choices</cite>)</p></li>
+<li><p><strong>score_cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Minimal score that the result must achieve to be considered a match</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple containing the choice and its score if the latter is above the cutoff, None otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bof.fuzz.get_best_choices">
+<span class="sig-prename descclassname"><span class="pre">bof.fuzz.</span></span><span class="sig-name descname"><span class="pre">get_best_choices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#get_best_choices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.get_best_choices" title="Link to this definition">#</a></dt>
+<dd><p>Given a list of choices with scores, extract the best choices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>choices</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – List of choices.</p></li>
+<li><p><strong>scores</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Score of the choices (must have the same size as <cite>choices</cite>)</p></li>
+<li><p><strong>limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or None) – Maximal number of results to give. If None, all choices will be returned (sorted).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of tuples containing the choices and their scores.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bof.fuzz.jit_common_factors">
+<span class="sig-prename descclassname"><span class="pre">bof.fuzz.</span></span><span class="sig-name descname"><span class="pre">jit_common_factors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queries_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xptr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices_length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yptr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#jit_common_factors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.jit_common_factors" title="Link to this definition">#</a></dt>
+<dd><p>Jitted function to compute the common factors between a corpus of queries and a corpus of choices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>queries_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of documents in the corpus of queries</p></li>
+<li><p><strong>xind</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Indices of the query factor matrix</p></li>
+<li><p><strong>xptr</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – pointers of the query factor matrix</p></li>
+<li><p><strong>choices_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of documents in the corpus of choices</p></li>
+<li><p><strong>yind</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Indices of the transposed choices factor matrix</p></li>
+<li><p><strong>yptr</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Pointers of the transposed choices factor matrix</p></li>
+<li><p><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Size of the factor space for choices</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <cite>queries_length X choices_length</cite> matrix that contains the number of (unique) factors between choices and
+queries.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bof.fuzz.jit_jc">
+<span class="sig-prename descclassname"><span class="pre">bof.fuzz.</span></span><span class="sig-name descname"><span class="pre">jit_jc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queries_factors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">choices_factors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">common_factors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_impact</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#jit_jc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.jit_jc" title="Link to this definition">#</a></dt>
+<dd><p>Jitted function to compute a joint complexity between a corpus of queries and a corpus of choices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>queries_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Vector of the number of unique factors for each query.</p></li>
+<li><p><strong>choices_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Vector of the number of unique factors for each choice.</p></li>
+<li><p><strong>common_factors</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Matrix of the number of common unique factors between queries and choices.</p></li>
+<li><p><strong>length_impact</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Importance of the length difference between two texts when computing the scores.</p></li>
+<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Don’t compute JC is common factors is less than threshold X (# query factors)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Joint Complexity matrix</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bof.fuzz.jit_square_factors">
+<span class="sig-prename descclassname"><span class="pre">bof.fuzz.</span></span><span class="sig-name descname"><span class="pre">jit_square_factors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xptr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yptr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_impact</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#jit_square_factors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.jit_square_factors" title="Link to this definition">#</a></dt>
+<dd><p>Jitted function to compute the joint complexity between texts of a corpus.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xind</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Indices of the factor matrix</p></li>
+<li><p><strong>xptr</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – pointers of the factor matrix</p></li>
+<li><p><strong>yind</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Indices of the transposed factor matrix</p></li>
+<li><p><strong>yptr</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Pointers of the transposed factor matrix</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Corpus size</p></li>
+<li><p><strong>length_impact</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Importance of the length difference between two texts when computing the scores.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <cite>n X n</cite> matrix that contains joint complexity scores of the corpus.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bof.fuzz.txt_max">
+<span class="sig-prename descclassname"><span class="pre">bof.fuzz.</span></span><span class="sig-name descname"><span class="pre">txt_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txt_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/fuzz.html#txt_max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.fuzz.txt_max" title="Link to this definition">#</a></dt>
+<dd><p>Auxiliary function that returns the index of the longest text from a list. In case of ties, alphabetic order is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>txt_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – List of texts.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The index of the longest text.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">txt_max</span><span class="p">([</span><span class="s2">&quot;This is long!&quot;</span><span class="p">,</span> <span class="s2">&quot;That is long!&quot;</span><span class="p">,</span> <span class="s2">&quot;It&#39;s short&quot;</span><span class="p">])</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="feature-extraction">
+<h2>Feature Extraction<a class="headerlink" href="#feature-extraction" title="Link to this heading">#</a></h2>
+<p>The <a class="reference internal" href="#module-bof.feature_extraction" title="bof.feature_extraction"><code class="xref py py-mod docutils literal notranslate"><span class="pre">feature_extraction</span></code></a> module mimics the module <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text">https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text</a>
+with a focus on character-based extraction.</p>
+<p>The main differences are:</p>
+<ul class="simple">
+<li><p>it is slightly faster;</p></li>
+<li><p>the features can be incrementally updated;</p></li>
+<li><p>it is possible to fit only a random sample of factors to reduce space and computation time.</p></li>
+</ul>
+<p>The main entry point for this module is the <a class="reference internal" href="#bof.feature_extraction.CountVectorizer" title="bof.feature_extraction.CountVectorizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> class, which mimics
+its <em>scikit-learn</em> counterpart (also named <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="(in scikit-learn v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a>).
+It is in fact very similar to sklearn’s <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer" title="(in scikit-learn v1.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a> using <cite>char</cite> or
+<cite>char_wb</cite> analyzer option from that module.</p>
+<dl class="py class" id="module-bof.feature_extraction">
+<dt class="sig sig-object py" id="bof.feature_extraction.CountVectorizer">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">bof.feature_extraction.</span></span><span class="sig-name descname"><span class="pre">CountVectorizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preprocessor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer" title="Link to this definition">#</a></dt>
+<dd><p>Counts the factors of a list of document.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preprocessor</strong> (<em>callable</em><em>, </em><em>optional</em>) – Preprocessing function to apply to texts before adding them to the factor tree.</p></li>
+<li><p><strong>n_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or None, optional) – Maximum factor size. If <cite>None</cite>, all factors will be extracted.</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, optional) – If set, load from corresponding file.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>, optional) – If set, specify the directory where the file is located.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="bof.feature_extraction.CountVectorizer.features_">
+<span class="sig-name descname"><span class="pre">features_</span></span><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.features_" title="Link to this definition">#</a></dt>
+<dd><p>Dictionary that maps factors to their index in the list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> -&gt; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<p>Build a vectorizer limiting factor size to 3:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">n_range</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Build the factor matrix of a corpus of texts.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">corpus</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[2, 2, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0],</span>
+<span class="go">       [0, 0, 0, 2, 0, 0, 2, 2, 1, 1, 1, 0],</span>
+<span class="go">       [1, 1, 0, 3, 0, 0, 2, 2, 1, 2, 2, 1]], dtype=uint32)</span>
+</pre></div>
+</div>
+<p>List the factors in the corpus:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="bof.feature_extraction.CountVectorizer.features">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">features</span></span><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.features" title="Link to this definition">#</a></dt>
+<dd><p>Get the list of features (internally, features are stored as a Numba Typed <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>
+that associates factors to indexes).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>features</strong> – List of factors.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bof.feature_extraction.CountVectorizer.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corpus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.fit" title="Link to this definition">#</a></dt>
+<dd><p>Build the features. Does not build the factor matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.) – Texts to analyze.</p></li>
+<li><p><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Clears current features and corpus. Features will be updated instead.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>We compute the factors of a corpus.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">n_range</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The <cite>fit</cite> method does not return anything, but the factors have been populated:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
+</pre></div>
+</div>
+<p>We fit another corpus.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The factors have been implicitly reset (<cite>rif</cite> is gone in this toy example):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;]</span>
+</pre></div>
+</div>
+<p>We keep pre-existing factors by setting <cite>reset</cite> to <cite>False</cite>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;rififi&quot;</span><span class="p">],</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The list of features has been updated (with <cite>rif`</cite>):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bof.feature_extraction.CountVectorizer.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corpus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.fit_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.fit_transform" title="Link to this definition">#</a></dt>
+<dd><p>Build the features and return the factor matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.) – Texts to analyze.</p></li>
+<li><p><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, optional) – Clears factors. If False, factors are updated instead.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A sparse matrix that indicates for each document of the corpus its factors and their multiplicity.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.17.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Build a FactorTree from a corpus of three documents:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">n_range</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[2, 2, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0],</span>
+<span class="go">       [0, 0, 0, 2, 0, 0, 2, 2, 1, 1, 1, 0],</span>
+<span class="go">       [1, 1, 0, 3, 0, 0, 2, 2, 1, 2, 2, 1]], dtype=uint32)</span>
+</pre></div>
+</div>
+<p>List of factors (of size at most 3):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
+</pre></div>
+</div>
+<p>Build a FactorTree from a corpus of two documents.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[2, 2, 1, 2, 1, 1, 0, 0, 0],</span>
+<span class="go">       [2, 2, 1, 3, 2, 2, 1, 1, 1]], dtype=uint32)</span>
+</pre></div>
+</div>
+<p>Notice the implicit reset, as only factors from “fifi” and “rififi” are present:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;i&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rif&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">m</span>
+<span class="go">9</span>
+</pre></div>
+</div>
+<p>With <cite>reset</cite> set to <cite>False</cite>, we can add another list without discarding pre-existing factors.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">],</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[0, 0, 0, 2, 0, 0, 2, 2, 0, 1, 1, 1]], dtype=uint32)</span>
+</pre></div>
+</div>
+<p>Notice the presence of empty columns, which corresponds to pre-existing factors that do not exist in “riri”.</p>
+<p>The size and list of factors:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">m</span>
+<span class="go">12</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;i&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;r&#39;, &#39;ri&#39;, &#39;rif&#39;, &#39;rir&#39;, &#39;ir&#39;, &#39;iri&#39;]</span>
+</pre></div>
+</div>
+<p>Setting n_range to None will compute all factors.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">n_range</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[2, 2, 1, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],</span>
+<span class="go">       [0, 0, 0, 0, 2, 0, 0, 2, 2, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],</span>
+<span class="go">       [1, 1, 0, 0, 3, 0, 0, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 1, 1]], dtype=uint32)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="bof.feature_extraction.CountVectorizer.m">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">m</span></span><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.m" title="Link to this definition">#</a></dt>
+<dd><p>Get the number of features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>m</strong> – Number of factors.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bof.feature_extraction.CountVectorizer.no_none_range">
+<span class="sig-name descname"><span class="pre">no_none_range</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.no_none_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.no_none_range" title="Link to this definition">#</a></dt>
+<dd><p>Replace None n_range by 0 before passing to cython code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bof.feature_extraction.CountVectorizer.sampling_fit">
+<span class="sig-name descname"><span class="pre">sampling_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corpus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.sampling_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.sampling_fit" title="Link to this definition">#</a></dt>
+<dd><p>Build a partial factor tree where only a random subset of factors are selected. Note that there is no
+<cite>sampling_fit_transform</cite> method, as mutualizing the processes would introduce incoherences in the factor
+description: you have to do a <cite>sampling_fit</cite> followed by a <cite>transform</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Texts to analyze.</p></li>
+<li><p><strong>reset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Clears FactorTree. If False, FactorTree will be updated instead.</p></li>
+<li><p><strong>sampling_rate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Probability to explore factors starting from one given position in the text.</p></li>
+<li><p><strong>seed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, optional) – Seed of the random generator.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>We fit a corpus to a tree a normal way to see the complete list of factors of size at most 3..</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
+</pre></div>
+</div>
+<p>Now we use a sampling fit instead. Only a subset of the factors are selected.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">sampling_fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">],</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;i&#39;, &#39;if&#39;, &#39;ifi&#39;]</span>
+</pre></div>
+</div>
+<p>We random fit another corpus. We reset the seed to reproduce the example above.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">sampling_fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">],</span> <span class="n">sampling_rate</span><span class="o">=</span><span class="mf">.2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The factors have been implicitly reset.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;]</span>
+</pre></div>
+</div>
+<p>We add another corpus to the fit by setting <cite>reset</cite> to <cite>False</cite>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">sampling_fit</span><span class="p">([</span><span class="s2">&quot;rififi&quot;</span><span class="p">],</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sampling_rate</span><span class="o">=</span><span class="mf">.2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The list of features has been updated:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bof.feature_extraction.CountVectorizer.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corpus</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#CountVectorizer.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.CountVectorizer.transform" title="Link to this definition">#</a></dt>
+<dd><p>Build factor matrix from the factors already computed. New factors are discarded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.) – Texts to analyze.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The factor count of the input corpus NB: if reset is set to <cite>False</cite>, the factor count of the pre-existing
+corpus is not returned but is internally preserved.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.csr_matrix.html#scipy.sparse.csr_matrix" title="(in SciPy v1.17.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csr_matrix</span></code></a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>To start, we fit a corpus:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">n_range</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[2, 2, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0],</span>
+<span class="go">       [0, 0, 0, 2, 0, 0, 2, 2, 1, 1, 1, 0],</span>
+<span class="go">       [1, 1, 0, 3, 0, 0, 2, 2, 1, 2, 2, 1]], dtype=uint32)</span>
+</pre></div>
+</div>
+<p>The factors are:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features</span>
+<span class="go">[&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;]</span>
+</pre></div>
+</div>
+<p>We now apply a transform.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">&quot;fir&quot;</span><span class="p">,</span> <span class="s2">&quot;rfi&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="go">array([[1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0],</span>
+<span class="go">       [1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0]], dtype=uint32)</span>
+</pre></div>
+</div>
+<p>The features have not been updated. For example, the only factors reported for “rfi” are “r”, “i”, “f”, and
+“fi”. Factors that were not fit (e.g. <cite>rf</cite>) are discarded.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bof.feature_extraction.build_end">
+<span class="sig-prename descclassname"><span class="pre">bof.feature_extraction.</span></span><span class="sig-name descname"><span class="pre">build_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#build_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.build_end" title="Link to this definition">#</a></dt>
+<dd><p>Return a function of a starting position <cite>s</cite> and a text length <cite>tl</cite> that tells the end of scanning text from <cite>s</cite>.
+It avoids to test the value of n_range all the time when doing factor extraction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or None) – Maximal factor size. If 0 or <cite>None</cite>, all factors are considered.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>callable</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">end</span> <span class="o">=</span> <span class="n">build_end</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">end</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="go">15</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">end</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="go">15</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">end</span> <span class="o">=</span> <span class="n">build_end</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">end</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="go">12</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">end</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="go">15</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="bof.feature_extraction.to_typed_list">
+<span class="sig-prename descclassname"><span class="pre">bof.feature_extraction.</span></span><span class="sig-name descname"><span class="pre">to_typed_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corpus</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/feature_extraction.html#to_typed_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.feature_extraction.to_typed_list" title="Link to this definition">#</a></dt>
+<dd><p>Convert a Python list of strings to a Numba typed list.</p>
+<p>This avoids the deprecated ‘reflected list’ type warning when passing
+Python lists to JIT-compiled functions.</p>
+<p>If the input is already a Numba typed list, it is returned as-is.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>corpus</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – List of strings to convert.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Typed list of strings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">numba.typed.List</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="common">
+<h2>Common<a class="headerlink" href="#common" title="Link to this heading">#</a></h2>
+<p>The <cite>common</cite> module contains miscellaneous classes and functions.</p>
+<dl class="py class" id="module-bof.common">
+<dt class="sig sig-object py" id="bof.common.MixInIO">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">bof.common.</span></span><span class="sig-name descname"><span class="pre">MixInIO</span></span><a class="reference internal" href="../_modules/bof/common.html#MixInIO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.common.MixInIO" title="Link to this definition">#</a></dt>
+<dd><p>Provide basic save/load capacities to other classes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="bof.common.MixInIO.dump">
+<span class="sig-name descname"><span class="pre">dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stemize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#MixInIO.dump"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.common.MixInIO.dump" title="Link to this definition">#</a></dt>
+<dd><p>Save instance to file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The stem of the filename.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>, optional) – The location path.</p></li>
+<li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=False</em>) – Should existing file be erased if it exists?</p></li>
+<li><p><strong>compress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=True</em>) – Should gzip compression be used?</p></li>
+<li><p><strong>stemize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><em>bool</em></a><em>, </em><em>default=True</em>) – Trim any extension (e.g. .xxx)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span> <span class="o">=</span> <span class="n">ToyClass</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span> <span class="o">=</span> <span class="n">ToyClass</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span><span class="o">.</span><span class="n">value</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdirname</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">v1</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myfile&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">tmpdirname</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">dir_content</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="n">tmpdirname</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)]</span>
+<span class="gp">... </span>    <span class="n">v2</span> <span class="o">=</span> <span class="n">ToyClass</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myfile&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="n">tmpdirname</span><span class="p">))</span>
+<span class="gp">... </span>    <span class="n">v1</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myfile&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">tmpdirname</span><span class="p">)</span> <span class="c1"># doctest.ELLIPSIS</span>
+<span class="go">File ...myfile.pkl.gz already exists! Use overwrite option to overwrite.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dir_content</span>
+<span class="go">[&#39;myfile.pkl.gz&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span><span class="o">.</span><span class="n">value</span>
+<span class="go">42</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdirname</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">v1</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myfile&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">tmpdirname</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">v1</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myfile&#39;</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">tmpdirname</span><span class="p">)</span> <span class="c1"># doctest.ELLIPSIS</span>
+<span class="go">File ...myfile.pkl already exists! Use overwrite option to overwrite.</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v1</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">51</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdirname</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">v1</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myfile&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">tmpdirname</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">v1</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myfile&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">tmpdirname</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">v2</span> <span class="o">=</span> <span class="n">ToyClass</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myfile&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">tmpdirname</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">dir_content</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="n">tmpdirname</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dir_content</span>
+<span class="go">[&#39;myfile.pkl&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v2</span><span class="o">.</span><span class="n">value</span>
+<span class="go">51</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tmpdirname</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="n">v2</span> <span class="o">=</span> <span class="n">ToyClass</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;thisfilenamedoesnotexist&#39;</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="w"> </span><span class="c">...</span>
+<span class="gr">FileNotFoundError</span>: <span class="n">[Errno 2] No such file or directory: ...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bof.common.MixInIO.load">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#MixInIO.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.common.MixInIO.load" title="Link to this definition">#</a></dt>
+<dd><p>Load instance from file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – The stem of the filename.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>, optional) – The location path.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="bof.common.ToyClass">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">bof.common.</span></span><span class="sig-name descname"><span class="pre">ToyClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/bof/common.html#ToyClass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bof.common.ToyClass" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../usage.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Usage</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../contributing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Contributing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fuzz">Fuzz</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.Process"><code class="docutils literal notranslate"><span class="pre">Process</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.Process.vectorizer"><code class="docutils literal notranslate"><span class="pre">Process.vectorizer</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.Process.choices"><code class="docutils literal notranslate"><span class="pre">Process.choices</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.Process.choices_matrix"><code class="docutils literal notranslate"><span class="pre">Process.choices_matrix</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.Process.choices_factors"><code class="docutils literal notranslate"><span class="pre">Process.choices_factors</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.Process.choices_length"><code class="docutils literal notranslate"><span class="pre">Process.choices_length</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.Process.dedupe"><code class="docutils literal notranslate"><span class="pre">Process.dedupe()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.Process.extract"><code class="docutils literal notranslate"><span class="pre">Process.extract()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.Process.extractOne"><code class="docutils literal notranslate"><span class="pre">Process.extractOne()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.Process.fit"><code class="docutils literal notranslate"><span class="pre">Process.fit()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.Process.reset"><code class="docutils literal notranslate"><span class="pre">Process.reset()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.Process.transform"><code class="docutils literal notranslate"><span class="pre">Process.transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.get_best_choice"><code class="docutils literal notranslate"><span class="pre">get_best_choice()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.get_best_choices"><code class="docutils literal notranslate"><span class="pre">get_best_choices()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.jit_common_factors"><code class="docutils literal notranslate"><span class="pre">jit_common_factors()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.jit_jc"><code class="docutils literal notranslate"><span class="pre">jit_jc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.jit_square_factors"><code class="docutils literal notranslate"><span class="pre">jit_square_factors()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.fuzz.txt_max"><code class="docutils literal notranslate"><span class="pre">txt_max()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature Extraction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.feature_extraction.CountVectorizer"><code class="docutils literal notranslate"><span class="pre">CountVectorizer</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.feature_extraction.CountVectorizer.features_"><code class="docutils literal notranslate"><span class="pre">CountVectorizer.features_</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.feature_extraction.CountVectorizer.features"><code class="docutils literal notranslate"><span class="pre">CountVectorizer.features</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.feature_extraction.CountVectorizer.fit"><code class="docutils literal notranslate"><span class="pre">CountVectorizer.fit()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.feature_extraction.CountVectorizer.fit_transform"><code class="docutils literal notranslate"><span class="pre">CountVectorizer.fit_transform()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.feature_extraction.CountVectorizer.m"><code class="docutils literal notranslate"><span class="pre">CountVectorizer.m</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.feature_extraction.CountVectorizer.no_none_range"><code class="docutils literal notranslate"><span class="pre">CountVectorizer.no_none_range()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.feature_extraction.CountVectorizer.sampling_fit"><code class="docutils literal notranslate"><span class="pre">CountVectorizer.sampling_fit()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.feature_extraction.CountVectorizer.transform"><code class="docutils literal notranslate"><span class="pre">CountVectorizer.transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.feature_extraction.build_end"><code class="docutils literal notranslate"><span class="pre">build_end()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.feature_extraction.to_typed_list"><code class="docutils literal notranslate"><span class="pre">to_typed_list()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common">Common</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.common.MixInIO"><code class="docutils literal notranslate"><span class="pre">MixInIO</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.common.MixInIO.dump"><code class="docutils literal notranslate"><span class="pre">MixInIO.dump()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.common.MixInIO.load"><code class="docutils literal notranslate"><span class="pre">MixInIO.load()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bof.common.ToyClass"><code class="docutils literal notranslate"><span class="pre">ToyClass</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/reference/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2020, Fabien Mathieu.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

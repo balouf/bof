@@ -1,0 +1,1092 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bof.fuzz &#8212; Bag of Factors 0.4.2 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=ff822928"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=6dbb43f8"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/bof/fuzz';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.4.2" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bag of Factors 0.4.2 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../readme.html">
+    Bag of Factors
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing.html">
+    Contributing
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../authors.html">
+    Credits
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../history.html">
+    History
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/balouf/bof" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../readme.html">
+    Bag of Factors
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing.html">
+    Contributing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../authors.html">
+    Credits
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../history.html">
+    History
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/balouf/bof" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">bof.fuzz</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for bof.fuzz</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span><span class="p">,</span> <span class="n">prange</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">bof.feature_extraction</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span>
+
+
+<div class="viewcode-block" id="jit_common_factors">
+<a class="viewcode-back" href="../../reference/index.html#bof.fuzz.jit_common_factors">[docs]</a>
+<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">jit_common_factors</span><span class="p">(</span><span class="n">queries_length</span><span class="p">,</span> <span class="n">xind</span><span class="p">,</span> <span class="n">xptr</span><span class="p">,</span> <span class="n">choices_length</span><span class="p">,</span> <span class="n">yind</span><span class="p">,</span> <span class="n">yptr</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Jitted function to compute the common factors between a corpus of queries and a corpus of choices.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    queries_length: :py:class:`int`</span>
+<span class="sd">        Number of documents in the corpus of queries</span>
+<span class="sd">    xind: :class:`~numpy.ndarray`</span>
+<span class="sd">        Indices of the query factor matrix</span>
+<span class="sd">    xptr: :class:`~numpy.ndarray`</span>
+<span class="sd">        pointers of the query factor matrix</span>
+<span class="sd">    choices_length: :py:class:`int`</span>
+<span class="sd">        Number of documents in the corpus of choices</span>
+<span class="sd">    yind: :class:`~numpy.ndarray`</span>
+<span class="sd">        Indices of the transposed choices factor matrix</span>
+<span class="sd">    yptr: :class:`~numpy.ndarray`</span>
+<span class="sd">        Pointers of the transposed choices factor matrix</span>
+<span class="sd">    m: :py:class:`int`</span>
+<span class="sd">        Size of the factor space for choices</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`~numpy.ndarray`</span>
+<span class="sd">        A `queries_length X choices_length` matrix that contains the number of (unique) factors between choices and</span>
+<span class="sd">        queries.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">queries_length</span><span class="p">,</span> <span class="n">choices_length</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">prange</span><span class="p">(</span><span class="n">queries_length</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">xind</span><span class="p">[</span><span class="n">xptr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span> <span class="n">xptr</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]:</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">k</span> <span class="o">&lt;</span> <span class="n">m</span>
+            <span class="p">):</span>  <span class="c1"># NB with sorted_indices, could be a break, but no guarantee enforced</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">yind</span><span class="p">[</span><span class="n">yptr</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="p">:</span> <span class="n">yptr</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]:</span>
+                    <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">res</span></div>
+
+
+
+<div class="viewcode-block" id="jit_jc">
+<a class="viewcode-back" href="../../reference/index.html#bof.fuzz.jit_jc">[docs]</a>
+<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">jit_jc</span><span class="p">(</span>
+    <span class="n">queries_factors</span><span class="p">,</span> <span class="n">choices_factors</span><span class="p">,</span> <span class="n">common_factors</span><span class="p">,</span> <span class="n">length_impact</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Jitted function to compute a joint complexity between a corpus of queries and a corpus of choices.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    queries_factors: :class:`~numpy.ndarray`</span>
+<span class="sd">        Vector of the number of unique factors for each query.</span>
+<span class="sd">    choices_factors: :class:`~numpy.ndarray`</span>
+<span class="sd">        Vector of the number of unique factors for each choice.</span>
+<span class="sd">    common_factors: :class:`~numpy.ndarray`</span>
+<span class="sd">        Matrix of the number of common unique factors between queries and choices.</span>
+<span class="sd">    length_impact: :py:class:`float`</span>
+<span class="sd">        Importance of the length difference between two texts when computing the scores.</span>
+<span class="sd">    threshold: :class:`float`</span>
+<span class="sd">        Don&#39;t compute JC is common factors is less than threshold X (# query factors)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`~numpy.ndarray`</span>
+<span class="sd">        Joint Complexity matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">queries_factors</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">choices_factors</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">prange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">queries_factors</span><span class="p">)):</span>
+        <span class="n">query_factors</span> <span class="o">=</span> <span class="n">queries_factors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">choices_factors</span><span class="p">)):</span>
+            <span class="n">cf</span> <span class="o">=</span> <span class="n">common_factors</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+            <span class="n">choice_factors</span> <span class="o">=</span> <span class="n">choices_factors</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">cf</span> <span class="o">&gt;</span> <span class="n">query_factors</span> <span class="o">*</span> <span class="n">threshold</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">query_factors</span> <span class="o">&lt;</span> <span class="n">choice_factors</span><span class="p">:</span>
+                    <span class="n">renorm</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span>
+                        <span class="n">length_impact</span> <span class="o">*</span> <span class="n">choice_factors</span>
+                        <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">length_impact</span><span class="p">)</span> <span class="o">*</span> <span class="n">query_factors</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">renorm</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span>
+                        <span class="n">length_impact</span> <span class="o">*</span> <span class="n">query_factors</span>
+                        <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">length_impact</span><span class="p">)</span> <span class="o">*</span> <span class="n">choice_factors</span>
+                    <span class="p">)</span>
+                <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">cf</span> <span class="o">/</span> <span class="p">(</span><span class="n">renorm</span> <span class="o">-</span> <span class="n">cf</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span></div>
+
+
+
+<div class="viewcode-block" id="jit_square_factors">
+<a class="viewcode-back" href="../../reference/index.html#bof.fuzz.jit_square_factors">[docs]</a>
+<span class="nd">@njit</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">jit_square_factors</span><span class="p">(</span><span class="n">xind</span><span class="p">,</span> <span class="n">xptr</span><span class="p">,</span> <span class="n">yind</span><span class="p">,</span> <span class="n">yptr</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">length_impact</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Jitted function to compute the joint complexity between texts of a corpus.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    xind: :class:`~numpy.ndarray`</span>
+<span class="sd">        Indices of the factor matrix</span>
+<span class="sd">    xptr: :class:`~numpy.ndarray`</span>
+<span class="sd">        pointers of the factor matrix</span>
+<span class="sd">    yind: :class:`~numpy.ndarray`</span>
+<span class="sd">        Indices of the transposed factor matrix</span>
+<span class="sd">    yptr: :class:`~numpy.ndarray`</span>
+<span class="sd">        Pointers of the transposed factor matrix</span>
+<span class="sd">    n: :py:class:`int`</span>
+<span class="sd">        Corpus size</span>
+<span class="sd">    length_impact: :py:class:`float`</span>
+<span class="sd">        Importance of the length difference between two texts when computing the scores.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :class:`~numpy.ndarray`</span>
+<span class="sd">        A `n X n` matrix that contains joint complexity scores of the corpus.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">self_factors</span> <span class="o">=</span> <span class="n">xptr</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">xptr</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">common_factors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">prange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">xind</span><span class="p">[</span><span class="n">xptr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span> <span class="n">xptr</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">yind</span><span class="p">[</span><span class="n">yptr</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="p">:</span> <span class="n">yptr</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]:</span>
+                <span class="n">common_factors</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">jit_jc</span><span class="p">(</span><span class="n">self_factors</span><span class="p">,</span> <span class="n">self_factors</span><span class="p">,</span> <span class="n">common_factors</span><span class="p">,</span> <span class="n">length_impact</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="txt_max">
+<a class="viewcode-back" href="../../reference/index.html#bof.fuzz.txt_max">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">txt_max</span><span class="p">(</span><span class="n">txt_list</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Auxiliary function that returns the index of the longest text from a list. In case of ties, alphabetic order is used.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    txt_list: :py:class:`list` of :py:class:`str`</span>
+<span class="sd">        List of texts.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :py:class:`int`</span>
+<span class="sd">        The index of the longest text.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    &gt;&gt;&gt; txt_max([&quot;This is long!&quot;, &quot;That is long!&quot;, &quot;It&#39;s short&quot;])</span>
+<span class="sd">    1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">txt_list</span><span class="p">)),</span> <span class="n">txt_list</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">z</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">z</span><span class="p">[</span><span class="mi">1</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="get_best_choices">
+<a class="viewcode-back" href="../../reference/index.html#bof.fuzz.get_best_choices">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_best_choices</span><span class="p">(</span><span class="n">choices</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">limit</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a list of choices with scores, extract the best choices.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    choices: :py:class:`list` of :py:class:`str`</span>
+<span class="sd">        List of choices.</span>
+<span class="sd">    scores: :class:`~numpy.ndarray`</span>
+<span class="sd">        Score of the choices (must have the same size as `choices`)</span>
+<span class="sd">    limit: :py:class:`int` or None</span>
+<span class="sd">        Maximal number of results to give. If None, all choices will be returned (sorted).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :py:class:`list`</span>
+<span class="sd">        List of tuples containing the choices and their scores.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">limit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">sorted_top</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">scores</span><span class="p">)</span>
+        <span class="c1"># return sorted(zip(choices, scores), key=lambda i: i[1], reverse=True)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">unsorted_top</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argpartition</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="o">-</span><span class="n">limit</span><span class="p">)[</span><span class="o">-</span><span class="n">limit</span><span class="p">:]</span>
+        <span class="n">sorted_top</span> <span class="o">=</span> <span class="n">unsorted_top</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">scores</span><span class="p">[</span><span class="n">unsorted_top</span><span class="p">])]</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">choices</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">scores</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sorted_top</span><span class="p">]</span></div>
+
+    <span class="c1"># return heapq.nlargest(limit, zip(choices, scores), key=lambda i: i[1])</span>
+
+
+<div class="viewcode-block" id="get_best_choice">
+<a class="viewcode-back" href="../../reference/index.html#bof.fuzz.get_best_choice">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_best_choice</span><span class="p">(</span><span class="n">choices</span><span class="p">,</span> <span class="n">scores</span><span class="p">,</span> <span class="n">score_cutoff</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a list of choices with scores, extract the best choice.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    choices: :py:class:`list` of :py:class:`str`</span>
+<span class="sd">        List of choices.</span>
+<span class="sd">    scores: :class:`~numpy.ndarray`</span>
+<span class="sd">        Score of the choices (must have the same size as `choices`)</span>
+<span class="sd">    score_cutoff: :py:class:`float`</span>
+<span class="sd">        Minimal score that the result must achieve to be considered a match</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :py:class:`tuple` or None</span>
+<span class="sd">        Tuple containing the choice and its score if the latter is above the cutoff, None otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">scores</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">score_cutoff</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">choices</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">scores</span><span class="p">[</span><span class="n">index</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="Process">
+<a class="viewcode-back" href="../../reference/index.html#bof.fuzz.Process">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Process</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The process class is used to compute the closest choices from a list of queries base on joint complexity.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n_range: :py:class:`int` or None, optional</span>
+<span class="sd">        Maximum factor size. If `None`, all factors will be extracted.:</span>
+<span class="sd">    preprocessor: callable, optional</span>
+<span class="sd">        Preprocessing function to apply to texts before adding them to the factor tree.</span>
+<span class="sd">    length_impact: :py:class:`float`</span>
+<span class="sd">        Importance of the length difference between two texts when computing the scores.</span>
+<span class="sd">    allow_updates: :py:class:`bool`</span>
+<span class="sd">        When transforming queries, are new factors kept in the :py:class:`~bof.feature_extraction.CountVectorizer`</span>
+<span class="sd">    filename: :py:class:`str`, optional</span>
+<span class="sd">        If set, load from corresponding file.</span>
+<span class="sd">    path: :py:class:`str` or :py:class:`~pathlib.Path`, optional</span>
+<span class="sd">        If set, specify the directory where the file is located.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    vectorizer: :py:class:`~bof.feature_extraction.CountVectorizer`</span>
+<span class="sd">        The vectorizer used to compute factors.</span>
+<span class="sd">    choices: :py:class:`list` of :py:class:`str`</span>
+<span class="sd">        The possible choices.</span>
+<span class="sd">    choices_matrix: :class:`~scipy.sparse.csr_matrix`</span>
+<span class="sd">        The factor matrix of the choices.</span>
+<span class="sd">    choices_factors: :class:`~numpy.ndarray`</span>
+<span class="sd">        Number of unique factors of each choice</span>
+<span class="sd">    choices_length: :py:class:`int`</span>
+<span class="sd">        Number of choices</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">n_range</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">preprocessor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">length_impact</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">allow_updates</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length_impact</span> <span class="o">=</span> <span class="n">length_impact</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">allow_updates</span> <span class="o">=</span> <span class="n">allow_updates</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">n_range</span><span class="o">=</span><span class="n">n_range</span><span class="p">,</span> <span class="n">preprocessor</span><span class="o">=</span><span class="n">preprocessor</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices_matrix</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices_factors</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices_length</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Process.reset">
+<a class="viewcode-back" href="../../reference/index.html#bof.fuzz.Process.reset">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clear choices from the object.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+
+<span class="sd">        &gt;&gt;&gt; p = Process()</span>
+<span class="sd">        &gt;&gt;&gt; p.fit([&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; p.choices</span>
+<span class="sd">        [&#39;riri&#39;, &#39;fifi&#39;, &#39;rififi&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; p.choices_factors.astype(int)</span>
+<span class="sd">        array([ 7,  7, 14])</span>
+<span class="sd">        &gt;&gt;&gt; p.reset()</span>
+<span class="sd">        &gt;&gt;&gt; p.choices is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; p.choices_factors is None</span>
+<span class="sd">        True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices_matrix</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices_factors</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices_length</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="Process.fit">
+<a class="viewcode-back" href="../../reference/index.html#bof.fuzz.Process.fit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">choices</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the factors of a list of choices.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        choices: :py:class:`list` of :py:class:`str`</span>
+<span class="sd">        The possible choices.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; p = Process()</span>
+<span class="sd">        &gt;&gt;&gt; p.fit([&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;])</span>
+
+<span class="sd">        The choices:</span>
+
+<span class="sd">        &gt;&gt;&gt; p.choices</span>
+<span class="sd">        [&#39;riri&#39;, &#39;fifi&#39;, &#39;rififi&#39;]</span>
+
+<span class="sd">        Number of unique factors for each choice:</span>
+
+<span class="sd">        &gt;&gt;&gt; p.choices_factors.astype(int)</span>
+<span class="sd">        array([ 7,  7, 14])</span>
+
+<span class="sd">        The matrix that associates factors to choices:</span>
+
+<span class="sd">        &gt;&gt;&gt; p.choices_matrix.toarray() # doctest: +NORMALIZE_WHITESPACE</span>
+<span class="sd">        array([[2, 0, 1],</span>
+<span class="sd">               [2, 0, 1],</span>
+<span class="sd">               [1, 0, 0],</span>
+<span class="sd">               [1, 0, 0],</span>
+<span class="sd">               [2, 2, 3],</span>
+<span class="sd">               [1, 0, 0],</span>
+<span class="sd">               [1, 0, 0],</span>
+<span class="sd">               [0, 2, 2],</span>
+<span class="sd">               [0, 2, 2],</span>
+<span class="sd">               [0, 1, 1],</span>
+<span class="sd">               [0, 1, 1],</span>
+<span class="sd">               [0, 1, 2],</span>
+<span class="sd">               [0, 1, 2],</span>
+<span class="sd">               [0, 0, 1],</span>
+<span class="sd">               [0, 0, 1],</span>
+<span class="sd">               [0, 0, 1],</span>
+<span class="sd">               [0, 0, 1],</span>
+<span class="sd">               [0, 0, 1]], dtype=uint32)</span>
+
+<span class="sd">        The corresponding factors:</span>
+
+<span class="sd">        &gt;&gt;&gt; p.vectorizer.features</span>
+<span class="sd">        [&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices</span> <span class="o">=</span> <span class="n">choices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices_matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">choices</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices_factors</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">choices_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">choices_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices_matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">choices_matrix</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">choices</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Process.transform">
+<a class="viewcode-back" href="../../reference/index.html#bof.fuzz.Process.transform">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queries</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the joint complexities of queries against choices,</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        queries: :py:class:`list` of :py:class:`str`</span>
+<span class="sd">            The list of queries.</span>
+<span class="sd">        threshold: :class:`float`</span>
+<span class="sd">            Relative threshold below which joint complexity is not actually computed.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ---------</span>
+
+<span class="sd">        &gt;&gt;&gt; p = Process()</span>
+<span class="sd">        &gt;&gt;&gt; p.fit([&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;])</span>
+
+<span class="sd">        Notice the number of factors:</span>
+
+<span class="sd">        &gt;&gt;&gt; p.vectorizer.m</span>
+<span class="sd">        18</span>
+
+<span class="sd">        &gt;&gt;&gt; p.transform([&quot;rir&quot;, &quot;fido&quot;, &quot;rafifi&quot;, &quot;screugneuhneu&quot;]) # doctest: +NORMALIZE_WHITESPACE</span>
+<span class="sd">        array([[71.42857143,  9.09090909, 18.75      ],</span>
+<span class="sd">               [ 6.25      , 21.42857143, 14.28571429],</span>
+<span class="sd">               [ 9.09090909, 41.17647059, 34.7826087 ],</span>
+<span class="sd">               [ 1.92307692,  0.        ,  1.69491525]])</span>
+
+<span class="sd">        The factors have been augmented with the ones from the queries:</span>
+
+<span class="sd">        &gt;&gt;&gt; p.vectorizer.m</span>
+<span class="sd">        79</span>
+
+<span class="sd">        This is could be a memory issue if you keep entering very different queries. To keep the factors clean after</span>
+<span class="sd">        a transform, set `allow_updates` to False.</span>
+
+<span class="sd">        &gt;&gt;&gt; p.allow_updates = False</span>
+<span class="sd">        &gt;&gt;&gt; p.fit([&quot;riri&quot;, &quot;fifi&quot;, &quot;rififi&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; p.transform([&quot;rir&quot;, &quot;fido&quot;, &quot;rafifi&quot;, &quot;screugneuhneu&quot;]) # doctest: +NORMALIZE_WHITESPACE</span>
+<span class="sd">        array([[71.42857143,  9.09090909, 18.75      ],</span>
+<span class="sd">               [ 6.25      , 21.42857143, 14.28571429],</span>
+<span class="sd">               [ 9.09090909, 41.17647059, 34.7826087 ],</span>
+<span class="sd">               [ 1.92307692,  0.        ,  1.69491525]])</span>
+<span class="sd">        &gt;&gt;&gt; p.vectorizer.m</span>
+<span class="sd">        18</span>
+<span class="sd">        &gt;&gt;&gt; p.vectorizer.features</span>
+<span class="sd">        [&#39;r&#39;, &#39;ri&#39;, &#39;rir&#39;, &#39;riri&#39;, &#39;i&#39;, &#39;ir&#39;, &#39;iri&#39;, &#39;f&#39;, &#39;fi&#39;, &#39;fif&#39;, &#39;fifi&#39;, &#39;if&#39;, &#39;ifi&#39;, &#39;rif&#39;, &#39;rifi&#39;, &#39;rifif&#39;, &#39;ifif&#39;, &#39;ififi&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">choices_matrix</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">queries_matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">queries</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">queries_factors</span> <span class="o">=</span> <span class="n">queries_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">queries_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">queries_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">queries</span><span class="p">)</span>
+        <span class="n">common_factor_matrix</span> <span class="o">=</span> <span class="n">jit_common_factors</span><span class="p">(</span>
+            <span class="n">queries_length</span><span class="p">,</span>
+            <span class="n">queries_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span>
+            <span class="n">queries_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">choices_length</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">choices_matrix</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">choices_matrix</span><span class="o">.</span><span class="n">indptr</span><span class="p">,</span>
+            <span class="n">m</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">allow_updates</span><span class="p">:</span>
+            <span class="n">extra_entries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">m</span> <span class="o">-</span> <span class="n">m</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">extra_entries</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">features_</span><span class="o">.</span><span class="n">popitem</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">jit_jc</span><span class="p">(</span>
+            <span class="n">queries_factors</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">choices_factors</span><span class="p">,</span>
+            <span class="n">common_factor_matrix</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">length_impact</span><span class="p">,</span>
+            <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Process.extract">
+<a class="viewcode-back" href="../../reference/index.html#bof.fuzz.Process.extract">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queries</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">score_cutoff</span><span class="o">=</span><span class="mf">40.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Find the best matches amongst a list of choices.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        queries: :py:class:`str` or :py:class:`list` of :py:class:`str`</span>
+<span class="sd">            Text (or list of texts) to match amongst the queries.</span>
+<span class="sd">        choices: :py:class:`list` of :py:class:`str`, optional</span>
+<span class="sd">            Possible choices. If None, the previously used (or fitted) choices will be used.</span>
+<span class="sd">        limit: :py:class:`int` or None</span>
+<span class="sd">            Maximal number of results to give. If None, all choices will be returned (sorted).</span>
+<span class="sd">        score_cutoff: :py:class:`float`, optional</span>
+<span class="sd">            Minimal score that a result must achieve to be considered a match</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :py:class:`list`</span>
+<span class="sd">            If `queries` is a single text, the list of tuples containing the best choices and their scores.</span>
+<span class="sd">            If `queries` is a list of texts, the list of list of tuples containing the best choices and their scores.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ---------</span>
+<span class="sd">        &gt;&gt;&gt; p = Process()</span>
+<span class="sd">        &gt;&gt;&gt; choices = [&quot;Atlanta Falcons&quot;, &quot;New York Jets&quot;, &quot;New York Giants&quot;, &quot;Dallas Cowboys&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; p.extract(&quot;new york jets&quot;, choices, limit=2)</span>
+<span class="sd">        [(&#39;New York Jets&#39;, 100.0), (&#39;New York Giants&#39;, 46.835443037974684)]</span>
+<span class="sd">        &gt;&gt;&gt; p.extract(&quot;new york jets&quot;, choices, limit=None) # doctest: +NORMALIZE_WHITESPACE</span>
+<span class="sd">        [(&#39;New York Jets&#39;, 100.0),</span>
+<span class="sd">        (&#39;New York Giants&#39;, 46.835443037974684),</span>
+<span class="sd">        (&#39;Atlanta Falcons&#39;, 0.0),</span>
+<span class="sd">        (&#39;Dallas Cowboys&#39;, 0.0)]</span>
+<span class="sd">        &gt;&gt;&gt; p.extract([&quot;new york&quot;, &quot;atlanta&quot;], choices, limit=2, score_cutoff=0.0) # doctest: +NORMALIZE_WHITESPACE</span>
+<span class="sd">        [[(&#39;New York Jets&#39;, 56.60377358490566), (&#39;New York Giants&#39;, 47.61904761904762)],</span>
+<span class="sd">        [(&#39;Atlanta Falcons&#39;, 37.28813559322034), (&#39;New York Giants&#39;, 7.594936708860759)]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">queries</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">is_str</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">queries</span> <span class="o">=</span> <span class="p">[</span><span class="n">queries</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">is_str</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">choices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">choices</span><span class="p">)</span>
+        <span class="n">jc_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">queries</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">score_cutoff</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">get_best_choices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">choices</span><span class="p">,</span> <span class="n">jc_array</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">limit</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span>
+                <span class="n">get_best_choices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">choices</span><span class="p">,</span> <span class="n">jc_array</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">limit</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">queries</span><span class="p">))</span>
+            <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Process.extractOne">
+<a class="viewcode-back" href="../../reference/index.html#bof.fuzz.Process.extractOne">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extractOne</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queries</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">score_cutoff</span><span class="o">=</span><span class="mf">40.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Find the best match amongst a list of choices.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        queries: :py:class:`str` or :py:class:`list` of :py:class:`str`</span>
+<span class="sd">            Text (or list of texts) to match amongst the queries.</span>
+<span class="sd">        choices: :py:class:`list` of :py:class:`str`, optional</span>
+<span class="sd">            Possible choices. If None, the previously used (or fitted) choices will be used.</span>
+<span class="sd">        score_cutoff: :py:class:`float`, optional</span>
+<span class="sd">            Minimal score that a result must achieve to be considered a match</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :py:class:`tuple` or :py:class:`list`</span>
+<span class="sd">            If `queries` is a single text, a tuple containing the best choice and its score.</span>
+<span class="sd">            If `queries` is a list of texts, the list of tuples containing the best choices and their scores.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ---------</span>
+<span class="sd">        &gt;&gt;&gt; choices = [&quot;Atlanta Falcons&quot;, &quot;New York Jets&quot;, &quot;New York Giants&quot;, &quot;Dallas Cowboys&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; p = Process()</span>
+<span class="sd">        &gt;&gt;&gt; p.extractOne(&quot;Cowboys&quot;, choices)</span>
+<span class="sd">        (&#39;Dallas Cowboys&#39;, 42.857142857142854)</span>
+<span class="sd">        &gt;&gt;&gt; p.extractOne([&quot;Cowboys&quot;, &quot;falcon&#39;s&quot;], choices)</span>
+<span class="sd">        [(&#39;Dallas Cowboys&#39;, 42.857142857142854), None]</span>
+<span class="sd">        &gt;&gt;&gt; p.extractOne([&quot;Cowboys&quot;, &quot;falcon&#39;s&quot;], choices, score_cutoff=30)</span>
+<span class="sd">        [(&#39;Dallas Cowboys&#39;, 42.857142857142854), (&#39;Atlanta Falcons&#39;, 30.88235294117647)]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">queries</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">is_str</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">queries</span> <span class="o">=</span> <span class="p">[</span><span class="n">queries</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">is_str</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">choices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">choices</span><span class="p">)</span>
+        <span class="n">jc_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">queries</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">get_best_choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">choices</span><span class="p">,</span> <span class="n">jc_array</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">score_cutoff</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span>
+                <span class="n">get_best_choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">choices</span><span class="p">,</span> <span class="n">jc_array</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">score_cutoff</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">queries</span><span class="p">))</span>
+            <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Process.dedupe">
+<a class="viewcode-back" href="../../reference/index.html#bof.fuzz.Process.dedupe">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dedupe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contains_dup</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">60.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inspired by fuzzywuzzy&#39;s dedupe function to remove (near) duplicates.</span>
+<span class="sd">        Currently barely optimized (and probably bugged).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        contains_dup: :py:class:`list` of :py:class:`str`</span>
+<span class="sd">            A list of texts with possible nearly redundant entries.</span>
+<span class="sd">        threshold: :py:class:`float`, optional</span>
+<span class="sd">            Minimal score that a result must achieve to be considered redundant.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :py:class:`list` of :py:class:`str`</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; contains_dupes = [&#39;Frodo Baggin&#39;, &#39;Frodo Baggins&#39;, &#39;F. Baggins&#39;, &#39;Samwise G.&#39;, &#39;Gandalf&#39;, &#39;Bilbo Baggins&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; p = Process()</span>
+<span class="sd">        &gt;&gt;&gt; p.dedupe(contains_dupes)</span>
+<span class="sd">        [&#39;Frodo Baggins&#39;, &#39;F. Baggins&#39;, &#39;Samwise G.&#39;, &#39;Gandalf&#39;, &#39;Bilbo Baggins&#39;]</span>
+
+<span class="sd">        `F. Baggins` is kept because the length difference impacts the results. Let us ignore the length.</span>
+
+<span class="sd">        &gt;&gt;&gt; p.length_impact = 0.0</span>
+<span class="sd">        &gt;&gt;&gt; p.dedupe(contains_dupes)</span>
+<span class="sd">        [&#39;Frodo Baggins&#39;, &#39;Samwise G.&#39;, &#39;Gandalf&#39;, &#39;Bilbo Baggins&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">contains_dup</span><span class="p">)</span>
+        <span class="n">unprocessed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="n">indexes</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">contains_dup</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+        <span class="n">jc_matrix</span> <span class="o">=</span> <span class="n">jit_square_factors</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">indptr</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">indptr</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">length_impact</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">unprocessed</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">closes</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">if</span> <span class="n">jc_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">]</span>
+                <span class="n">closest</span> <span class="o">=</span> <span class="n">closes</span><span class="p">[</span><span class="n">txt_max</span><span class="p">([</span><span class="n">contains_dup</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">closes</span><span class="p">])]</span>
+                <span class="k">if</span> <span class="n">indexes</span><span class="p">[</span><span class="n">closest</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">closest</span> <span class="o">=</span> <span class="n">indexes</span><span class="p">[</span><span class="n">closest</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">closes</span><span class="p">:</span>
+                    <span class="n">indexes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">closest</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">contains_dup</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">indexes</span><span class="p">)]</span></div>
+</div>
+
+
+
+<span class="c1"># Trigger jit compilation on import.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dry_run</span><span class="p">():</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Process</span><span class="p">()</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">fit</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">transform</span><span class="p">([</span><span class="s2">&quot;rir&quot;</span><span class="p">,</span> <span class="s2">&quot;fido&quot;</span><span class="p">])</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">dedupe</span><span class="p">([</span><span class="s2">&quot;riri&quot;</span><span class="p">,</span> <span class="s2">&quot;fifi&quot;</span><span class="p">,</span> <span class="s2">&quot;rififi&quot;</span><span class="p">])</span>
+
+
+<span class="n">dry_run</span><span class="p">()</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2020, Fabien Mathieu.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
