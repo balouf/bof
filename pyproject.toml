@@ -20,7 +20,7 @@ license = "MIT"
 dependencies = [
 "dill>=0.3.8",
 "numba>=0.63.0",
-"scipy>=1.16.0",
+"scipy>=1.16.1",
 ]
 
 
