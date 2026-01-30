@@ -1,5 +1,13 @@
 # History
 
+## 0.4.2 (2026-01-30): Compatibility
+
+* Added Python 3.14 support.
+* Minimum Python version bumped to 3.11.
+* Dependencies updated: numba>=0.63.0, scipy>=1.16.0.
+* Removed explicit numpy dependency (implicitly provided by numba and scipy).
+* Fixed numba 'reflected list' deprecation warning by converting corpus to typed lists.
+
 ## 0.4.1 (2025-06-25): Maintenance
 
 * Dependencies updated.

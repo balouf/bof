@@ -4,10 +4,10 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bof"
-version = "0.4.1"
-description = "Bag of Factors allow you to analyze a corpus from its self_factors."
+version = "0.4.2"
+description = "Bag of Factors allows you to analyze a corpus from its factors."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 authors = [
     {name = "Fabien Mathieu", email = "fabien.mathieu@normalesup.org"}
 ]
@@ -19,9 +19,8 @@ license = "MIT"
 
 dependencies = [
 "dill>=0.3.8",
-"numpy>=1.26.4",
-"numba>=0.59.1",
-"scipy>=1.13.1",
+"numba>=0.63.0",
+"scipy>=1.16.0",
 ]
 
 

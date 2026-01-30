@@ -292,7 +292,7 @@ class Process:
         >>> p.choices
         ['riri', 'fifi', 'rififi']
 
-        Numbe of unique factors for each choice:
+        Number of unique factors for each choice:
 
         >>> p.choices_factors.astype(int)
         array([ 7,  7, 14])

@@ -1,5 +1,3 @@
-# from bof.common import MixInIO
-# from bof.cython.count import fit_transform, fit, transform, sampling_fit
 from bof.numba import (
     jit_fit_transform,
     jit_fit,
@@ -8,38 +6,36 @@ from bof.numba import (
     empty_features,
     default_preprocessor,
 )
+from numba.typed import List as TypedList
 from scipy.sparse import coo_matrix, csr_matrix
 import numpy as np
 
 
-# def number_of_factors(length, n_range=None):
-#     """
-#     Return the number of factors (with multiplicity) of size at most `n_range` that exist in a text of length `length`.
-#     This allows to pre-allocate working memory.
-#
-#     Parameters
-#     ----------
-#     length: :py:class:`int`
-#         Length of the text.
-#     n_range: :py:class:`int` or None
-#         Maximal factor size. If `None`, all factors are considered.
-#
-#     Returns
-#     -------
-#     int
-#         The number of factors (with multiplicity).
-#
-#     Examples
-#     --------
-#     >>> l = len("riri")
-#     >>> number_of_factors(l)
-#     10
-#     >>> number_of_factors(l, n_range=2)
-#     7
-#     """
-#     if n_range is None or n_range > length:
-#         return length * (length + 1) // 2
-#     return n_range * (length - n_range) + n_range * (n_range + 1) // 2
+def to_typed_list(corpus):
+    """
+    Convert a Python list of strings to a Numba typed list.
+
+    This avoids the deprecated 'reflected list' type warning when passing
+    Python lists to JIT-compiled functions.
+
+    If the input is already a Numba typed list, it is returned as-is.
+
+    Parameters
+    ----------
+    corpus: :py:class:`list` of :py:class:`str`
+        List of strings to convert.
+
+    Returns
+    -------
+    :class:`numba.typed.List`
+        Typed list of strings.
+    """
+    if isinstance(corpus, TypedList):
+        return corpus
+    typed_corpus = TypedList()
+    for txt in corpus:
+        typed_corpus.append(txt)
+    return typed_corpus
 
 
 def build_end(n_range=None):
@@ -237,8 +233,9 @@ class CountVectorizer:
 
         self.no_none_range()
 
+        typed_corpus = to_typed_list(corpus)
         tot_size, document_indices, feature_indices, m = jit_fit_transform(
-            corpus=corpus,
+            corpus=typed_corpus,
             preprocessor=self.preprocessor,
             features=self.features_,
             n_range=self.n_range,
@@ -305,8 +302,9 @@ class CountVectorizer:
 
         self.no_none_range()
 
+        typed_corpus = to_typed_list(corpus)
         jit_fit(
-            corpus=corpus,
+            corpus=typed_corpus,
             preprocessor=self.preprocessor,
             features=self.features_,
             n_range=self.n_range,
@@ -355,8 +353,9 @@ class CountVectorizer:
         """
         self.no_none_range()
 
+        typed_corpus = to_typed_list(corpus)
         tot_size, document_indices, feature_indices, m = jit_transform(
-            corpus=corpus,
+            corpus=typed_corpus,
             preprocessor=self.preprocessor,
             features=self.features_,
             n_range=self.n_range,
@@ -432,8 +431,9 @@ class CountVectorizer:
 
         self.no_none_range()
 
+        typed_corpus = to_typed_list(corpus)
         jit_sampling_fit(
-            corpus=corpus,
+            corpus=typed_corpus,
             preprocessor=self.preprocessor,
             features=self.features_,
             n_range=self.n_range,
